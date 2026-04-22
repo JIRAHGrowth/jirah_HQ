@@ -15,33 +15,27 @@ import type {
   LinkedArtifact,
 } from './types'
 
-type Mode = 'onedrive' | 'dev'
-
-export function resolveRoot(): { root: string; mode: Mode } {
+export function resolveRoot(): { root: string } {
   const env = process.env.ONEDRIVE_ROOT
-  if (env && env.trim().length > 0) {
-    return { root: env.trim(), mode: 'onedrive' }
+  if (!env || env.trim().length === 0) {
+    throw new Error(
+      'ONEDRIVE_ROOT is not set. Configure it in dashboard/.env.local (see dashboard/.env.local.example).',
+    )
   }
-  return { root: path.join(process.cwd(), '..', 'seed-data'), mode: 'dev' }
+  return { root: env.trim() }
 }
 
 function subPath(
   base: string,
   section: 'prospects' | 'audits' | 'active-clients',
-  mode: Mode,
 ): string {
-  if (mode === 'onedrive') {
-    if (section === 'prospects') {
-      return path.join(base, '02 - Sales & Pipeline', 'Prospects')
-    }
-    if (section === 'audits') {
-      return path.join(base, '02 - Sales & Pipeline', 'Audit Applications')
-    }
-    return path.join(base, '01 - Clients', 'Active')
+  if (section === 'prospects') {
+    return path.join(base, '02 - Sales & Pipeline', 'Prospects')
   }
-  if (section === 'prospects') return path.join(base, 'prospects')
-  if (section === 'audits') return path.join(base, 'audit-applications')
-  return path.join(base, 'active-clients')
+  if (section === 'audits') {
+    return path.join(base, '02 - Sales & Pipeline', 'Audit Applications')
+  }
+  return path.join(base, '01 - Clients', 'Active')
 }
 
 const PROFILE_FILENAMES = ['00 - Profile.md', '00-profile.md']
@@ -64,20 +58,6 @@ async function listSubdirs(dir: string): Promise<string[]> {
     const entries = await fs.readdir(dir, { withFileTypes: true })
     return entries
       .filter((e) => e.isDirectory() && !e.name.startsWith('_'))
-      .map((e) => path.join(dir, e.name))
-  } catch {
-    return []
-  }
-}
-
-async function listMdFiles(dir: string): Promise<string[]> {
-  try {
-    const entries = await fs.readdir(dir, { withFileTypes: true })
-    return entries
-      .filter(
-        (e) =>
-          e.isFile() && e.name.endsWith('.md') && !e.name.startsWith('_'),
-      )
       .map((e) => path.join(dir, e.name))
   } catch {
     return []
@@ -207,19 +187,16 @@ function normalizeArtifacts(raw: unknown): LinkedArtifact[] {
   return out.sort((a, b) => (b.ranOn || '').localeCompare(a.ranOn || ''))
 }
 
-async function collectProfiles(dir: string, mode: Mode): Promise<string[]> {
-  if (mode === 'dev') {
-    return listMdFiles(dir)
-  }
+async function collectProfiles(dir: string): Promise<string[]> {
   const subdirs = await listSubdirs(dir)
   const profiles = await Promise.all(subdirs.map((d) => findProfile(d)))
   return profiles.filter((p): p is string => p !== null)
 }
 
 export async function getPipeline(): Promise<PipelineItem[]> {
-  const { root, mode } = resolveRoot()
-  const dir = subPath(root, 'prospects', mode)
-  const files = await collectProfiles(dir, mode)
+  const { root } = resolveRoot()
+  const dir = subPath(root, 'prospects')
+  const files = await collectProfiles(dir)
   const items = await Promise.all(
     files.map(async (f) => {
       const parsed = await readFrontmatter<Partial<PipelineItem> & { tasks?: unknown; events?: unknown }>(f)
@@ -249,9 +226,9 @@ export async function getPipeline(): Promise<PipelineItem[]> {
 }
 
 export async function getAudits(): Promise<AuditApp[]> {
-  const { root, mode } = resolveRoot()
-  const dir = subPath(root, 'audits', mode)
-  const files = await collectProfiles(dir, mode)
+  const { root } = resolveRoot()
+  const dir = subPath(root, 'audits')
+  const files = await collectProfiles(dir)
   const items = await Promise.all(
     files.map(async (f) => {
       const parsed = await readFrontmatter<Partial<AuditApp> & { tasks?: unknown; events?: unknown }>(f)
@@ -277,8 +254,8 @@ export async function getAudits(): Promise<AuditApp[]> {
 }
 
 export async function getEngagements(): Promise<Engagement[]> {
-  const { root, mode } = resolveRoot()
-  const dir = subPath(root, 'active-clients', mode)
+  const { root } = resolveRoot()
+  const dir = subPath(root, 'active-clients')
   const subdirs = await listSubdirs(dir)
   const items = await Promise.all(
     subdirs.map(async (d) => {
@@ -323,14 +300,10 @@ function parseTimeline(content: string): { date: string; body: string }[] {
 export async function getBriefing(date?: string): Promise<Briefing> {
   const d = date || new Date().toISOString().slice(0, 10)
   const workspace = path.join(process.cwd(), '..')
-  const candidates = [
+  const parsed = await readFrontmatter<{ date?: string }>(
     path.join(workspace, 'briefings', `${d}.md`),
-    path.join(workspace, 'seed-data', 'briefings', `${d}.md`),
-  ]
-  for (const c of candidates) {
-    const parsed = await readFrontmatter<{ date?: string }>(c)
-    if (parsed) return parseBriefing(parsed.data, parsed.content, d)
-  }
+  )
+  if (parsed) return parseBriefing(parsed.data, parsed.content, d)
   return { date: d, overdue: [], sprint: [], warm: [] }
 }
 

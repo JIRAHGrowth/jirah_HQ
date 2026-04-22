@@ -10,26 +10,22 @@ Design source of truth: [../design-review/command-center-v1/](../design-review/c
 cd dashboard
 npm install
 cp .env.local.example .env.local
-# Leave ONEDRIVE_ROOT commented for dev mode (reads ../seed-data/)
-# Uncomment + set for production (reads from OneDrive)
+# Open .env.local and set ONEDRIVE_ROOT for your machine
+# (path differs per partner — see comments in .env.local.example)
 npm run dev
 ```
 
 Open http://localhost:3000.
 
-## Modes
+## Data source
 
-- **Dev mode (default):** reads `../seed-data/` for prospects, audits, engagements. Self-contained, no OneDrive sync needed.
-- **Production mode:** reads from `ONEDRIVE_ROOT` — the OneDrive `01 - Clients` folder synced on your machine.
+The dashboard reads from `ONEDRIVE_ROOT` — the OneDrive `NEW - JIRAH MASTER` folder synced on your machine. Must be set in `.env.local` or the dashboard will throw a clear error on startup. Each partner's path differs (OneDrive prefixes shared folders with the owner's name); see `.env.local.example` for both variants.
 
-Briefings are read from `../briefings/YYYY-MM-DD.md` in both modes, with a fallback to `../seed-data/briefings/YYYY-MM-DD.md`.
+Briefings are read from `../briefings/YYYY-MM-DD.md` (committed to the repo, shared across both partners).
 
-## Joshua's setup
+## Partner onboarding
 
-1. Clone the full workspace.
-2. `cd dashboard && npm install`
-3. Copy `.env.local.example` → `.env.local`, set `ONEDRIVE_ROOT` to his OneDrive mount path.
-4. `npm run dev` → same dashboard, same data.
+See [../SETUP-JOSHUA.md](../SETUP-JOSHUA.md) — covers clone, env setup, daily pull/push rhythm.
 
 ## Tech
 
