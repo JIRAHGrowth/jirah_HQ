@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JIRAH Skills Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E1E2B;
+  --navy-2:#162A3B;
+  --cream:#F7F3EC;
+  --cream-2:#EFE8DB;
+  --ink:#1A1A1A;
+  --rule:#C9B880;
+  --gold:#B89650;
+  --muted:#5C6872;
+  --mute-2:#8A94A0;
+  --working:#2F6B4E;
+  --working-bg:#E2EEDF;
+  --ghost:#8E7A3C;
+  --ghost-bg:#EFE8DB;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+.wrap-narrow{max-width:820px;margin:0 auto;padding:0 40px}
+
+/* Hero */
+.hero{
+  background:var(--navy);
+  color:var(--cream);
+  padding:120px 0 100px;
+  border-bottom:1px solid rgba(201,184,128,0.15);
+}
+.hero .eyebrow{color:var(--rule)}
+.hero h1{
+  font-family:'EB Garamond',Georgia,serif;
+  font-weight:500;
+  font-size:64px;
+  line-height:1.05;
+  letter-spacing:-0.015em;
+  margin:22px 0 28px;
+  max-width:820px;
+}
+.hero .lede{
+  font-family:'EB Garamond',Georgia,serif;
+  font-style:italic;
+  font-size:24px;
+  line-height:1.4;
+  color:#DDD3BF;
+  max-width:680px;
+  font-weight:400;
+}
+.hero .meta{
+  margin-top:56px;
+  padding-top:24px;
+  border-top:1px solid rgba(201,184,128,0.2);
+  display:flex;
+  gap:48px;
+  flex-wrap:wrap;
+  font-size:13px;
+  color:#A9B3BD;
+  letter-spacing:0.04em;
+}
+.hero .meta span strong{
+  display:block;
+  color:var(--cream);
+  font-weight:500;
+  margin-top:4px;
+  letter-spacing:0.02em;
+}
+
+/* Eyebrow label */
+.eyebrow{
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* Sections */
+section{padding:96px 0;border-bottom:1px solid rgba(14,30,43,0.08)}
+section.dark{background:var(--navy);color:var(--cream);border-bottom-color:rgba(201,184,128,0.15)}
+section.dark .eyebrow{color:var(--rule)}
+section.dark h2{color:var(--cream)}
+section.dark .prose{color:#D3DAE1}
+section.cream-2{background:var(--cream-2)}
+
+h2{
+  font-family:'EB Garamond',Georgia,serif;
+  font-weight:500;
+  font-size:40px;
+  line-height:1.15;
+  letter-spacing:-0.01em;
+  margin:18px 0 18px;
+  max-width:780px;
+}
+h3{
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--navy);
+  margin:0 0 10px;
+}
+section.dark h3{color:var(--cream)}
+
+.prose{
+  font-size:16px;
+  line-height:1.65;
+  color:#2A3641;
+  max-width:720px;
+}
+.prose p + p{margin-top:16px}
+.prose a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+section.dark .prose a{color:var(--cream);text-decoration-color:var(--gold)}
+
+/* Pills */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:4px 9px;
+  border-radius:3px;
+  line-height:1;
+}
+.pill.working{background:var(--working-bg);color:var(--working)}
+.pill.ghost{background:var(--ghost-bg);color:var(--ghost)}
+section.dark .pill.working{background:rgba(180,218,180,0.15);color:#A8D4A8}
+section.dark .pill.ghost{background:rgba(184,150,80,0.18);color:#D7B872}
+
+/* At-a-glance table */
+.glance{
+  margin-top:48px;
+  border:1px solid rgba(14,30,43,0.12);
+  background:#FFFCF5;
+  border-radius:4px;
+  overflow:hidden;
+}
+.glance table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14.5px;
+}
+.glance .phase-row td{
+  background:var(--navy);
+  color:var(--cream);
+  font-family:'EB Garamond',Georgia,serif;
+  font-weight:500;
+  font-size:17px;
+  letter-spacing:0.02em;
+  padding:14px 22px;
+}
+.glance tr.skill-row td{
+  padding:12px 22px;
+  border-bottom:1px solid rgba(14,30,43,0.06);
+  vertical-align:top;
+}
+.glance tr.skill-row:last-child td{border-bottom:none}
+.glance tr.skill-row td:first-child{
+  font-family:'JetBrains Mono',Menlo,monospace;
+  font-size:12.5px;
+  color:var(--navy);
+  font-weight:500;
+  white-space:nowrap;
+  width:260px;
+}
+.glance tr.skill-row td:nth-child(2){color:#3A4651;line-height:1.45}
+.glance tr.skill-row td:nth-child(3){width:100px;text-align:right}
+
+/* Working skill cards */
+.cards{display:grid;grid-template-columns:1fr;gap:40px;margin-top:56px}
+.card{
+  background:#FFFCF5;
+  border:1px solid rgba(14,30,43,0.1);
+  border-left:3px solid var(--gold);
+  padding:36px 40px 38px;
+  border-radius:2px;
+}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:18px}
+.card-name{
+  font-family:'JetBrains Mono',Menlo,monospace;
+  font-size:17px;
+  color:var(--navy);
+  font-weight:500;
+}
+.card h4{
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:24px;
+  font-weight:500;
+  color:var(--navy);
+  margin:12px 0 10px;
+  letter-spacing:-0.005em;
+}
+.card p{font-size:15px;color:#2A3641;line-height:1.6}
+.card p + p{margin-top:12px}
+.fire{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px dashed rgba(14,30,43,0.15);
+  font-size:13.5px;
+  color:var(--muted);
+}
+.fire strong{
+  color:var(--navy);
+  font-weight:600;
+  display:block;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.fire code{
+  font-family:'JetBrains Mono',Menlo,monospace;
+  font-size:12.5px;
+  background:var(--cream-2);
+  color:var(--navy);
+  padding:2px 6px;
+  border-radius:2px;
+}
+
+/* Ghost group */
+.ghost-group{margin-top:64px}
+.ghost-group:first-child{margin-top:40px}
+.ghost-group-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:24px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(14,30,43,0.15);
+}
+.ghost-group-head h3{
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:28px;
+  font-weight:500;
+  color:var(--navy);
+  text-transform:none;
+  letter-spacing:-0.005em;
+  margin:0;
+}
+.ghost-group-head .count{
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:0.08em;
+}
+.ghost-list{display:grid;grid-template-columns:1fr;gap:24px}
+.ghost-item{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:32px;
+  padding:18px 0;
+  border-bottom:1px solid rgba(14,30,43,0.06);
+}
+.ghost-item:last-child{border-bottom:none}
+.ghost-name{
+  font-family:'JetBrains Mono',Menlo,monospace;
+  font-size:13px;
+  color:var(--navy);
+  font-weight:500;
+}
+.ghost-desc{font-size:15px;color:#2A3641;line-height:1.6}
+
+/* Personal skills grid */
+.personal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:48px}
+.personal-card{
+  background:#FFFCF5;
+  border:1px solid rgba(14,30,43,0.1);
+  padding:28px 30px 30px;
+  border-radius:2px;
+}
+.personal-card .pname{
+  font-family:'JetBrains Mono',Menlo,monospace;
+  font-size:13.5px;
+  color:var(--navy);
+  font-weight:500;
+  margin-bottom:10px;
+}
+.personal-card .pdesc{font-size:14.5px;color:#2A3641;line-height:1.55}
+
+/* Subagents */
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
+.sub-col h4{
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:22px;
+  font-weight:500;
+  color:var(--navy);
+  margin-bottom:16px;
+}
+section.dark .sub-col h4{color:var(--cream)}
+.sub-item{
+  padding:14px 0;
+  border-bottom:1px solid rgba(201,184,128,0.18);
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:20px;
+  font-size:14px;
+}
+.sub-item:last-child{border-bottom:none}
+.sub-name{font-family:'JetBrains Mono',Menlo,monospace;font-size:12.5px;color:var(--rule)}
+.sub-desc{color:#C2CBD3}
+section:not(.dark) .sub-desc{color:#2A3641}
+section:not(.dark) .sub-item{border-bottom-color:rgba(14,30,43,0.08)}
+section:not(.dark) .sub-name{color:var(--navy)}
+
+/* Callout */
+.callout{
+  background:#FFFCF5;
+  border-left:3px solid var(--gold);
+  padding:28px 32px;
+  margin-top:40px;
+  max-width:780px;
+}
+.callout p{font-size:15px;line-height:1.65;color:#2A3641}
+.callout p + p{margin-top:12px}
+
+/* Footer */
+footer{
+  background:var(--navy);
+  color:#8A94A0;
+  padding:40px 0;
+  font-size:13px;
+  letter-spacing:0.04em;
+}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer strong{color:var(--cream);font-weight:500;letter-spacing:0.06em}
+
+/* Responsive */
+@media (max-width:720px){
+  .wrap,.wrap-narrow{padding:0 24px}
+  .hero{padding:80px 0 72px}
+  .hero h1{font-size:42px}
+  .hero .lede{font-size:19px}
+  section{padding:64px 0}
+  h2{font-size:30px}
+  .ghost-item{grid-template-columns:1fr;gap:8px}
+  .sub-grid{grid-template-columns:1fr;gap:32px}
+  .sub-item{grid-template-columns:1fr;gap:4px}
+  .glance tr.skill-row td:first-child{width:auto;font-size:11.5px}
+  .glance tr.skill-row td{display:block;width:auto;padding:6px 18px}
+  .glance tr.skill-row td:first-child{padding-top:14px}
+  .glance tr.skill-row td:last-child{padding-bottom:14px;text-align:left}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">JIRAH Growth Partners · Internal Reference</div>
+    <h1>JIRAH Skills Reference</h1>
+    <p class="lede">What each skill does, when to fire it, and what you get back.</p>
+    <div class="meta">
+      <span>BUILT<strong>2026-04-20</strong></span>
+      <span>FOR<strong>Jason &amp; Joshua</strong></span>
+      <span>WORKSPACE<strong>c:\Users\jason\Desktop\Jirah Ops\</strong></span>
+    </div>
+  </div>
+</header>
+
+<!-- QUICK ORIENTATION -->
+<section>
+  <div class="wrap-narrow">
+    <div class="eyebrow">Orientation</div>
+    <h2>How skills work</h2>
+    <div class="prose">
+      <p>Skills are specialised behaviours you invoke by typing <code>/&lt;skill-name&gt;</code> in Claude Code, or by hitting a trigger phrase. Say "we just signed X" and Claude will fire <code>/jirah-new-client</code> on its own. Say "daily briefing" and it will fire <code>/jirah-daily-briefing</code>.</p>
+      <p>Two classes of skill live in this workstation. <strong>Working</strong> skills are fully implemented and run immediately. <strong>Ghost</strong> skills are stubbed today. When invoked, a ghost skill returns the build brief you can see in this document. That brief is the spec. Once a ghost skill is promoted to working, its invocation starts delivering real output.</p>
+      <p>Jirah-specific skills live in <code>.claude/skills/</code> inside this workspace and travel with it. Personal skills (html-brief, meeting-prep, decision-memo) live in Jason's global <code>~/.claude/skills/</code> and are available across every project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AT-A-GLANCE -->
+<section class="cream-2">
+  <div class="wrap">
+    <div class="eyebrow">At a glance</div>
+    <h2>Every skill, grouped by lifecycle phase</h2>
+    <div class="prose"><p>Four skills run today. Thirty-one Jirah ghosts are ready to be built in priority order. Five personal skills and one working subagent round out the toolbox.</p></div>
+
+    <div class="glance">
+      <table>
+        <tbody>
+
+          <tr class="phase-row"><td colspan="3">Intake &amp; Onboarding</td></tr>
+          <tr class="skill-row"><td>/jirah-new-client</td><td>Scaffolds a new Active Client folder from the OneDrive template.</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/jirah-file-sort</td><td>Classifies and moves a batch of files into a client's numbered subfolders.</td><td><span class="pill working">Working</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Demand Generation</td></tr>
+          <tr class="skill-row"><td>/jirah-industry-pulse</td><td>Weekly 4-vertical scan for outreach triggers.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-lead-gen</td><td>Deep research + partner-voice intro emails, parallel fan-out.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-intro-request</td><td>Warm-intro asks off the people graph.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-thought-leadership</td><td>LinkedIn posts and longform in Jirah's signature format.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-audit-apply</td><td>Landing-page copy + form + scoring rubric for audit funnel.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-audit-triage</td><td>ICP-scores and ranks incoming audit applications.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-people-graph</td><td>Markdown-per-person relationship network.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-email</td><td>Partner-voice emails across every outreach stage.</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Discovery &amp; Discussion (Steps 1–2)</td></tr>
+          <tr class="skill-row"><td>/jirah-discovery</td><td>Prep for discovery call + post-call synthesis.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-discussion-document</td><td>Step 2 Mode A Discussion Document.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-survey-writing</td><td>Friction-point-indexed stakeholder surveys.</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Sprint &amp; Report (Steps 3–5)</td></tr>
+          <tr class="skill-row"><td>/jirah-friction-audit</td><td>The 1-day paid Friction Audit product (prep / capture / synthesize).</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/jirah-kickoff-agenda</td><td>60–90 min Step 3 kickoff + internal prep notes.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-sprint-facilitation</td><td>Step 4 pre-sprint guide + in-sprint transcript analyzer.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-session-analyzer</td><td>Process one Fireflies transcript.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-team-interview</td><td>Role-specific team-interview guides.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-triangulation</td><td>Hypothesis-validation plan utility.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-financial-audit</td><td>Red-flag review of client financials.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-document-review</td><td>Review of client-sent strategy / policy / legal documents.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-action-register</td><td>Step 5 prioritised action register (final deliverable).</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-report-review</td><td>Methodology compliance check on Jirah deliverables.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-client-presentation</td><td>Single-file HTML with Jirah branding (Mode A / B).</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">AI Track</td></tr>
+          <tr class="skill-row"><td>/jirah-ai-opportunity-scan</td><td>Embedded in every audit — 2–3 pilot-shaped AI opportunities.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-ai-scoping</td><td>Turns opportunity into scoped 4-week pilot proposal.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-pilot-plan</td><td>Client-facing co-branded AI Pilot Plan document.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-ai-pilot-status</td><td>Weekly demo-able pilot status document.</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Retainer (Step 6)</td></tr>
+          <tr class="skill-row"><td>/jirah-kpi-tracker</td><td>Monthly action-register + KPI tracking during retainer.</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Harvest Loop</td></tr>
+          <tr class="skill-row"><td>/jirah-case-study</td><td>Auto-drafts "owner thought X, actual was Y" case study.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-testimonial-ask</td><td>30-days-post partner-voice testimonial ask.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-referral-ask</td><td>Win-moment referral asks (signed / testimonial / case).</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Ops Cadence</td></tr>
+          <tr class="skill-row"><td>/jirah-daily-briefing</td><td>Daily scan of pipeline, engagements, audits.</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/jirah-weekly-review</td><td>Monday partner-sync synthesis.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-pipeline-forecast</td><td>Probabilistic pipeline forecast from stage data.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-pattern-library-query</td><td>Scans prior engagements for matching patterns.</td><td><span class="pill ghost">Ghost</span></td></tr>
+          <tr class="skill-row"><td>/jirah-win-loss</td><td>Retrospective across all ~50 historical proposals.</td><td><span class="pill ghost">Ghost</span></td></tr>
+
+          <tr class="phase-row"><td colspan="3">Personal / Global (Jason's cross-project skills)</td></tr>
+          <tr class="skill-row"><td>/html-brief-jason</td><td>Editorial-style single-file HTML briefs.</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/decision-memo-jason</td><td>Structured decision memos with a clear recommendation.</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/doc-review-jason</td><td>Stress-tests strategic documents — no softening.</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/meeting-prep-jason</td><td>Leverage briefings for calls and meetings.</td><td><span class="pill working">Working</span></td></tr>
+          <tr class="skill-row"><td>/code-plan-jason</td><td>Read-before-write + blast-radius discipline on code tasks.</td><td><span class="pill working">Working</span></td></tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WORKING SKILLS DEEP DETAIL -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Working skills · Available right now</div>
+    <h2>The four Jirah skills you can run today</h2>
+    <div class="prose" style="margin-bottom:16px"><p>These are implemented end-to-end. Fire them and they execute. Everything below is the authoritative behaviour — if the skill diverges from this description, the SKILL.md file in <code>.claude/skills/</code> is the source of truth.</p></div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">/jirah-new-client</div>
+          <span class="pill working">Working</span>
+        </div>
+        <h4>Scaffolds a new Active Client folder from the OneDrive template</h4>
+        <p>Copies <code>01 - Clients/_template/</code> into <code>01 - Clients/Active/[Client Name]/</code>, preserving the full numbered scaffold (03 - Admin through 10 - Harvest). Fills <code>00 - Profile.md</code> frontmatter from your inputs: id (slug), name, industry, geo, owner, co-owner, currentStep, milestone, contract, sponsor, status, created.</p>
+        <p>Seeds <code>02 - Comms Log.md</code> with the engagement-opened entry. If an AI pilot is in scope, also creates the parallel <code>~\Desktop\Jirah-AI-[ClientName]\</code> workspace and cross-references it in the profile. Pairs with /jirah-file-sort: after scaffolding, point the sort skill at whatever documents the client sent.</p>
+        <div class="fire"><strong>Fire when</strong>"we just signed X" or "new client onboarding for Y". Asks for owner, industry, geo, contract value, sponsor before acting.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">/jirah-file-sort</div>
+          <span class="pill working">Working</span>
+        </div>
+        <h4>Classifies and moves a batch of files into a client's numbered subfolders</h4>
+        <p>Takes a source directory (Downloads, a handed-over folder, a list of paths) and a target client, then classifies each file using 22 filename and content heuristics: contracts, financials, legal, handbooks, marketing, discussion documents, questionnaires, interview guides, session recordings, stakeholder interviews, facilitator notes, drafts, finals, monthly meetings, AI pilot artefacts, harvest materials.</p>
+        <p>Shows a <strong>preview plan</strong> before moving anything — no silent moves. Optionally renames to <code>YYYY-MM-DD - Title.ext</code>. Uses robocopy under the hood to survive OneDrive sync locks. Ambiguous files land in <code>_unsorted/</code> rather than getting guessed into the wrong place. Works for active clients, prospects, and audit applicants (prospects get a flatter scheme since they don't have the full 03–10 structure).</p>
+        <div class="fire"><strong>Fire when</strong>"sort these files into [Client]", "put these in the right place", "Genesis just sent us docs", or after <code>/jirah-new-client</code> on intake day.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">/jirah-daily-briefing</div>
+          <span class="pill working">Working</span>
+        </div>
+        <h4>Scans the whole pipeline and drafts your morning briefing</h4>
+        <p>Reads all active clients, prospects, and audit applications. Surfaces overdue follow-ups (based on <code>lastContactDays</code>), sprint-phase risks, warm prospects worth nurturing, and draft replies where the next action is communication. Writes <code>briefings/YYYY-MM-DD.md</code> for the day.</p>
+        <p>Designed to run on a scheduled trigger each morning, but you can also fire it manually any time you want to know what's on your plate.</p>
+        <div class="fire"><strong>Fire when</strong>"daily briefing", "what's on my plate", or on the scheduled morning trigger.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">/jirah-friction-audit</div>
+          <span class="pill working">Working</span>
+        </div>
+        <h4>The 1-day paid audit product, end to end</h4>
+        <p>Invoke with <code>--mode prep</code>, <code>--mode capture</code>, or <code>--mode synthesize</code>. The Friction Audit is Jirah's $1,500 paid front-door product: handpicked applicants book a full day, and the skill guides each phase — pre-read materials in prep, structured capture during the session, and triangulated synthesis after.</p>
+        <p>Diagnoses through the 10 Friction Points with confidence tags (Very High / High / Medium). Triangulation is non-negotiable. Produces a short action register with three expansion paths: ops, project, and AI. The AI path feeds directly into <code>/jirah-ai-opportunity-scan</code> when that ghost promotes to working.</p>
+        <div class="fire"><strong>Fire when</strong>a handpicked audit applicant has paid and booked their day. Prep 48 hours before. Capture during. Synthesize within 72 hours after.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GHOST SKILLS -->
+<section class="cream-2">
+  <div class="wrap">
+    <div class="eyebrow">Ghost skills · Build briefs</div>
+    <h2>Thirty-one Jirah ghosts, organised by lifecycle phase</h2>
+    <div class="prose"><p>Each ghost below is a spec waiting to be promoted to a working skill. Invoking one today returns the build brief. The phase groupings mirror the Jirah engagement lifecycle: demand generation at top of funnel, intake and discovery, sprint and report, parallel AI track, retainer, harvest loop, and ops cadence on top.</p></div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>Demand Generation</h3><span class="count">8 skills · top of funnel</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-industry-pulse</div><div class="ghost-desc">Weekly scan across Jirah's four verticals (engineering, professional services, accounting, building systems) for outreach triggers: funding rounds, senior hires, partner changes, expansion announcements. Outputs a ranked target list with specific-observation hooks you can quote in cold outreach. Fire weekly, typically Monday morning.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-lead-gen</div><div class="ghost-desc">Deep research on a batch of target prospects, then drafts partner-voice intro emails that reference specific observations (not generic boilerplate). Fans out to the <code>jirah-prospect-researcher</code> subagent in parallel to keep the main context clean. Fire when you have 3–10 prospects to warm up and want drafts ready to send.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-intro-request</div><div class="ghost-desc">Drafts warm-intro asks off the people graph. Produces the email that an introducer can forward verbatim — so the friction for them is zero. Fire when an existing contact could bridge you to a named prospect.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-thought-leadership</div><div class="ghost-desc">LinkedIn posts and longform pieces in Jirah's signature "owner thought X, actual was Y" format. Weekly post cadence, monthly longform cadence. Pulls patterns from the pattern library so the content is grounded in real engagement learning, not generic advice.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-audit-apply</div><div class="ghost-desc">Generates the landing page copy, application form questions, and scoring rubric for the "Apply for a Friction Audit" funnel front door. Designed for out-of-market prospects who don't get the lunch invite but still deserve a path in. Fire once to stand up the page, then refresh as positioning evolves.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-audit-triage</div><div class="ghost-desc">ICP-scores incoming audit applications against the criteria (30–150 staff, $6M–$20M revenue, owner-run B2B services, the four core verticals). Ranks them, drafts accept and decline emails, and updates application status. Fire as applications arrive or in a weekly batch.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-people-graph</div><div class="ghost-desc">Tracks and queries the wider Jirah relationship network: introducers, alumni of past engagements, advisors, prospects' colleagues. One markdown file per person. Fire to find who could warm a cold prospect, or to see who Jirah knows inside a target firm.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-email</div><div class="ghost-desc">Partner-voice emails across every outreach stage: cold intro, follow-up, proposal send, mid-engagement check-in, warm nurture. Signs "Jason and Joshua" for joint emails, single partner for solo sends. Fire when you need a draft that sounds like Jirah rather than generic consultant-ese.</div></div>
+      </div>
+    </div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>Discovery &amp; Discussion</h3><span class="count">3 skills · Steps 1–2</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-discovery</div><div class="ghost-desc">Step 1 of the 6-step process. Preps for a discovery call (questions, hypotheses to probe, context from prior touches) and produces a post-call synthesis with a binary fit decision and clear next step. Fire before and after every first qualifying call.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-discussion-document</div><div class="ghost-desc">Step 2 deliverable. Produces the Mode A Discussion Document that codifies objectives, scope, timeline, and investment. Pattern sourced from the Smith &amp; Anderson exemplar. This is what converts a qualified discovery into a signed engagement. Fire after discovery when the prospect has signalled interest.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-survey-writing</div><div class="ghost-desc">Designs stakeholder surveys: friction-point-indexed questions with an NPS and open-ended mix. Used pre-audit to gather quantitative signal before the day, or mid-engagement for triangulation. Fire when you need a survey out the door and don't want to reinvent the structure.</div></div>
+      </div>
+    </div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>Sprint &amp; Report</h3><span class="count">8 skills · Steps 3–5</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-kickoff-agenda</div><div class="ghost-desc">Produces the 60–90 minute Step 3 kickoff meeting agenda plus internal prep notes for the facilitator pair. Sets expectations, confirms scope, and locks the sprint dates. Fire 3–5 days before kickoff.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-sprint-facilitation</div><div class="ghost-desc">Step 4 support. Delivers the pre-sprint preparation guide and, during the sprint, an in-session transcript analyser that spawns <code>jirah-transcript-analyzer</code> subagents on each Fireflies transcript as sessions land. Fire once before the sprint and then on each session recording.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-session-analyzer</div><div class="ghost-desc">Processes a single Fireflies transcript via the transcript-analyzer subagent. Extracts language shifts, contradictions, and emotional markers. Called by /jirah-sprint-facilitation but also usable standalone. Fire on any transcript you want to mine for signal.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-team-interview</div><div class="ghost-desc">Interview guides for team-member sessions (triangulation during audits and engagements). Role-specific friction-point probing — the questions for a long-tenured IC differ from the ones for the ops lead. Fire when booking team interviews.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-triangulation</div><div class="ghost-desc">Utility skill. For a given owner hypothesis, plans the validation: who to interview, what external checks to run, what data to pull. Fire when the owner has just stated a strong claim and you need to decide how to stress-test it.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-financial-audit</div><div class="ghost-desc">Reviews client financials (P&amp;L, balance sheet, cash flow, AR aging) for red flags: margin compression, concentration risk, aging receivables, unusual expense patterns. Feeds the Friction Audit afternoon data pass. Fire when financials arrive and you need them read before the session.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-document-review</div><div class="ghost-desc">Reviews client-sent documents (strategy decks, policies, financials, legal) via the <code>jirah-document-reviewer</code> subagent. Surfaces concerns to raise with the owner — gaps, contradictions, red flags. Fire on any substantive document the client sends.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-action-register</div><div class="ghost-desc">Step 5 final deliverable. Produces the prioritised action register: Critical / High / Medium, mapped to friction point, owner-assigned, deadline-bound. This is the register, not a narrative report — that's the whole point. Replaces the retired /jirah-report-writing. Fire after sprint synthesis.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-report-review</div><div class="ghost-desc">Methodology compliance check on a drafted Jirah deliverable. Confidence tags on every finding, action-register format, voice match, Mode A visuals, no out-of-scope items. Extends the global /doc-review-jason with Jirah-specific criteria. Fire before any client-facing report goes out.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-client-presentation</div><div class="ghost-desc">Builds client-facing HTML presentations — extends the global /html-brief-jason with Jirah branding (Mode A standalone or Mode B co-branded). Single-file HTML, browser-rendered. Fire for Discussion Documents, final-report summaries, pilot plans when a deck-style presentation is required.</div></div>
+      </div>
+    </div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>AI Track</h3><span class="count">4 skills · parallel to core consulting</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-ai-opportunity-scan</div><div class="ghost-desc">Embedded in every Friction Audit. Surfaces where AI creates 10x leverage in the client's workflow. Outputs 2–3 pilot-shaped opportunities — concrete enough to scope, not so specific that the Plan A/B fork is foreclosed. Fire as part of every audit synthesis.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-ai-scoping</div><div class="ghost-desc">Turns one selected AI opportunity into a scoped 4-week pilot proposal. Mode B (co-branded), Plan A/B decision fork, weekly deliverables, 0-hallucination standards. Fire after the owner has picked the opportunity they want to pursue.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-pilot-plan</div><div class="ghost-desc">Produces the client-facing AI Pilot Plan document (Mode B co-branded). Structure: Hero → Problem → Approach → Timeline → Example Output → Risks → Next Steps. Single-file HTML via the pilot-plan template. Fire when the scope is signed and you need the deliverable-grade document.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-ai-pilot-status</div><div class="ghost-desc">Weekly demo-able status document during AI pilot execution. Shows progress, names risks, surfaces Plan A / Plan B decision state. Designed to be screenshared live with the client, not emailed as a dense report. Fire every Friday during an active pilot.</div></div>
+      </div>
+    </div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>Retainer</h3><span class="count">1 skill · Step 6</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-kpi-tracker</div><div class="ghost-desc">Ongoing KPI tracking and monthly action-register status updates during the retainer phase. This is where retainer revenue lives. The register from Step 5 becomes a rolling scoreboard. Fire monthly during retainer to produce the status doc for the partner meeting.</div></div>
+      </div>
+    </div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>Harvest Loop</h3><span class="count">3 skills · post-engagement</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-case-study</div><div class="ghost-desc">Auto-drafts a case study from a finished engagement in Jirah's signature "owner thought X, actual was Y" narrative. Mode A (Jirah-branded). Feeds top-of-funnel content. Fire 30–60 days after a sprint or pilot lands and results are visible.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-testimonial-ask</div><div class="ghost-desc">Drafts the partner-voice testimonial ask. Sent 30 days post-delivery when results have landed — early enough that the client still remembers the pain, late enough that the impact is real. Fire at the 30-day post-delivery mark.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-referral-ask</div><div class="ghost-desc">Drafts referral asks at the three win moments: contract signed, testimonial collected, case study published. Owner-run firms refer owner-run firms — the ask has to be shaped for that audience. Fire at any of the three win moments.</div></div>
+      </div>
+    </div>
+
+    <div class="ghost-group">
+      <div class="ghost-group-head"><h3>Ops Cadence</h3><span class="count">4 skills · partner rhythm</span></div>
+      <div class="ghost-list">
+        <div class="ghost-item"><div class="ghost-name">/jirah-weekly-review</div><div class="ghost-desc">Monday partner-sync synthesis. Pipeline movement, overdue follow-ups, this-week content slate, audits triaged this week, engagements at risk. Pairs with /jirah-daily-briefing — the daily is tactical, the weekly is strategic. Fire Monday morning.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-pipeline-forecast</div><div class="ghost-desc">Probabilistic pipeline forecast from the stage data. Applies conversion rates to weighted value. Outputs expected close this quarter with an uncertainty band — not a single number. Fire monthly or when the pipeline shape changes materially.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-pattern-library-query</div><div class="ghost-desc">Scans prior engagements (Vulcan → Hatch → Falcon → Genesis and everything since) for patterns matching a current client profile. Injects pattern-library insights into whatever you're drafting — so a new discussion doc quotes what happened at a structurally similar past engagement. Fire during drafting, not just once at engagement start.</div></div>
+        <div class="ghost-item"><div class="ghost-name">/jirah-win-loss</div><div class="ghost-desc">One-shot retrospective across all ~50 historical Jirah proposals. Fans out 5 <code>jirah-proposal-miner</code> subagents in parallel. Highest-ROI single build — validates the ICP with data, surfaces price-point patterns, and names revivable lost-deal candidates. Fire once now, then again each year to refresh.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL / GLOBAL SKILLS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Personal / Global</div>
+    <h2>Five skills Jason uses everywhere</h2>
+    <div class="prose"><p>These live in Jason's global <code>~/.claude/skills/</code> and are available in every project, not just Jirah Ops. Joshua can adopt any of them by copying the skill folder to his own global location. All are working.</p></div>
+
+    <div class="personal-grid">
+      <div class="personal-card">
+        <div class="pname">/html-brief-jason</div>
+        <div class="pdesc">Editorial-style single-file browser-rendered HTML briefs — pitches, proposals, pilot plans, one-pagers, memos. Built this document. Fire when you want a designed long-scroll doc rather than a slide deck or a Word file.</div>
+      </div>
+      <div class="personal-card">
+        <div class="pname">/decision-memo-jason</div>
+        <div class="pdesc">Structured decision memos: context, decision needed, options, recommendation, risks, assumptions. Forces a clear recommendation — never ends with "it depends." Fire when you're wrestling with a call and want to get the reasoning out of your head.</div>
+      </div>
+      <div class="personal-card">
+        <div class="pname">/doc-review-jason</div>
+        <div class="pdesc">Stress-tests strategic documents (memos, decks, proposals, financial models, contracts). No validation, no softening — direct challenge. Fire on any substantive document before it leaves your laptop.</div>
+      </div>
+      <div class="personal-card">
+        <div class="pname">/meeting-prep-jason</div>
+        <div class="pdesc">High-leverage briefings for calls and meetings: stakeholder profile, likely objections and framings, strategic questions to ask, desired outcome, talking points, proposed agenda. Fire before any stakes-bearing call.</div>
+      </div>
+      <div class="personal-card">
+        <div class="pname">/code-plan-jason</div>
+        <div class="pdesc">Enforces read-before-write and blast-radius discipline on coding tasks. Auto-triggers on multi-file refactors and "change how X works" asks. Skip with "just do it" for trivial changes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBAGENTS -->
+<section class="dark">
+  <div class="wrap">
+    <div class="eyebrow">Under the hood</div>
+    <h2>Subagents that skills call</h2>
+    <div class="prose"><p>Subagents are specialised ghost workers that skills spawn for parallel or context-isolated work. You don't invoke them directly — skills call them. They exist so the main context stays clean when a skill needs to read 50 transcripts or research 20 prospects at once.</p></div>
+
+    <div class="sub-grid">
+      <div class="sub-col">
+        <h4>Working</h4>
+        <div class="sub-item">
+          <div class="sub-name">jirah-proposal-miner</div>
+          <div class="sub-desc">Reads and tags proposal files. Called by /jirah-win-loss in 5-way parallel fan-out across the ~50-proposal archive. Keeps proposal content out of the main context window.</div>
+        </div>
+      </div>
+      <div class="sub-col">
+        <h4>Ghost</h4>
+        <div class="sub-item">
+          <div class="sub-name">jirah-prospect-researcher</div>
+          <div class="sub-desc">Deep research on one target prospect: news, funding, leadership, hiring patterns. Called by /jirah-lead-gen in parallel.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-name">jirah-vertical-scanner</div>
+          <div class="sub-desc">Scans one vertical for weekly outreach triggers. Called by /jirah-industry-pulse (4 instances in parallel, one per vertical).</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-name">jirah-transcript-analyzer</div>
+          <div class="sub-desc">Ingests a single Fireflies transcript. Extracts language shifts, contradictions, emotional markers. Called by /jirah-session-analyzer and /jirah-sprint-facilitation.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-name">jirah-document-reviewer</div>
+          <div class="sub-desc">Reviews one client-sent document against a supplied review lens. Called by /jirah-document-review.</div>
+        </div>
+        <div class="sub-item">
+          <div class="sub-name">jirah-pattern-matcher</div>
+          <div class="sub-desc">Scans prior engagements for patterns matching a current client profile. Called by /jirah-pattern-library-query.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW GHOSTS WORK -->
+<section>
+  <div class="wrap-narrow">
+    <div class="eyebrow">On ghost skills</div>
+    <h2>Why a skill can exist before it works</h2>
+    <div class="prose">
+      <p>Ghost skills are stubs. Invoking one today returns a build brief: purpose, inputs, process outline, output shape. That brief is the spec. When the skill gets promoted to working, that spec becomes the implementation contract — so the behaviour is predictable from day one.</p>
+      <p>This pattern lets the full skill registry exist now, even though only four Jirah skills are implemented. The registry makes the intended behaviour legible, surfaces naming collisions early, and lets Claude trigger the right skill by phrase even when the body is stubbed (it will return the brief and you can either hand-execute the steps or schedule the build).</p>
+      <p>Priority order for promoting ghosts lives in <code>PLAN.md §4</code> in this workspace.</p>
+    </div>
+
+    <div class="callout">
+      <p><strong>Using skills well.</strong> Invoke by slash command when you want to be explicit (<code>/jirah-daily-briefing</code>). Use natural phrasing when you want Claude to pick the skill (<code>"run my daily briefing"</code>). Both work. If you're not sure whether a skill exists, ask — "is there a skill for X?" — and Claude will check the registry.</p>
+      <p><strong>Adding a new skill.</strong> Drop a <code>SKILL.md</code> file under <code>.claude/skills/&lt;skill-name&gt;/</code> with the frontmatter schema used by the existing skills. The runtime picks it up automatically on the next session.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><strong>JIRAH Growth Partners</strong> · Internal reference</span>
+    <span>2026-04-20</span>
+  </div>
+</footer>
+
+</body>
+</html>

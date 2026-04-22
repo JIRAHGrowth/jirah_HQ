@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JIRAH Ops — A Tour for Joshua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#111827;
+    --navy-2:#1a2030;
+    --cream:#FAF7F0;
+    --cream-2:#F2ECDD;
+    --ink:#1a1a1a;
+    --ink-soft:#3a3a3a;
+    --gold:#C5A55A;
+    --gold-soft:#D9BF80;
+    --muted:#6b7280;
+    --rule:rgba(197,165,90,0.45);
+    --rule-soft:rgba(17,24,39,0.08);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    font-size:16px;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 48px}
+
+  /* Typography */
+  h1,h2,h3,h4{font-family:'Playfair Display', Georgia, serif;font-weight:500;color:var(--ink)}
+  h1{font-size:64px;line-height:1.05;letter-spacing:-0.015em;font-weight:600}
+  h2{font-size:38px;line-height:1.15;letter-spacing:-0.01em;margin-bottom:24px}
+  h3{font-size:22px;line-height:1.3;font-weight:600;margin-bottom:10px;font-family:'DM Sans', sans-serif;letter-spacing:-0.005em}
+  h4{font-size:16px;font-weight:600;font-family:'DM Sans', sans-serif;letter-spacing:0.02em;text-transform:uppercase;color:var(--gold)}
+
+  p{margin-bottom:18px;font-size:17px;line-height:1.65;color:var(--ink-soft)}
+  p.lede{font-size:20px;line-height:1.55;color:var(--ink);font-weight:400}
+
+  .eyebrow{
+    font-family:'DM Sans', sans-serif;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.22em;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:18px;
+    display:block;
+  }
+
+  .gold-line{width:48px;height:2px;background:var(--gold);margin:0 0 28px 0;display:block}
+
+  /* Sections */
+  section{padding:96px 0;border-bottom:1px solid var(--rule-soft)}
+  section.tight{padding:72px 0}
+  section.dark{background:var(--navy);color:var(--cream);border-bottom:1px solid rgba(250,247,240,0.08)}
+  section.dark h1,section.dark h2,section.dark h3{color:var(--cream)}
+  section.dark p{color:rgba(250,247,240,0.82)}
+  section.dark h4{color:var(--gold)}
+  section.cream-2{background:var(--cream-2)}
+
+  /* Hero */
+  .hero{padding:140px 0 120px;background:var(--navy);color:var(--cream);border-bottom:none}
+  .hero .monogram{
+    font-family:'Playfair Display', serif;
+    font-size:42px;
+    color:var(--gold);
+    font-weight:600;
+    letter-spacing:0.05em;
+    margin-bottom:48px;
+    display:inline-block;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--gold);
+  }
+  .hero .firm-label{
+    font-family:'DM Sans',sans-serif;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:28px;
+  }
+  .hero h1{color:var(--cream);font-size:84px;margin-bottom:24px;letter-spacing:-0.02em}
+  .hero .subtitle{
+    font-family:'Playfair Display', serif;
+    font-size:26px;
+    font-style:italic;
+    color:rgba(250,247,240,0.88);
+    font-weight:400;
+    margin-bottom:64px;
+    line-height:1.4;
+    max-width:780px;
+  }
+  .hero .meta{
+    font-family:'DM Sans', sans-serif;
+    font-size:13px;
+    color:rgba(250,247,240,0.6);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-weight:500;
+    padding-top:28px;
+    border-top:1px solid rgba(197,165,90,0.3);
+    display:inline-block;
+    padding-right:80px;
+  }
+
+  /* Pull quote */
+  .pull{
+    border-left:3px solid var(--gold);
+    padding:12px 0 12px 28px;
+    margin:40px 0;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:24px;
+    line-height:1.45;
+    color:var(--ink);
+    font-weight:400;
+  }
+  section.dark .pull{color:var(--cream)}
+
+  /* Grids */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px}
+
+  .zone{
+    padding:32px;
+    background:var(--cream);
+    border:1px solid var(--rule-soft);
+    border-top:3px solid var(--gold);
+  }
+  .zone .label{
+    font-family:'DM Sans',sans-serif;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    color:var(--muted);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .zone h3{font-family:'Playfair Display',serif;font-weight:500;font-size:24px;margin-bottom:14px}
+  .zone .path{
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:12px;
+    color:var(--gold);
+    background:var(--navy);
+    padding:10px 12px;
+    display:block;
+    margin:14px 0 16px;
+    word-break:break-all;
+    border-radius:2px;
+  }
+  .zone p{font-size:15px;margin:0}
+
+  /* Six rings */
+  .rings{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:18px;
+    margin-top:36px;
+  }
+  .ring{
+    padding:24px 18px;
+    background:var(--cream);
+    border-top:2px solid var(--gold);
+    text-align:left;
+  }
+  .ring .num{
+    font-family:'Playfair Display',serif;
+    font-size:34px;
+    color:var(--gold);
+    font-weight:600;
+    line-height:1;
+    margin-bottom:12px;
+    display:block;
+  }
+  .ring .ring-name{
+    font-family:'DM Sans',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+
+  /* Surfaces */
+  .surface{
+    background:var(--cream);
+    border:1px solid var(--rule-soft);
+    padding:36px 36px 32px;
+    margin-bottom:24px;
+    border-left:3px solid var(--gold);
+  }
+  .surface .tag{
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:12px;
+    color:var(--gold);
+    background:var(--navy);
+    padding:4px 10px;
+    display:inline-block;
+    margin-bottom:14px;
+    border-radius:2px;
+  }
+  .surface h3{font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin-bottom:14px}
+  .surface ul{list-style:none;margin-top:14px}
+  .surface ul li{
+    padding:8px 0 8px 20px;
+    position:relative;
+    font-size:15px;
+    color:var(--ink-soft);
+    border-bottom:1px dashed var(--rule-soft);
+  }
+  .surface ul li:last-child{border-bottom:none}
+  .surface ul li::before{
+    content:"▸";
+    position:absolute;
+    left:0;
+    color:var(--gold);
+    font-size:12px;
+    top:10px;
+  }
+
+  /* Skill tables */
+  .skills-block{margin-top:36px}
+  .skills-row{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:32px;
+    padding:20px 0;
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .skills-row .col-label{
+    font-family:'DM Sans',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--ink);
+    padding-top:4px;
+  }
+  .skills-row .col-label .status{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    letter-spacing:0.15em;
+    font-weight:500;
+  }
+  .skills-row .col-label .working{color:var(--gold)}
+  .skills-row .col-label .ghost{color:var(--muted)}
+
+  .skill-chip{
+    display:inline-block;
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:12px;
+    padding:5px 10px;
+    margin:4px 6px 4px 0;
+    background:var(--cream);
+    border:1px solid var(--rule);
+    color:var(--ink);
+    border-radius:2px;
+  }
+  .skill-chip.live{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+  .skill-desc{font-size:14px;color:var(--muted);margin-top:8px}
+
+  /* Process sequence */
+  .steps{counter-reset:step;margin-top:36px}
+  .step{
+    counter-increment:step;
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:24px;
+    padding:24px 0;
+    border-bottom:1px solid var(--rule-soft);
+    align-items:start;
+  }
+  .step::before{
+    content:counter(step, decimal-leading-zero);
+    font-family:'Playfair Display',serif;
+    font-size:36px;
+    color:var(--gold);
+    font-weight:600;
+    line-height:1;
+  }
+  .step h4{
+    font-family:'DM Sans',sans-serif;
+    text-transform:none;
+    letter-spacing:0;
+    color:var(--ink);
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .step h4 code{
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:13px;
+    color:var(--gold);
+    background:var(--navy);
+    padding:2px 8px;
+    margin-right:10px;
+    border-radius:2px;
+    font-weight:400;
+  }
+  .step p{font-size:15px;color:var(--ink-soft);margin:0}
+
+  /* Status block */
+  .status-row{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:28px;
+    padding:22px 0;
+    border-bottom:1px solid rgba(250,247,240,0.12);
+    align-items:start;
+  }
+  .status-row .status-label{
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+    font-weight:500;
+    color:var(--gold);
+  }
+  .status-row .status-label .sub{
+    display:block;
+    font-family:'DM Sans',sans-serif;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    color:rgba(250,247,240,0.5);
+    margin-top:4px;
+    font-weight:500;
+  }
+  .status-row p{margin:0;font-size:15px;color:rgba(250,247,240,0.82)}
+  .status-row:last-child{border-bottom:none}
+
+  /* Checklist */
+  .checklist{list-style:none;margin-top:28px}
+  .checklist li{
+    padding:18px 0 18px 44px;
+    position:relative;
+    font-size:16px;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .checklist li:last-child{border-bottom:none}
+  .checklist li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:22px;
+    width:20px;
+    height:20px;
+    border:2px solid var(--gold);
+    border-radius:2px;
+  }
+  .checklist li strong{color:var(--ink);font-weight:600}
+  .checklist li code{
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:13px;
+    background:var(--navy);
+    color:var(--gold);
+    padding:2px 8px;
+    border-radius:2px;
+  }
+
+  /* Close section */
+  .close-block{
+    text-align:left;
+    max-width:760px;
+  }
+  .close-block h2{font-size:32px;margin-bottom:28px}
+  .close-block p{font-size:19px;line-height:1.6;color:rgba(250,247,240,0.9)}
+  .signoff{
+    margin-top:56px;
+    padding-top:28px;
+    border-top:1px solid rgba(197,165,90,0.3);
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:18px;
+  }
+
+  /* Flow diagram (two-funnel) */
+  .flow{margin-top:40px}
+  .flow-node{
+    background:rgba(197,165,90,0.08);
+    border:1px solid rgba(197,165,90,0.3);
+    padding:18px 24px;
+    text-align:center;
+    max-width:520px;
+    margin:0 auto;
+    border-radius:2px;
+  }
+  .flow-node .node-label{
+    font-family:'DM Sans',sans-serif;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .flow-node .node-body{
+    font-family:'Playfair Display',serif;
+    font-size:18px;
+    color:var(--cream);
+    line-height:1.3;
+    font-weight:500;
+  }
+  .flow-node .node-sub{
+    font-family:'DM Sans',sans-serif;
+    font-size:13px;
+    color:rgba(250,247,240,0.6);
+    margin-top:6px;
+  }
+  .flow-arrow{
+    text-align:center;
+    color:var(--gold);
+    font-size:18px;
+    line-height:1;
+    margin:14px 0;
+    letter-spacing:0.1em;
+  }
+  .flow-split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    margin:14px 0;
+    position:relative;
+  }
+  .flow-split::before{
+    content:"";
+    position:absolute;
+    top:-14px;
+    left:25%;
+    right:25%;
+    height:1px;
+    background:var(--gold);
+    opacity:0.4;
+  }
+  .flow-branch{
+    padding:24px;
+    background:rgba(197,165,90,0.05);
+    border:1px solid rgba(197,165,90,0.25);
+    border-top:2px solid var(--gold);
+  }
+  .flow-branch .branch-tag{
+    font-family:'DM Sans',sans-serif;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.22em;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .flow-branch h4{
+    font-family:'Playfair Display',serif;
+    text-transform:none;
+    letter-spacing:-0.005em;
+    color:var(--cream);
+    font-size:22px;
+    font-weight:500;
+    margin-bottom:14px;
+  }
+  .flow-branch ol{
+    list-style:none;
+    counter-reset:branch-step;
+    padding:0;
+  }
+  .flow-branch ol li{
+    counter-increment:branch-step;
+    position:relative;
+    padding:10px 0 10px 34px;
+    font-size:14px;
+    color:rgba(250,247,240,0.82);
+    border-bottom:1px dashed rgba(250,247,240,0.1);
+    line-height:1.5;
+  }
+  .flow-branch ol li:last-child{border-bottom:none}
+  .flow-branch ol li::before{
+    content:counter(branch-step);
+    position:absolute;
+    left:0;
+    top:10px;
+    font-family:'Playfair Display',serif;
+    font-size:16px;
+    color:var(--gold);
+    font-weight:600;
+    width:24px;
+    height:24px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    text-align:center;
+    line-height:22px;
+  }
+  .flow-branch ol li code{
+    font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:12px;
+    color:var(--gold);
+    background:rgba(17,24,39,0.6);
+    padding:2px 6px;
+    border-radius:2px;
+  }
+  .converge-note{
+    text-align:center;
+    font-family:'DM Sans',sans-serif;
+    font-size:12px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:18px 0 14px;
+    font-weight:600;
+  }
+
+  /* Responsive */
+  @media (max-width:900px){
+    .wrap{padding:0 28px}
+    .hero{padding:100px 0 80px}
+    .hero h1{font-size:56px}
+    .hero .subtitle{font-size:20px}
+    h2{font-size:30px}
+    section{padding:64px 0}
+    .grid-2,.grid-3{grid-template-columns:1fr;gap:24px}
+    .rings{grid-template-columns:repeat(2,1fr)}
+    .skills-row{grid-template-columns:1fr;gap:12px}
+    .step{grid-template-columns:60px 1fr;gap:16px}
+    .status-row{grid-template-columns:1fr;gap:8px}
+    .flow-split{grid-template-columns:1fr;gap:20px}
+    .flow-split::before{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="monogram">J</div>
+    <div class="firm-label">JIRAH Growth Partners</div>
+    <h1>JIRAH Ops</h1>
+    <p class="subtitle">The command center Jason built. A quick tour for Joshua.</p>
+    <div class="meta">Prepared by Jason &middot; April 2026</div>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">01 &nbsp; What It Is</span>
+    <span class="gold-line"></span>
+    <h2>A Claude-managed workspace that acts as Jirah's command center.</h2>
+    <p class="lede">JIRAH Ops lives on my desktop in a single folder. When I open Claude Code inside that folder, Claude loads all of Jirah's IP, process, and voice rules automatically. It is not a generic AI assistant. It is a Jirah-aware one.</p>
+    <p>The system drives the full growth loop end to end: cold lead, Friction Audit, closed client, delivered engagement, case study, referral. Everything we do as a firm has a place in it.</p>
+    <p>There are two surfaces you will actually use:</p>
+    <div class="grid-2" style="margin-top:28px">
+      <div class="zone">
+        <div class="label">Surface 1</div>
+        <h3>Claude Code Chat</h3>
+        <p>For drafting, diagnosing, generating. You type slash commands and Claude produces deliverables in Jirah's voice.</p>
+      </div>
+      <div class="zone">
+        <div class="label">Surface 2</div>
+        <h3>Local Dashboard</h3>
+        <p>A Next.js app running on <code style="font-size:13px;color:var(--gold);background:var(--navy);padding:2px 6px">localhost:3000</code>. Pipeline, audit queue, and engagement health visible at a glance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WE BUILT IT -->
+<section class="cream-2">
+  <div class="wrap">
+    <span class="eyebrow">02 &nbsp; Why We Built It</span>
+    <span class="gold-line"></span>
+    <h2>Before this: 50+ proposals scattered across OneDrive, no pipeline tracker, no reminder system, no demand-gen engine.</h2>
+    <p>Generic Claude sessions do not know our methodology. They do not know the 10 Friction Points, the wedge on Ownership Impact, the Mode A vs Mode B visual distinction, or the voice rules that keep us from sounding like every other consultancy. Every session started from zero.</p>
+    <div class="pull">After this: a Claude-managed growth machine with Jirah's wedge, voice, and methodology baked in at the workspace level. Both partners see the same state.</div>
+    <p>This is not a delivery-ops automation project. It is a growth machine that includes delivery as one ring of a six-ring loop.</p>
+  </div>
+</section>
+
+<!-- SIX RING GROWTH MACHINE -->
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">03 &nbsp; The Growth Machine</span>
+    <span class="gold-line"></span>
+    <h2>Consulting firms grow on a repeatable machine. The workspace encodes all six rings.</h2>
+    <p class="lede">Most firms build the delivery ring well and neglect the other five. We are building all six from the start.</p>
+    <div class="rings">
+      <div class="ring"><span class="num">01</span><div class="ring-name">IP</div></div>
+      <div class="ring"><span class="num">02</span><div class="ring-name">Relationships</div></div>
+      <div class="ring"><span class="num">03</span><div class="ring-name">Trigger Outreach</div></div>
+      <div class="ring"><span class="num">04</span><div class="ring-name">Diagnostic</div></div>
+      <div class="ring"><span class="num">05</span><div class="ring-name">Proof Harvest</div></div>
+      <div class="ring"><span class="num">06</span><div class="ring-name">Referral Loop</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZATION: 3 ZONES -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">04 &nbsp; How It's Organized</span>
+    <span class="gold-line"></span>
+    <h2>Three persistence zones. Know which one you're touching.</h2>
+    <p class="lede">Data lives in one of three places. The rule is simple: firm IP is shareable, personal Claude memory is not, client data is the shared source of truth.</p>
+    <div class="grid-3" style="margin-top:40px">
+      <div class="zone">
+        <div class="label">Zone 1 &middot; Shareable</div>
+        <h3>Workspace</h3>
+        <span class="path">c:\Users\jason\Desktop\Jirah Ops\</span>
+        <p><strong>CLAUDE.md, PLAN.md, context/, .claude/, briefings/, dashboard/.</strong> This is what you clone to your machine. Firm IP, skills, dashboard code, context files.</p>
+      </div>
+      <div class="zone">
+        <div class="label">Zone 2 &middot; Jason-Personal</div>
+        <h3>Claude Memory</h3>
+        <span class="path">~/.claude/projects/.../memory/</span>
+        <p>My profile, my preferences, my voice pointer. Not shared. You will have your own when you install on your machine. Nothing Jirah-critical lives here.</p>
+      </div>
+      <div class="zone">
+        <div class="label">Zone 3 &middot; Shared Source of Truth</div>
+        <h3>OneDrive</h3>
+        <span class="path">NEW - JIRAH MASTER/</span>
+        <p><strong>Active Clients, prospects, audit-applications, _pipeline.xlsx.</strong> Live client data. Both partners read and write here. The dashboard reads this.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE TWO SURFACES -->
+<section class="cream-2">
+  <div class="wrap">
+    <span class="eyebrow">05 &nbsp; How To Use It</span>
+    <span class="gold-line"></span>
+    <h2>Two surfaces. Use them together.</h2>
+
+    <div class="surface">
+      <span class="tag">Surface 1</span>
+      <h3>Claude Code Chat &middot; For drafting, diagnosing, generating</h3>
+      <p>Open Claude Code in the workspace folder. Claude auto-loads the full Jirah context stack: firm IP, voice rules, the 10 Friction Points, the 6-step process, visual modes, pattern library.</p>
+      <p>You invoke work with slash commands. Type <code style="font-family:ui-monospace,monospace;font-size:14px;color:var(--gold);background:var(--navy);padding:2px 8px;border-radius:2px">/jirah-daily-briefing</code> and Claude scans pipeline, engagements, and the audit queue, then writes today's briefing.</p>
+    </div>
+
+    <div class="surface">
+      <span class="tag">Surface 2</span>
+      <h3>Local Dashboard &middot; For seeing state at a glance</h3>
+      <p>Run <code style="font-family:ui-monospace,monospace;font-size:14px;color:var(--gold);background:var(--navy);padding:2px 8px;border-radius:2px">cd dashboard &amp;&amp; npm run dev</code> and open <code style="font-family:ui-monospace,monospace;font-size:14px;color:var(--gold);background:var(--navy);padding:2px 8px;border-radius:2px">localhost:3000</code>. Five views:</p>
+      <ul>
+        <li><strong>Today's Focus Bar.</strong> Overdue follow-ups, audit queue count, engagements at risk, content-this-week status.</li>
+        <li><strong>Pipeline Kanban.</strong> Cold / Warm / Meeting Booked / Proposal Sent / Closed Won / Closed Lost.</li>
+        <li><strong>Audit Applications Queue.</strong> Sortable table with ICP score, status, triage action.</li>
+        <li><strong>Active Engagements.</strong> Card grid with a 6-step stepper per client.</li>
+        <li><strong>Today's Briefing Panel.</strong> Renders the day's briefing markdown inline.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS INVENTORY -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">06 &nbsp; Skills &middot; What To Type</span>
+    <span class="gold-line"></span>
+    <h2>Slash commands, grouped by function.</h2>
+    <p class="lede">Working skills run today. Ghost stubs return a build brief when invoked. That brief is the spec we fill in when the skill is first needed in real client work. Ship when you need it.</p>
+
+    <div class="skills-block">
+
+      <div class="skills-row">
+        <div class="col-label">Working Today<span class="status working">3 LIVE</span></div>
+        <div>
+          <span class="skill-chip live">/jirah-new-client</span>
+          <span class="skill-chip live">/jirah-daily-briefing</span>
+          <span class="skill-chip live">/jirah-friction-audit</span>
+          <p class="skill-desc">Scaffold a new client folder. Scan pipeline and write today's briefing. Run the 1-day paid Friction Audit in prep, capture, or synthesize mode.</p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <div class="col-label">Demand Generation<span class="status ghost">GHOST</span></div>
+        <div>
+          <span class="skill-chip">/jirah-audit-apply</span>
+          <span class="skill-chip">/jirah-audit-triage</span>
+          <span class="skill-chip">/jirah-lead-gen</span>
+          <span class="skill-chip">/jirah-email</span>
+          <span class="skill-chip">/jirah-industry-pulse</span>
+          <span class="skill-chip">/jirah-thought-leadership</span>
+          <p class="skill-desc">Landing copy and triage for the audit funnel. Cold prospect research and partner-voice outreach. Weekly vertical scans. "Owner thought X, actual was Y" post drafting.</p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <div class="col-label">6-Step Delivery<span class="status ghost">GHOST</span></div>
+        <div>
+          <span class="skill-chip">/jirah-discovery</span>
+          <span class="skill-chip">/jirah-discussion-document</span>
+          <span class="skill-chip">/jirah-kickoff-agenda</span>
+          <span class="skill-chip">/jirah-sprint-facilitation</span>
+          <span class="skill-chip">/jirah-action-register</span>
+          <span class="skill-chip">/jirah-kpi-tracker</span>
+          <p class="skill-desc">The six steps of our engagement flow, each with its own skill. Action register replaces "report writing" because a prioritized register is the deliverable.</p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <div class="col-label">AI Service Track<span class="status ghost">GHOST</span></div>
+        <div>
+          <span class="skill-chip">/jirah-ai-opportunity-scan</span>
+          <span class="skill-chip">/jirah-ai-scoping</span>
+          <span class="skill-chip">/jirah-pilot-plan</span>
+          <span class="skill-chip">/jirah-ai-pilot-status</span>
+          <p class="skill-desc">Embedded in every audit. Opportunity to 4-week scoped pilot. Mode B co-branded pilot plan doc. Weekly demo-able status reports.</p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <div class="col-label">Harvest Loop<span class="status ghost">GHOST</span></div>
+        <div>
+          <span class="skill-chip">/jirah-case-study</span>
+          <span class="skill-chip">/jirah-testimonial-ask</span>
+          <span class="skill-chip">/jirah-referral-ask</span>
+          <span class="skill-chip">/jirah-win-loss</span>
+          <p class="skill-desc">Close the loop after every engagement. Case study, testimonial, referral. Plus a retrospective that mines our historical proposals for pattern.</p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <div class="col-label">Ops Cadence<span class="status ghost">GHOST</span></div>
+        <div>
+          <span class="skill-chip">/jirah-weekly-review</span>
+          <span class="skill-chip">/jirah-pipeline-forecast</span>
+          <p class="skill-desc">Monday partner sync synthesis. Probabilistic forecast once win/loss data exists. These support our weekly rhythm.</p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <div class="col-label">Global Skills<span class="status working">5 SHARED</span></div>
+        <div>
+          <span class="skill-chip live">/html-brief</span>
+          <span class="skill-chip live">/decision-memo</span>
+          <span class="skill-chip live">/doc-review</span>
+          <span class="skill-chip live">/meeting-prep</span>
+          <span class="skill-chip live">/code-plan</span>
+          <p class="skill-desc">Not Jirah-specific. Generic but useful. This document was produced with <code style="font-size:12px">/html-brief</code>.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE PROCESS IN ACTION -->
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">07 &nbsp; The Process In Action</span>
+    <span class="gold-line"></span>
+    <h2>Two funnels, routed by geography. Same back end.</h2>
+    <p class="lede">We are closers in person. For anyone within driving distance of Kelowna, the front door is lunch with us, not an application form. Everyone else goes through the audit-application funnel. Both paths converge on the same paid Friction Audit.</p>
+
+    <div class="flow">
+
+      <div class="flow-node">
+        <div class="node-label">Entry</div>
+        <div class="node-body">Warm intro, industry-pulse trigger, or inbound</div>
+        <div class="node-sub">Surfaced by <code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-industry-pulse</code> or <code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-lead-gen</code></div>
+      </div>
+
+      <div class="flow-arrow">&#9660;</div>
+
+      <div class="flow-node">
+        <div class="node-label">Qualify</div>
+        <div class="node-body">15-minute ICP fit check</div>
+        <div class="node-sub">Phone screen or email qualification. Route decision happens here.</div>
+      </div>
+
+      <div class="flow-arrow">&#9660;</div>
+
+      <div class="converge-note">Route by geography &mdash; within driving distance of Kelowna?</div>
+
+      <div class="flow-split">
+
+        <div class="flow-branch">
+          <div class="branch-tag">Funnel 1 &middot; Local</div>
+          <h4>Lunch Front Door</h4>
+          <ol>
+            <li>Lunch with Jason and Joshua. No slides. Read the room, read the owner.</li>
+            <li>Soft audit pitch at the table: <em>"If there's a fit, the way we start is a 1-day audit, $1,500."</em></li>
+            <li>Post-lunch debrief logged to prospect's OneDrive file with next action and deadline.</li>
+          </ol>
+        </div>
+
+        <div class="flow-branch">
+          <div class="branch-tag">Funnel 2 &middot; Out-of-Market</div>
+          <h4>Apply-for-Audit Front Door</h4>
+          <ol>
+            <li>Drive them to the apply form. Application lands in OneDrive, dashboard queue, ICP-scored.</li>
+            <li><code>/jirah-audit-triage</code> drafts accept or decline in partner voice. Booking sent.</li>
+            <li>Volume lane. Runs alongside mass outreach without needing a seat at the table.</li>
+          </ol>
+        </div>
+
+      </div>
+
+      <div class="converge-note">Both paths converge &#9660;</div>
+
+      <div class="flow-node">
+        <div class="node-label">Paid Engagement #1</div>
+        <div class="node-body">Friction Audit &mdash; $1,500, 1 day</div>
+        <div class="node-sub"><code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-friction-audit</code> &middot; 10 Friction Points, triangulated, confidence-tagged</div>
+      </div>
+
+      <div class="flow-arrow">&#9660;</div>
+
+      <div class="flow-node">
+        <div class="node-label">Deliverable</div>
+        <div class="node-body">Action Register</div>
+        <div class="node-sub"><code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-action-register</code> &middot; Critical / High / Medium, owner-assigned, deadline-bound. Not a report.</div>
+      </div>
+
+      <div class="flow-arrow">&#9660;</div>
+
+      <div class="flow-node">
+        <div class="node-label">Expansion</div>
+        <div class="node-body">One diagnostic, three monetization paths</div>
+        <div class="node-sub">Ops optimization &middot; high-value project execution &middot; custom AI build</div>
+      </div>
+
+      <div class="flow-arrow">&#9660;</div>
+
+      <div class="flow-node">
+        <div class="node-label">Harvest Loop</div>
+        <div class="node-body">Case study, testimonial, referral</div>
+        <div class="node-sub"><code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-case-study</code> &middot; <code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-testimonial-ask</code> &middot; <code style="font-family:ui-monospace,monospace;font-size:11px;color:var(--gold);background:rgba(17,24,39,0.6);padding:1px 6px">/jirah-referral-ask</code> &middot; patterns feed the next engagement</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHATS BUILT / WHATS NEXT -->
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">08 &nbsp; Status</span>
+    <span class="gold-line"></span>
+    <h2>What's built. What's next.</h2>
+    <p class="lede">Honest view. Sprints 1a through 1e are complete. Groups of skills come online sprint by sprint.</p>
+
+    <div style="margin-top:40px">
+
+      <div class="status-row">
+        <div class="status-label">Sprints 1a &ndash; 1e<span class="sub">Done &middot; 2026-04-18</span></div>
+        <p>Context files, CLAUDE.md, 3 working skills, 1 working subagent, dashboard v1 live at localhost:3000, sample data seeded, pattern library codified from 4 real engagements. Key validation: FP #10 Ownership Impact is the terminal diagnosis in 4 of 4 engagements. The wedge is evidence-backed, not hypothesis-driven.</p>
+      </div>
+
+      <div class="status-row">
+        <div class="status-label">Sprint 2<span class="sub">Next</span></div>
+        <p>Demand-generation skills go live: audit-apply, triage, lead-gen, email, industry-pulse, thought-leadership. Outlook Mail and Calendar MCP wiring. Canva integration. First four thought-leadership pieces drafted from the pattern library.</p>
+      </div>
+
+      <div class="status-row">
+        <div class="status-label">Sprint 3<span class="sub">After That</span></div>
+        <p>The 6-step delivery skills plus the AI pilot tooling. Transcript analyzer and document reviewer subagents. This is where a cold prospect can flow end to end without ad-hoc handling.</p>
+      </div>
+
+      <div class="status-row">
+        <div class="status-label">Sprint 4<span class="sub">Compounding Loop</span></div>
+        <p>Harvest skills and ops cadence. Scheduled triggers: 7:30am daily briefing, 8:00am Monday weekly review, 4:00pm Friday wins log, 1st-of-month content calendar, 1st-of-quarter positioning review. The machine runs itself.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOR JOSHUA -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">09 &nbsp; For Joshua</span>
+    <span class="gold-line"></span>
+    <h2>What you do first.</h2>
+    <p class="lede">Six steps to get your mirror running. Should take under an hour.</p>
+    <ul class="checklist">
+      <li><strong>Clone the workspace.</strong> Copy <code>c:\Users\jason\Desktop\Jirah Ops\</code> to the same path on your machine. Same path matters for the permissions config.</li>
+      <li><strong>Install Claude Code.</strong> If you do not have it yet. Sign in with your Anthropic account.</li>
+      <li><strong>Verify the context loaded.</strong> Open Claude Code in the workspace. Ask: "what does Jirah do?" The answer should be Jirah-specific, not generic. If it is generic, the context did not load.</li>
+      <li><strong>Spin up the dashboard.</strong> Run <code>cd dashboard &amp;&amp; npm install</code>, then configure <code>.env.local</code> with your OneDrive path, then <code>npm run dev</code>. Open <code>localhost:3000</code>.</li>
+      <li><strong>Start your mornings with <code>/jirah-daily-briefing</code>.</strong> It writes <code>briefings/YYYY-MM-DD.md</code>. Read that before anything else.</li>
+      <li><strong>Treat ghost skills as specs, not errors.</strong> Invoke one and you get a build brief back. That brief is what we fill in when the skill is first needed in live work. Ship when needed, not before.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER / CLOSE -->
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">10 &nbsp; The Point</span>
+    <span class="gold-line"></span>
+    <div class="close-block">
+      <h2>This is a living system. It compounds.</h2>
+      <p>Every engagement sharpens the pattern library. Every win and loss sharpens the ICP. Every audit feeds thought leadership. Every case study feeds the referral loop.</p>
+      <p>The goal is not perfect from day one. The goal is a machine that gets sharper every week, without us having to remember to sharpen it.</p>
+      <div class="signoff">&mdash; Jason</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Dependencies
+**/node_modules/
+
+# Build output
+dashboard/.next/
+dashboard/out/
+dashboard/tsconfig.tsbuildinfo
+dashboard/next-env.d.ts
+
+# Environment (machine-specific OneDrive path)
+.env.local
+.env*.local
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local state (should not be shared)
+.claude/settings.local.json
