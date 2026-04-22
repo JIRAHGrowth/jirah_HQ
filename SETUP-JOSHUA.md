@@ -41,10 +41,13 @@ cp .env.local.example .env.local
 Then open `dashboard/.env.local` in a text editor and uncomment/set:
 
 ```
-ONEDRIVE_ROOT="C:\\Users\\joshua\\OneDrive - jirahgrowth.consulting\\Jason Lotoski's files - JIRAH Growth Partners - Shared\\NEW - JIRAH MASTER"
+ONEDRIVE_ROOT="C:\\Users\\joshu\\OneDrive - jirahgrowth.consulting\\JIRAH Growth Partners - Shared\\NEW - JIRAH MASTER"
 ```
 
-**Note:** the path starts with *your* Windows username (`joshua`) and references *Jason's* shared folder — it's the mirror of how Jason's looks on his machine. Double-backslashes are required (JSON escape).
+**Note on the path:**
+- Your Windows username is `joshu` (5 letters), not `joshua` — that's how your user profile folder is actually named.
+- There is **no** `[owner name]'s files -` prefix on your side, because **you** are the share owner. Jason's machine shows `Joshua Marshall's files - JIRAH Growth Partners - Shared` because OneDrive prefixes shared folders with the owner's name on the *receiving* side. Your side doesn't get a prefix.
+- Double-backslashes are required (JSON escape).
 
 ---
 

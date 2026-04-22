@@ -27,9 +27,9 @@ Use THIS skill for everything else:
 
 - [context/jirah-voice.md](../../../context/jirah-voice.md) — deliverable structure (Hero → Problem → Approach → Timeline → Example Output → Risks → Next Steps), voice markers
 - [context/jirah-visuals.md](../../../context/jirah-visuals.md) — **Mode A / Mode B chooser table**; exact palette + fonts + structural patterns
-- Structural exemplars:
-  - Mode A: `C:\Users\jason\Downloads\SA_Discussion_Document.html`
-  - Mode B: `C:\Users\jason\Downloads\Shop Drawing Pilot Plan.html`
+- Structural exemplars (resolve `[ONEDRIVE_ROOT]` from `dashboard/.env.local`):
+  - Mode A: `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\SA_Discussion_Document.html`
+  - Mode B: `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\Shop Drawing Pilot Plan.html`
 
 ## Inputs (ask if not supplied)
 

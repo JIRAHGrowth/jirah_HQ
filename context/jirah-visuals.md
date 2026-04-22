@@ -23,9 +23,9 @@ Jirah produces two distinct deliverable aesthetics. **Pick the mode before you s
 
 **Title treatment:** Use full formal branding — **"JIRAH Growth Partners"** — in the header/title.
 
-**Exemplar files:**
-- `C:\Users\jason\Downloads\Discussion Document - S&A.pdf`
-- `C:\Users\jason\Downloads\SA_Discussion_Document.html` — full-viewport slide-deck style with scroll-snap, fixed right-side nav dots, top progress bar, bottom-right slide counter
+**Exemplar files** (live in OneDrive — `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\`):
+- `Discussion Document - S&A.pdf`
+- `SA_Discussion_Document.html` — full-viewport slide-deck style with scroll-snap, fixed right-side nav dots, top progress bar, bottom-right slide counter
 
 ---
 
@@ -43,8 +43,8 @@ Jirah produces two distinct deliverable aesthetics. **Pick the mode before you s
 
 **Title treatment:** "Prepared by Jirah" or similar — lowercase "Jirah" in body copy. Jirah branding is small and secondary; client brand is primary.
 
-**Exemplar file:**
-- `C:\Users\jason\Downloads\Shop Drawing Pilot Plan.html` — Smith + Andersen AI pilot
+**Exemplar file** (lives in OneDrive — `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\`):
+- `Shop Drawing Pilot Plan.html` — Smith + Andersen AI pilot
 
 ---
 

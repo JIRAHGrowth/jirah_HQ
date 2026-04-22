@@ -26,7 +26,7 @@ Render the scoped pilot into the **shippable client deliverable** — the artifa
 - [context/jirah-visuals.md](../../../context/jirah-visuals.md) — **Mode B** rules (client's brand palette + fonts; "Prepared by Jirah" branding secondary)
 - [context/jirah-pattern-library.md](../../../context/jirah-pattern-library.md) — Smith + Andersen Shop-Drawing Pilot as the shape + price anchor
 - Upstream: `/jirah-ai-scoping` output at `engagements/[slug]/09-ai-pilot/01-technical-scope.md`
-- **Structural exemplar:** `C:\Users\jason\Downloads\Shop Drawing Pilot Plan.html` (S+A, co-branded)
+- **Structural exemplar:** `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\Shop Drawing Pilot Plan.html` (S+A, co-branded)
 
 ## Inputs (ask if not supplied)
 
@@ -141,7 +141,7 @@ SECTION 7 — Next Steps + Investment
 - **No JavaScript beyond scroll-snap + progress-bar update** (vanilla; no build step)
 - **No external dependencies** beyond Google Fonts
 
-Reference `C:\Users\jason\Downloads\Shop Drawing Pilot Plan.html` for CSS structure — steal verbatim, update content + brand.
+Reference `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\Shop Drawing Pilot Plan.html` for CSS structure — steal verbatim, update content + brand.
 
 ### 5. Voice checklist (Claude self-rejects if any fail)
 
@@ -223,4 +223,4 @@ Next action
 - Downstream: [`jirah-ai-pilot-status`](../jirah-ai-pilot-status/SKILL.md) (weekly during execution), [`jirah-action-register`](../jirah-action-register/SKILL.md) (pilot-close wraps into strategic register if parallel strategic+AI shape)
 - Adjacent: [`jirah-email`](../jirah-email/SKILL.md) `--scenario proposal-send` for cover email, [`jirah-client-presentation`](../jirah-client-presentation/SKILL.md) if a slide deck accompanies
 - Context: jirah-voice.md, jirah-visuals.md, jirah-pattern-library.md
-- Structural exemplar: `C:\Users\jason\Downloads\Shop Drawing Pilot Plan.html`
+- Structural exemplar: `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\Shop Drawing Pilot Plan.html`

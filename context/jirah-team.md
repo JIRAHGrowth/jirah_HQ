@@ -8,7 +8,7 @@
 **Background:** 10+ years across tech, business management, engineering, entrepreneurship. Founder of TONIT (global motorcyclist community). Advisor/investor via OKGN Angel Summit.
 **Superpower:** Building bespoke AI tools for clients — Jirah's flagship new service line. Treat AI services as first-class, not experimental.
 **In-session role:** Notes, language shift / contradiction / emotional-marker analysis. Jason does NOT facilitate.
-**Tool authoring:** Jason owns the Claude workspace at `C:\Users\jason\Desktop\Jirah Ops`.
+**Tool authoring:** Jason owns the Claude workspace (shared repo at `github.com/JIRAHGrowth/jirah_HQ`, cloned locally on each partner's machine).
 
 ## Joshua Marshall
 **Credentials:** MBA

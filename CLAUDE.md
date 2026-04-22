@@ -34,10 +34,10 @@ For any client, prospect, or deliverable work, read these first:
 
 ## Where data lives
 
-- **Workspace** (this directory, shareable with Joshua): `c:\Users\jason\Desktop\Jirah Ops\`
-  - `CLAUDE.md`, `PLAN.md`, `context/`, `.claude/`, `briefings/`, `dashboard/`, `seed-data/`
-- **Claude memory** (Jason-personal only): `~/.claude/projects/c--Users-jason-Desktop-Jirah-Ops/memory/`
-- **OneDrive** (shared, source of truth for client data): `C:\Users\jason\OneDrive - jirahgrowth.consulting\Joshua Marshall's files - JIRAH Growth Partners - Shared\NEW - JIRAH MASTER\`
+- **Workspace** (this repo, cloned per-partner from GitHub, shareable via `git pull` / `git push`): typically `~\Desktop\Jirah Ops\`
+  - `CLAUDE.md`, `PLAN.md`, `context/`, `.claude/`, `briefings/`, `dashboard/`
+- **Claude memory** (per-partner, personal, not in git): `~\.claude\projects\c--Users-<username>-Desktop-Jirah-Ops\memory\`
+- **OneDrive** (shared, source of truth for client data): `[ONEDRIVE_ROOT]\` — resolves per-machine via `ONEDRIVE_ROOT` in `dashboard/.env.local` (path differs: OneDrive prefixes shared folders with the owner's name on the receiving side)
   - `01 - Clients\Active\[ClientName]\` — all active clients (sprint + retainer phases co-exist per client)
   - `01 - Clients\Inactive\[ClientName]\` — archived clients
   - `01 - Clients\_template\` — canonical per-client scaffold (numbered 03 - Admin → 10 - Harvest)

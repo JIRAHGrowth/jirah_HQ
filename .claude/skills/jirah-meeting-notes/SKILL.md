@@ -84,9 +84,9 @@ Classification shapes emphasis — a discovery call's "decisions" will be about 
 
 Use the embedded template (see below). Clean, professional, scannable. Not Jirah-branded with heavy visuals — this is an internal/shared working document, not a client deliverable. Default to neutral professional typography.
 
-Save the HTML to a temp path:
+Save the HTML to a temp path (resolves to the current user's temp folder on either machine):
 ```
-C:\Users\jason\AppData\Local\Temp\jirah-meeting-notes-<timestamp>.html
+%TEMP%\jirah-meeting-notes-<timestamp>.html
 ```
 
 ### Step 5: Convert to PDF via Edge headless
@@ -105,7 +105,7 @@ Microsoft Edge ships with Windows 11. Use its headless print-to-PDF mode:
 **Output path logic:**
 - If transcript is a file, save PDF next to it: same folder, same basename, `.pdf` extension, with `-notes` suffix.
   - e.g. `AI-Trevor-and-Jason-54f4d8bf-3abe.md` → `AI-Trevor-and-Jason-54f4d8bf-3abe-notes.pdf`
-- If no source file (pasted text only), save to `C:\Users\jason\Documents\meeting-notes\YYYY-MM-DD-<slug>.pdf`.
+- If no source file (pasted text only), save to `%USERPROFILE%\Documents\meeting-notes\YYYY-MM-DD-<slug>.pdf` (resolves per-machine to Jason's or Joshua's user profile).
 - If the meeting clearly ties to an active Jirah client and the user asked to file it there, save to that client's `06 - Sprint & Facilitation\` or `08 - Monthly Retainer\` folder as appropriate. Ask before auto-filing to a client folder.
 
 Verify the PDF was written before moving on.

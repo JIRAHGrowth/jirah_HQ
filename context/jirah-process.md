@@ -20,7 +20,7 @@ Every strategic-consulting engagement follows this flow. AI-build engagements ha
 
 **Purpose:** Codify the objectives, scope, and approach for the engagement. This becomes the shared contract for what we will and won't do.
 
-**Deliverable:** Discussion Document (Mode A — JIRAH-branded). Exemplars: `C:\Users\jason\Downloads\Discussion Document - S&A.pdf`, `SA_Discussion_Document.html`.
+**Deliverable:** Discussion Document (Mode A — JIRAH-branded). Exemplars in OneDrive (`[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\`): `Discussion Document - S&A.pdf`, `SA_Discussion_Document.html`.
 
 **Structure:** What we heard → what we think matters → scope of the sprint → out-of-scope (explicitly named — SOPs, HR policy, handbooks usually) → timeline → investment.
 

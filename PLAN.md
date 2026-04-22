@@ -69,14 +69,14 @@ Why: volume at top, prestige in middle, commitment test at the threshold, constr
 
 | Zone | Path | Scope | What lives here |
 |---|---|---|---|
-| **Workspace** | `c:\Users\jason\Desktop\Jirah Ops\` | Project files, shareable with Joshua | `CLAUDE.md`, `.claude/`, `context/`, `briefings/`, skill definitions |
-| **Claude Memory** | `C:\Users\jason\.claude\projects\c--Users-jason-Desktop-Jirah-Ops\memory\` | Jason's personal Claude memory (not visible to Joshua) | Jason's profile, voice-rules pointer, `MEMORY.md` index |
-| **OneDrive (shared)** | `C:\Users\jason\OneDrive - jirahgrowth.consulting\Joshua Marshall's files - JIRAH Growth Partners - Shared\NEW - JIRAH MASTER\` | Shared with Joshua | Live client data — prospects, active clients, pipeline xlsx |
+| **Workspace** | `~\Desktop\Jirah Ops\` (cloned per-partner from GitHub) | Shared via git pull/push | `CLAUDE.md`, `.claude/`, `context/`, `briefings/`, dashboard, skill definitions |
+| **Claude Memory** | `~\.claude\projects\c--Users-<username>-Desktop-Jirah-Ops\memory\` | Per-partner, personal (not in git) | Partner profile, voice-rules pointer, `MEMORY.md` index |
+| **OneDrive (shared)** | `[ONEDRIVE_ROOT]\` — resolves via `dashboard/.env.local` per machine | Shared with Joshua | Live client data — prospects, active clients, pipeline xlsx |
 
 ### Workspace layout
 
 ```
-c:\Users\jason\Desktop\Jirah Ops\
+~\Desktop\Jirah Ops\   (per-partner clone of github.com/JIRAHGrowth/jirah_HQ)
 ├── CLAUDE.md                                 ← master context loaded every session
 ├── PLAN.md                                   ← this file
 ├── .claude\

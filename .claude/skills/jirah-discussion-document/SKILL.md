@@ -18,7 +18,7 @@ The Discussion Document is the single highest-leverage writing artifact in the e
 - [context/jirah-voice.md](../../../context/jirah-voice.md) — deliverable structure, voice markers
 - [context/jirah-visuals.md](../../../context/jirah-visuals.md) — **Mode A** rules (gold + navy, Playfair + DM Sans, formal "JIRAH Growth Partners" branding)
 - [context/jirah-pattern-library.md](../../../context/jirah-pattern-library.md) — engagement shapes + price anchors; two-column framing pattern
-- `C:\Users\jason\Downloads\SA_Discussion_Document.html` — **structural exemplar**, full-viewport slide-deck style with scroll-snap, fixed right-side nav dots, top progress bar, slide counter
+- `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\SA_Discussion_Document.html` — **structural exemplar**, full-viewport slide-deck style with scroll-snap, fixed right-side nav dots, top progress bar, slide counter. Resolve `[ONEDRIVE_ROOT]` from `dashboard/.env.local`.
 
 ## Inputs (ask if not supplied)
 
@@ -202,4 +202,4 @@ To generate the cover email: /jirah-email --scenario proposal-send --target [slu
 - Downstream: [`jirah-kickoff-agenda`](../jirah-kickoff-agenda/SKILL.md) (on sign-off)
 - Adjacent: [`jirah-email`](../jirah-email/SKILL.md) (cover email on send), [`jirah-pilot-plan`](../jirah-pilot-plan/SKILL.md) (Mode B alternative for AI-primary scope)
 - Context: jirah-process.md, jirah-methodology.md, jirah-voice.md, jirah-visuals.md, jirah-pattern-library.md
-- Structural exemplar: `C:\Users\jason\Downloads\SA_Discussion_Document.html`
+- Structural exemplar: `[ONEDRIVE_ROOT]\04 - Deliverable Templates\Exemplars\SA_Discussion_Document.html`
