@@ -25,7 +25,7 @@ Distinct from `/jirah-daily-briefing`:
 
 - **Week** — ISO week (`2026-W17`); defaults to the current-ISO-week at run time
 - **Scope** — `--full` (default — all sections) | `--pipeline-only` | `--engagements-only` for focused runs
-- **Input mode** — `--live` (default — reads current state from OneDrive / seed-data) | `--snapshot [path]` (pre-computed state for deterministic replay)
+- **Input mode** — `--live` (default — reads current state from OneDrive) | `--snapshot [path]` (pre-computed state for deterministic replay)
 
 ---
 
@@ -188,7 +188,7 @@ Opens at: localhost:3000/weekly-review (if dashboard integrated)
 ## Edge cases
 
 - **First run of the skill** (no prior-week data) — compute current-state snapshot only; flag "baseline week, no W/W deltas available yet"
-- **OneDrive unavailable at run time** (network, auth lapse) — fall back to `seed-data/`; flag that state may not reflect production
+- **OneDrive unavailable at run time** (network, auth lapse, `ONEDRIVE_ROOT` unset) — stop and surface the error; do not produce a weekly review from stale or partial state
 - **A full stage is empty** (e.g., 0 prospects in "meeting booked") — still render row; state "—" for notable; do not hide the emptiness
 - **Pipeline forecast failed or is stale** — proceed with raw pipeline Δ; flag forecast gap; recommend running forecast before the partner meeting
 - **Daily briefings missing from prior week** (Claude wasn't invoked daily) — proceed with what exists; note gap in flag section

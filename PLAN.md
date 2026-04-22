@@ -386,7 +386,7 @@ All seven skills graduated from ghost stubs to full bodies — inputs, process, 
 - **Canva MCP** — already surfaced as a deferred tool in the environment. Wires up once `jirah-thought-leadership` / `jirah-client-presentation` / `jirah-pilot-plan` are first used in anger. Gains `--render-canva` flag to produce the images directly.
 - **Web-search MCP** (Perplexity or Brave) — deepens `jirah-prospect-researcher` + `jirah-vertical-scanner` beyond default WebSearch quality. Pick one — Perplexity higher quality, Brave cheaper. Not blocking; defaults work.
 - **Publish first 4 thought-leadership pieces** from the pattern-library codification (Falcon, Genesis, Hatch, S+A). Can ship as copy-paste now; Canva MCP adds image-rendering later.
-- **First real run through each skill** — validates that seed-data shapes + OneDrive paths work end-to-end.
+- **First real run through each skill** — validates that OneDrive paths + frontmatter shapes work end-to-end.
 
 MCP wiring is a self-contained batch we can drive through in one focused pass once one of the skills above becomes active-use. Until then, every skill works as copy-paste output.
 

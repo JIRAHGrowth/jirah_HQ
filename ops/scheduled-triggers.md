@@ -39,7 +39,7 @@ All times in `America/Vancouver`. Cron day-of-week: 0=Sunday, 1=Monday, etc.
 
 **Cron:** `30 7 * * *`
 
-**What fires:** Scans OneDrive (or seed-data fallback) for overdue follow-ups, sprint risks, warm prospects. Drafts partner-voice replies for each. Writes `briefings/YYYY-MM-DD.md`.
+**What fires:** Scans OneDrive for overdue follow-ups, sprint risks, warm prospects. Drafts partner-voice replies for each. Writes `briefings/YYYY-MM-DD.md`.
 
 **Output consumed by:** Partners in Outlook email + dashboard right-rail panel at `localhost:3000`.
 
@@ -195,7 +195,7 @@ Append to this file an "Active triggers" section once wired:
 ## Failure modes + recovery
 
 - **Trigger fires but skill errors** → Claude logs error; briefing not written; Jason sees gap in `briefings/` directory. Manual invoke to recover.
-- **OneDrive unavailable** → skill falls back to `seed-data/`; briefing notes this in output.
+- **OneDrive unavailable** (sync lapsed, `ONEDRIVE_ROOT` unset) → skill errors out cleanly and the briefing is not written; partner sees the gap and remediates before the next run.
 - **Multiple overlapping triggers** (e.g., daily briefing + weekly review on same Monday) → they run independently; daily briefing writes to `briefings/`, weekly to `reviews/`; no conflict.
 - **Claude rate limits** → low risk given current cadence; monitor if more triggers get added.
 - **Partner away / vacation** → triggers keep running; output accumulates; partner catches up on return. No cost to continuity.

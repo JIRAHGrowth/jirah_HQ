@@ -15,23 +15,24 @@ Read before acting:
 - [context/jirah-methodology.md](../../../context/jirah-methodology.md) — for the "why this matters" framing
 
 ## Inputs
-- None (automatic; pulls from OneDrive / seed-data state)
+- None (automatic; pulls from OneDrive state)
 - Optional: `--date YYYY-MM-DD` to regenerate for a specific day
 
 ## Process
 
 1. **Compute today's date** (America/Vancouver).
-2. **Scan sources** — read from OneDrive if available, else from `seed-data/`:
-   - `.../Active Clients/*/00-profile.md`
-   - `.../Sales - Client Targets/prospects/*.md` (skip `_template.md`)
-   - `.../Sales - Client Targets/audit-applications/*.md` (skip `_template.md`)
-3. **Parse frontmatter** — extract `stage`, `owner`, `lastContactDays`, `nextAction`, `milestone`, `dueLabel`, `warn`, `status`, `icp`, `currentStep`.
-4. **Categorize**:
+2. **Resolve OneDrive root** — read `ONEDRIVE_ROOT` from `dashboard/.env.local` (same mechanism the dashboard uses). If unset, stop and ask the user to configure it — do not silently produce a fake briefing.
+3. **Scan sources** under `[ONEDRIVE_ROOT]`:
+   - `01 - Clients\Active\*\00 - Profile.md`
+   - `02 - Sales & Pipeline\Prospects\*\00 - Profile.md` (skip `_template`)
+   - `02 - Sales & Pipeline\Audit Applications\*\00 - Profile.md` (skip `_template`)
+4. **Parse frontmatter** — extract `stage`, `owner`, `lastContactDays`, `nextAction`, `milestone`, `dueLabel`, `warn`, `status`, `icp`, `currentStep`.
+5. **Categorize**:
    - **Overdue follow-ups** — prospects/clients with `lastContactDays > 7` OR `nextAction` date in the past. Top 5 by staleness × stage priority (proposal > booked > warm > cold).
    - **Sprint risks** — engagements with `warn: true` OR `currentStep` in 3–4 with milestone due within 5 days OR `lastContactDays > 7` in-engagement.
    - **Warm prospects to nurture** — stage `warm` with `lastContactDays` 4–14. Top 3.
-5. **Draft a partner-voice reply** for each item (short, specific, references what was committed and what's next). Voice rules come from `context/jirah-voice.md` — direct, factual, no marketing fluff, numbers > adjectives.
-6. **Write to `briefings/YYYY-MM-DD.md`** with this structure:
+6. **Draft a partner-voice reply** for each item (short, specific, references what was committed and what's next). Voice rules come from `context/jirah-voice.md` — direct, factual, no marketing fluff, numbers > adjectives.
+7. **Write to `briefings/YYYY-MM-DD.md`** with this structure:
 
 ```markdown
 ---
@@ -88,5 +89,5 @@ counts:
 
 - No overdue / no risks / no warm — still write the file; use "None today." for empty sections (dashboard expects sections to exist).
 - First run with no data — write a minimal briefing noting sources are empty + how to seed.
-- OneDrive not synced AND seed-data empty — error out cleanly, don't silently produce a fake briefing.
+- `ONEDRIVE_ROOT` unset or path unreachable — error out cleanly, don't silently produce a fake briefing.
 - If `--date` is in the past, label it clearly: "Retrospective briefing for YYYY-MM-DD (generated today)".

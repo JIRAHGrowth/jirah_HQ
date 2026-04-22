@@ -31,10 +31,9 @@ Green = accept to paid audit. Amber = shortlist for 15-min call. Red = warm decl
 
 ## Where applications live
 
-Workspace seed data: `seed-data/audit-applications/[id].md`
-OneDrive (prod): `02 - Sales & Pipeline\Audit Applications\[ApplicantName]\` — the application form is one of the files in the applicant's folder
+`[ONEDRIVE_ROOT]\02 - Sales & Pipeline\Audit Applications\[ApplicantName]\` — the application form is one of the files in the applicant's folder.
 
-Claude should prefer OneDrive if `ONEDRIVE_ROOT` is set; fall back to seed-data for dev. Reference the resolved root from the dashboard's lib/onedrive pattern.
+Resolve `[ONEDRIVE_ROOT]` from `dashboard/.env.local` (same mechanism the dashboard uses — see `dashboard/lib/onedrive.ts`). If unset, stop and ask the user to configure it.
 
 ---
 

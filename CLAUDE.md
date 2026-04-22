@@ -53,8 +53,6 @@ For any client, prospect, or deliverable work, read these first:
 
 **Per-client folder convention** (inside `Active\[ClientName]\`): `00 - Profile.md`, `01 - Engagement Plan.md`, `02 - Comms Log.md`, `03 - Admin/`, `04 - Client Source Files/`, `05 - Discovery & Discussion Doc/`, `06 - Sprint & Facilitation/`, `07 - Deliverables/` (Drafts/Final/Appendices), `08 - Monthly Retainer/`, `09 - AI Pilot/`, `10 - Harvest/`. Numeric prefixes mirror the 6-step engagement process; unused phases stay as empty folders.
 
-**Dev-mode fallback:** the dashboard reads `seed-data/` (in this workspace) when `ONEDRIVE_ROOT` is unset. Useful for testing before OneDrive sync is ready.
-
 ---
 
 ## Skills (invoke with `/skill-name`)

@@ -45,8 +45,7 @@ Read before acting:
    - Create `~\Desktop\Jirah-AI-[ClientName]\` directory
    - Add "Related workspaces" section to `00 - Profile.md` body pointing at the AI workspace path
    - Note: the client folder already has a `09 - AI Pilot/` subtree ready for pilot-plan and artifacts
-6. **Update `seed-data/active-clients/index.md`** (if present) to include new client (dashboard-dev fallback).
-7. **Confirm with user** — echo new folder path + what was filled. Ask if anything needs adjustment.
+6. **Confirm with user** — echo new folder path + what was filled. Ask if anything needs adjustment.
 
 ## Output
 
