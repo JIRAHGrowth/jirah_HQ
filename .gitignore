@@ -27,3 +27,6 @@ npm-debug.log*
 
 # Claude Code local state (should not be shared)
 .claude/settings.local.json
+
+# Claude Code working scratch
+.tmp/

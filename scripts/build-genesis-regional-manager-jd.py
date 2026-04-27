@@ -28,9 +28,11 @@ from docx.shared import Pt, RGBColor, Inches
 # Genesis navy from the existing Rascal JDs (approximate match)
 NAVY = RGBColor(0x1F, 0x3A, 0x6D)
 
+LOGO_PATH = Path(__file__).parent / "assets" / "genesis-logo.png"
+
 OUTPUT_DIR = Path(
     r"C:\Users\joshu\OneDrive - jirahgrowth.consulting\JIRAH Growth Partners - Shared"
-    r"\01 - Clients\Active\Genesis Systems\07 - Deliverables\Drafts"
+    r"\01 - Clients\Active\Genesis Systems\07 - Deliverables"
 )
 OUTPUT_PATH = OUTPUT_DIR / "Regional-Manager-Metro-Vancouver.docx"
 
@@ -65,6 +67,22 @@ def add_page_number_footer(section):
     run2.font.size = Pt(9)
     run2.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
     p._p.append(field("NUMPAGES"))
+
+
+def add_header_logo(section, logo_path: Path):
+    """Place the Genesis logo top-left in the page header.
+
+    Matches the existing Rascal HR-produced JDs (logo in header, appears on every
+    page). Sized small to keep branding light.
+    """
+    if not logo_path.exists():
+        return
+    header = section.header
+    p = header.paragraphs[0]
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    p.paragraph_format.space_after = Pt(0)
+    run = p.add_run()
+    run.add_picture(str(logo_path), width=Inches(0.85))
 
 
 def add_title(doc, text):
@@ -124,12 +142,15 @@ def add_bullets(doc, items):
 def build():
     doc = Document()
 
-    # Margins — matches Rascal look
+    # Margins — matches Rascal look. Top margin slightly larger to give the header
+    # logo room without crowding the title.
     for section in doc.sections:
-        section.top_margin = Inches(0.8)
+        section.top_margin = Inches(1.1)
         section.bottom_margin = Inches(0.8)
         section.left_margin = Inches(0.9)
         section.right_margin = Inches(0.9)
+        section.header_distance = Inches(0.35)
+        add_header_logo(section, LOGO_PATH)
         add_page_number_footer(section)
 
     # Default style
