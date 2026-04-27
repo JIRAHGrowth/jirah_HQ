@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JIRAH Growth Partners — Effortless Business Bootcamp — Internal Learnings Memo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C5A55A;
+  --gold-light: #D4BC7E;
+  --gold-pale: #F5F0E3;
+  --gold-glow: rgba(197,165,90,0.15);
+  --navy: #111827;
+  --navy-mid: #1A2035;
+  --navy-light: #1F2A44;
+  --charcoal: #1E2330;
+  --slate: #374151;
+  --off-white: #FAF7F0;
+  --warm-gray: #E8E4DD;
+  --text-dark: #111827;
+  --text-mid: #4B5563;
+  --text-light: #9CA3AF;
+  --red: #B91C1C;
+  --red-bg: rgba(185,28,28,0.06);
+  --green: #15803D;
+  --green-bg: rgba(21,128,61,0.06);
+  --amber: #B45309;
+  --amber-bg: rgba(180,83,9,0.08);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-x: hidden; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--navy); }
+
+.slide {
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.slide-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── NAV ─── */
+.nav-dots {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+.nav-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.nav-dot.active {
+  background: var(--gold); border-color: var(--gold);
+  transform: scale(1.3);
+  box-shadow: 0 0 12px rgba(197,165,90,0.4);
+}
+.nav-dot.light { border-color: rgba(0,0,0,0.15); background: rgba(0,0,0,0.08); }
+.nav-dot.light.active { background: var(--gold); border-color: var(--gold); }
+.nav-dot .tooltip {
+  position: absolute; right: 22px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--navy); color: #fff;
+  padding: 6px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 500;
+  white-space: nowrap; opacity: 0;
+  pointer-events: none; transition: opacity 0.2s;
+  letter-spacing: 0.3px;
+}
+.nav-dot:hover .tooltip { opacity: 1; }
+
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  z-index: 200;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(197,165,90,0.3);
+}
+
+.slide-counter {
+  position: fixed; bottom: 30px; right: 30px;
+  z-index: 100;
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+}
+.slide-counter.dark-text { color: rgba(0,0,0,0.3); }
+
+.section-tag {
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: inline-block;
+}
+.section-tag.light { color: var(--gold); }
+
+/* ─── TYPOGRAPHY ─── */
+.heading-xl {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.heading-lg {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.heading-md {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.body-lg { font-size: 18px; line-height: 1.7; font-weight: 300; color: var(--text-mid); }
+.body-md { font-size: 15px; line-height: 1.65; font-weight: 400; }
+.mono {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-25px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pulse-glow { 0%,100% { box-shadow: 0 0 20px rgba(197,165,90,0.1); } 50% { box-shadow: 0 0 40px rgba(197,165,90,0.25); } }
+
+.anim { opacity: 0; }
+.anim.visible { animation-fill-mode: both; }
+.anim.visible.fade-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim.visible.fade-left { animation: fadeInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* ═══════════════════════════════════════
+   SLIDE 1 — TITLE
+   ═══════════════════════════════════════ */
+#slide-title { background: var(--navy); position: relative; }
+#slide-title::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 60%; height: 140%;
+  background: radial-gradient(ellipse at center, rgba(197,165,90,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.title-geo {
+  position: absolute;
+  border: 1px solid rgba(197,165,90,0.12);
+  pointer-events: none;
+}
+.title-geo-1 { width: 400px; height: 400px; top: -100px; right: -50px; transform: rotate(25deg); border-radius: 4px; }
+.title-geo-2 { width: 260px; height: 260px; top: 80px; right: 140px; transform: rotate(40deg); border-radius: 4px; border-color: rgba(197,165,90,0.06); }
+
+.title-accent-bar {
+  width: 4px; height: 110px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  margin-bottom: 28px;
+}
+.title-main { color: #fff; margin-bottom: 22px; }
+.title-main em { font-style: italic; color: var(--gold-light); }
+.title-sub { color: var(--gold-light); font-size: 18px; font-weight: 300; margin-bottom: 12px; letter-spacing: 0.5px; max-width: 720px; }
+.title-meta { color: var(--text-light); font-size: 13px; font-weight: 400; letter-spacing: 0.3px; }
+.title-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 40px;
+  padding: 10px 20px;
+  border: 1px solid rgba(197,165,90,0.25);
+  border-radius: 100px;
+  font-size: 11px; font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.title-badge .pulse {
+  width: 8px; height: 8px;
+  background: var(--gold); border-radius: 50%;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+.internal-banner {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 6px 14px;
+  background: rgba(185,28,28,0.15);
+  border: 1px solid rgba(185,28,28,0.35);
+  border-radius: 4px;
+  color: #FCA5A5;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 2 — SOURCE & FRAME
+   ═══════════════════════════════════════ */
+#slide-source { background: var(--off-white); }
+.source-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 30px;
+}
+.source-col h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--navy);
+}
+.source-col ul { list-style: none; }
+.source-col ul li {
+  padding: 8px 0 8px 22px;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-mid);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.source-col ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+.source-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-dark);
+  max-width: 820px;
+  margin-bottom: 10px;
+}
+.source-lead strong { color: var(--navy); font-weight: 600; }
+
+/* ═══════════════════════════════════════
+   SLIDE 3 — THE SPEAKER'S MODEL
+   ═══════════════════════════════════════ */
+#slide-model { background: var(--navy); color: #fff; }
+.model-intro {
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+  max-width: 780px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.ladder-step {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(197,165,90,0.18);
+  border-radius: 8px;
+  padding: 20px 16px;
+  position: relative;
+}
+.ladder-step .num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.ladder-step h5 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.ladder-step p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(197,165,90,0.2);
+}
+.pillar {
+  text-align: center;
+}
+.pillar .label {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.pillar .name {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.pullquote {
+  margin-top: 32px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--gold);
+  background: rgba(197,165,90,0.06);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--gold-light);
+  line-height: 1.5;
+}
+.pullquote .attr {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 4 — AFFIRMATIONS
+   ═══════════════════════════════════════ */
+#slide-affirm { background: var(--off-white); }
+.affirm-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 30px;
+}
+.affirm-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 200px;
+  gap: 20px;
+  padding: 18px 20px;
+  background: #fff;
+  border-radius: 10px;
+  border-left: 3px solid var(--green);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  align-items: center;
+}
+.affirm-row .check {
+  width: 28px; height: 28px;
+  background: var(--green); color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+}
+.affirm-row .body h5 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--navy);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.affirm-row .body p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+.affirm-row .tag {
+  font-size: 10px;
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: right;
+  border-left: 1px solid rgba(0,0,0,0.08);
+  padding-left: 16px;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 5 — GAPS
+   ═══════════════════════════════════════ */
+#slide-gaps { background: var(--off-white); }
+.gap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 30px;
+}
+.gap-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 22px;
+  border-top: 3px solid var(--amber);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  position: relative;
+}
+.gap-card .num {
+  position: absolute;
+  top: -12px;
+  right: 18px;
+  background: var(--amber);
+  color: #fff;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+}
+.gap-card h5 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.gap-card p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.gap-card .surface {
+  font-size: 10px;
+  color: var(--amber);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 6 — ARCHITECTURE SHIFTS
+   ═══════════════════════════════════════ */
+#slide-arch { background: var(--navy); color: #fff; }
+.arch-lead {
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+  max-width: 820px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.arch-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(197,165,90,0.2);
+  border-radius: 10px;
+  padding: 24px;
+}
+.arch-card .label {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--gold);
+  font-size: 13px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.arch-card h5 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+.arch-card .now {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 6px;
+}
+.arch-card .now strong { color: var(--gold-light); letter-spacing: 1px; }
+.arch-card .shift {
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(197,165,90,0.15);
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 7 — PRIORITIZED RECOMMENDATIONS
+   ═══════════════════════════════════════ */
+#slide-priorities { background: var(--off-white); }
+.priority-band {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.priority-band:first-of-type { margin-top: 28px; }
+.band-header {
+  padding: 14px 24px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.band-header.p1 { background: var(--red); }
+.band-header.p2 { background: var(--amber); }
+.band-header.p3 { background: var(--slate); }
+.band-header .count {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.band-body {
+  padding: 8px 0;
+}
+.band-row {
+  padding: 14px 24px;
+  display: grid;
+  grid-template-columns: 28px 1fr 160px;
+  gap: 16px;
+  align-items: start;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.band-row:last-child { border-bottom: none; }
+.band-row .idx {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1.3;
+}
+.band-row .content h6 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.band-row .content p {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+.band-row .meta {
+  font-size: 10px;
+  color: var(--slate);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: right;
+  border-left: 1px solid rgba(0,0,0,0.06);
+  padding-left: 14px;
+  padding-top: 3px;
+}
+.band-row .meta .owner { color: var(--gold); display: block; margin-top: 4px; font-weight: 700; }
+
+/* ═══════════════════════════════════════
+   SLIDE 8 — RED FLAGS
+   ═══════════════════════════════════════ */
+#slide-flags { background: var(--off-white); }
+.flag-intro {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 820px;
+  margin-bottom: 28px;
+}
+.flag-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.flag-card {
+  background: #fff;
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.flag-card h6 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.flag-card p {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 9 — NEXT STEPS
+   ═══════════════════════════════════════ */
+#slide-next { background: var(--navy); color: #fff; }
+.next-lead {
+  color: rgba(255,255,255,0.78);
+  font-size: 17px;
+  max-width: 820px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.decisions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.decision-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(197,165,90,0.18);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+.decision-card .label {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.decision-card h6 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.decision-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+.decision-card .owner {
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--gold-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.close-strip {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(197,165,90,0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-strip .brand {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.close-strip .meta {
+  color: rgba(255,255,255,0.5);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .slide-inner { padding: 60px 30px; }
+  .source-grid, .gap-grid, .arch-grid, .flag-list, .decisions { grid-template-columns: 1fr; }
+  .ladder { grid-template-columns: 1fr 1fr; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+  .band-row { grid-template-columns: 24px 1fr; }
+  .band-row .meta { grid-column: 1 / -1; border-left: none; border-top: 1px solid rgba(0,0,0,0.06); padding-left: 0; padding-top: 8px; text-align: left; margin-top: 6px; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar" style="width:0%"></div>
+<div class="nav-dots" id="navDots"></div>
+<div class="slide-counter" id="slideCounter">01 / 09</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 1 — TITLE
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-title" data-label="Title" data-theme="dark">
+  <div class="title-geo title-geo-1"></div>
+  <div class="title-geo title-geo-2"></div>
+  <div class="slide-inner">
+    <div class="title-accent-bar anim fade-up"></div>
+    <p class="section-tag anim fade-up" style="animation-delay:0.1s">Internal Partner Memo &nbsp;·&nbsp; AI Service-Line Build</p>
+    <h1 class="heading-xl title-main anim fade-up" style="animation-delay:0.2s">
+      What We Learned from<br><em>The Effortless Business Bootcamp</em>
+    </h1>
+    <p class="title-sub anim fade-up" style="animation-delay:0.35s">
+      Mining Callan Faulkner's "AI employees" session for what applies to the JIRAH build — and what to leave behind.
+    </p>
+    <p class="title-meta anim fade-up" style="animation-delay:0.45s">
+      Prepared 22 April 2026 &nbsp;·&nbsp; Jason Lotoski &amp; Joshua Marshall &nbsp;·&nbsp; JIRAH Growth Partners
+    </p>
+    <div class="title-badge anim fade-up" style="animation-delay:0.55s">
+      <span class="pulse"></span>
+      Partner Review
+    </div>
+    <div style="margin-top:24px">
+      <span class="internal-banner anim fade-up" style="animation-delay:0.65s">Internal Only &nbsp;·&nbsp; Not for Client Circulation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 2 — SOURCE & FRAME
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-source" data-label="Source" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">What This Memo Is</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 24px;">Source, frame, and how to read it.</h2>
+    <p class="source-lead anim fade-up" style="animation-delay:0.2s">
+      Joshua attended Session 1 (original + re-run) of <strong>The Effortless Business Bootcamp</strong> — Callan Faulkner, founder of The Uncommon Business. The session walked through how she runs a reported $16M creator-education company on ~25 humans + ~150 "AI employees," demonstrating a stack of Claude Projects, Skills, and scheduled agents covering marketing, sales, customer success, and executive ops.
+    </p>
+    <p class="source-lead anim fade-up" style="animation-delay:0.28s">
+      This is <strong>not a client analysis</strong> and <strong>not methodology theory</strong>. It is a partner-level decision doc: what affirms the JIRAH build, what gaps it reveals, what architecture shifts it proposes, and — most importantly — a prioritized list of what to act on, with rationale.
+    </p>
+    <div class="source-grid">
+      <div class="source-col anim fade-left" style="animation-delay:0.35s">
+        <h4>What we ingested</h4>
+        <ul>
+          <li>Bootcamp Session 1 original transcript (20 Apr 2026)</li>
+          <li>Session 1 re-run transcript (22 Apr 2026)</li>
+          <li>Live delivery: screen-share walkthroughs of 20+ named AI employees</li>
+          <li>Speaker's stated ICP — female founders, coaches, creators, $500K–$100M</li>
+        </ul>
+      </div>
+      <div class="source-col anim fade-left" style="animation-delay:0.45s">
+        <h4>How we read it</h4>
+        <ul>
+          <li>Translate through JIRAH's ICP filter — $6M–$20M B2B services owners</li>
+          <li>Keep architecture; drop voice, vibe, and consumer-funnel tactics</li>
+          <li>Flag unverified outcome claims as marketing, not fact</li>
+          <li>Prioritize against JIRAH's two surfaces — internal ops + client AI service line</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 3 — THE SPEAKER'S MODEL
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-model" data-label="Model" data-theme="dark">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">The Frame She's Selling</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; color:#fff; margin-bottom: 16px;">A five-level ladder and four-pillar org model.</h2>
+    <p class="model-intro anim fade-up" style="animation-delay:0.2s">
+      Useful to summarize before we react to it — the whole argument rests on the distinction between <em>using</em> AI and <em>building</em> AI. Most of what JIRAH clients do today sits at level 2.
+    </p>
+
+    <div class="ladder">
+      <div class="ladder-step anim fade-up" style="animation-delay:0.3s">
+        <div class="num">01</div>
+        <h5>Manual</h5>
+        <p>Pre-AI. Spreadsheets, notes, memory.</p>
+      </div>
+      <div class="ladder-step anim fade-up" style="animation-delay:0.35s">
+        <div class="num">02</div>
+        <h5>Vanilla AI</h5>
+        <p>Paste prompt → copy output. Most owners today.</p>
+      </div>
+      <div class="ladder-step anim fade-up" style="animation-delay:0.4s">
+        <div class="num">03</div>
+        <h5>Projects</h5>
+        <p>Shared department brain: instructions + files.</p>
+      </div>
+      <div class="ladder-step anim fade-up" style="animation-delay:0.45s">
+        <div class="num">04</div>
+        <h5>Skills</h5>
+        <p>Forward-slash-invocable IP trained on expert practice.</p>
+      </div>
+      <div class="ladder-step anim fade-up" style="animation-delay:0.5s">
+        <div class="num">05</div>
+        <h5>Scheduled / Always-On</h5>
+        <p>Runs overnight, reports to Slack, never sleeps.</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar anim fade-up" style="animation-delay:0.55s">
+        <div class="label">Pillar 1</div>
+        <div class="name">AI-Committed<br>Founder</div>
+      </div>
+      <div class="pillar anim fade-up" style="animation-delay:0.6s">
+        <div class="label">Pillar 2</div>
+        <div class="name">AI Architect<br>Humans</div>
+      </div>
+      <div class="pillar anim fade-up" style="animation-delay:0.65s">
+        <div class="label">Pillar 3</div>
+        <div class="name">AI<br>Employees</div>
+      </div>
+      <div class="pillar anim fade-up" style="animation-delay:0.7s">
+        <div class="label">Pillar 4</div>
+        <div class="name">Business<br>Brain</div>
+      </div>
+    </div>
+
+    <blockquote class="pullquote anim fade-up" style="animation-delay:0.8s">
+      "You cannot automate a process that doesn't exist."
+      <span class="attr">Callan Faulkner — repeated three times across the session</span>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 4 — AFFIRMATIONS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-affirm" data-label="Affirmations" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">What Validates the Build</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 12px;">Six things JIRAH is already doing right.</h2>
+    <p class="body-lg anim fade-up" style="animation-delay:0.18s; max-width: 820px;">
+      Worth naming before we talk about gaps. The operator running $16M on AI employees is endorsing four of our load-bearing disciplines.
+    </p>
+
+    <div class="affirm-list">
+      <div class="affirm-row anim fade-up" style="animation-delay:0.25s">
+        <div class="check">✓</div>
+        <div class="body">
+          <h5>Process documentation precedes automation.</h5>
+          <p>"You cannot automate a process that doesn't exist." This IS the Friction Audit → Sprint → Action Register sequence. Confirms why the diagnostic work must lead every AI pilot — not run alongside it.</p>
+        </div>
+        <div class="tag">Methodology<br>Wedge</div>
+      </div>
+
+      <div class="affirm-row anim fade-up" style="animation-delay:0.3s">
+        <div class="check">✓</div>
+        <div class="body">
+          <h5>Text-first, artifact-second workflow.</h5>
+          <p>Draft in markdown, render to HTML. Mirrors our Discussion Document → Mode A HTML split and our pilot-plan pattern. She explicitly says "it's a lot faster" — our 6-step process already assumes this.</p>
+        </div>
+        <div class="tag">Methodology<br>Validated</div>
+      </div>
+
+      <div class="affirm-row anim fade-up" style="animation-delay:0.35s">
+        <div class="check">✓</div>
+        <div class="body">
+          <h5>Exemplars are non-negotiable training files.</h5>
+          <p>"Give it an output. Give it a fake output. Give it an example." We already anchor pricing to the Smith + Andersen Shop-Drawing pilot and reference exemplars in every skill. Her pattern reinforces what we already do.</p>
+        </div>
+        <div class="tag">Pattern<br>Library</div>
+      </div>
+
+      <div class="affirm-row anim fade-up" style="animation-delay:0.4s">
+        <div class="check">✓</div>
+        <div class="body">
+          <h5>High-frequency humans, AI-powered back end.</h5>
+          <p>"The best companies have a high-frequency-human front end, AI-powered back end." Matches our Joshua-leads-facilitation / Jason-observes model and our methodology rule that humans own relationships, AI handles throughput.</p>
+        </div>
+        <div class="tag">Methodology<br>Validated</div>
+      </div>
+
+      <div class="affirm-row anim fade-up" style="animation-delay:0.45s">
+        <div class="check">✓</div>
+        <div class="body">
+          <h5>Transcript-first capture as operating discipline.</h5>
+          <p>Granola + Apple Call Recording + Voice Memos + Whisper Flow. We already live on Fireflies + jirah-session-analyzer. Confirms capture discipline is the moat, not the LLM itself.</p>
+        </div>
+        <div class="tag">Internal Ops<br>Validated</div>
+      </div>
+
+      <div class="affirm-row anim fade-up" style="animation-delay:0.5s">
+        <div class="check">✓</div>
+        <div class="body">
+          <h5>Non-technical humans can build AI employees.</h5>
+          <p>Her 65-year-old father (Matt, a Target manufacturer's rep) now charges $8–10K/mo per AI employee he's built. Directly validates our partner positioning — neither co-founder needs to be an AI engineer; neither does the client owner.</p>
+        </div>
+        <div class="tag">Positioning<br>Validated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 5 — GAPS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-gaps" data-label="Gaps" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">Where We're Under-Built</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 12px;">Five things she has that we don't — yet.</h2>
+    <p class="body-lg anim fade-up" style="animation-delay:0.18s; max-width: 820px;">
+      These aren't "she's right, we're wrong." These are patterns we could absorb without compromising the JIRAH voice. Prioritization on Slide 7.
+    </p>
+
+    <div class="gap-grid">
+      <div class="gap-card anim fade-up" style="animation-delay:0.25s">
+        <div class="num">1</div>
+        <h5>No self-scoring quality gate on deliverables.</h5>
+        <p>She instructs skills to score their own output 0–100 on multiple expert personas (world-class designer, Chris Voss, readiness) and regenerate until all categories hit 100. Our confidence tags sit on <em>findings</em>, not on <em>deliverable drafts</em>.</p>
+        <div class="surface">Adds to /jirah-report-review</div>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.3s">
+        <div class="num">2</div>
+        <h5>No productized "AI employee" retainer tier.</h5>
+        <p>Her dad charges $8–10K/month <em>per deployed AI employee</em>. We price AI pilots as fixed-fee one-time builds. Gap between our ~$18K S+A anchor and our monthly retainer is unfilled.</p>
+        <div class="surface">New offer tier</div>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.35s">
+        <div class="num">3</div>
+        <h5>No compliance-context file per vertical.</h5>
+        <p>Her team embeds legal/compliance rules directly into skill context ("hangover cure on services page = legal risk"). Engineering PE stamps, accounting CPA ethics, professional-services privilege — we should pack these as required files for any vertical pilot.</p>
+        <div class="surface">New skill + context files</div>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.4s">
+        <div class="num">4</div>
+        <h5>No always-on scheduled infrastructure pattern.</h5>
+        <p>She runs scheduled tasks on a dedicated always-on spare machine with a second Claude account. For JIRAH-ICP clients with IT governance, we need a documented cloud-scheduler pattern (Azure Functions, AWS EventBridge, or BYOK Anthropic jobs) ready to drop into pilot plans.</p>
+        <div class="surface">Pilot-plan template</div>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.45s">
+        <div class="num">5</div>
+        <h5>No "Client Business Brain" as retainer asset.</h5>
+        <p>Her whole architecture sits on a synced Drive + Claude Project combo. We deliver reports and action registers; we do not ship a persistent <em>brain</em> that compounds after delivery. That brain could be the retainer product.</p>
+        <div class="surface">New service-line asset</div>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.5s">
+        <div class="num">6</div>
+        <h5>/jirah-industry-pulse is weekly, not always-on.</h5>
+        <p>Her Event Scout runs on scheduled cadence, writes straight to Notion. Our industry-pulse is a manual weekly skill. Easy upgrade — scheduled trigger + auto-append to prospects/ — stays inside current architecture.</p>
+        <div class="surface">Upgrade existing skill</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 6 — ARCHITECTURE SHIFTS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-arch" data-label="Architecture" data-theme="dark">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">Deeper Rethinks</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; color:#fff; margin-bottom: 16px;">Four architecture shifts worth a partner decision.</h2>
+    <p class="arch-lead anim fade-up" style="animation-delay:0.2s">
+      These are not tweaks. These change how we package and price AI work — and how we talk about it on a pitch call. Each has an opportunity cost; we should decide before we act.
+    </p>
+
+    <div class="arch-grid">
+      <div class="arch-card anim fade-up" style="animation-delay:0.3s">
+        <div class="label">Shift 1 — Language</div>
+        <h5>"AI Pilot" → "AI Employee."</h5>
+        <p class="now"><strong>NOW:</strong> We sell AI Pilots. One-time builds, fixed-fee.</p>
+        <p class="shift">"Pilot" = the build project. "AI Employee" = the deployed artifact. Keeps the pilot nomenclature but names what the client is actually buying. Sharper pricing story, cleaner case-study copy.</p>
+      </div>
+
+      <div class="arch-card anim fade-up" style="animation-delay:0.4s">
+        <div class="label">Shift 2 — Delivery</div>
+        <h5>Ship a Client Business Brain with every pilot.</h5>
+        <p class="now"><strong>NOW:</strong> We ship an HTML pilot plan + a working tool. Client owns both artifacts; nothing compounds.</p>
+        <p class="shift">Ship a Claude Project populated with their SOPs, policies, financials, prior case studies, compliance context. Every future pilot builds on top of it. Turns one-off builds into a per-client asset base.</p>
+      </div>
+
+      <div class="arch-card anim fade-up" style="animation-delay:0.5s">
+        <div class="label">Shift 3 — Role</div>
+        <h5>Name "AI Architect" as a JIRAH retainer lane.</h5>
+        <p class="now"><strong>NOW:</strong> "Extended CEO" is the positioning. AI work sits inside it but isn't named as a role the client can buy.</p>
+        <p class="shift">Package "AI Architect in residence" as a distinct Step 6 retainer lane — parallel to ops advisory, not sub-ordinate. Lets us sell AI capacity to clients who don't yet have a strategic AI problem but want the in-house capability growing.</p>
+      </div>
+
+      <div class="arch-card anim fade-up" style="animation-delay:0.6s">
+        <div class="label">Shift 4 — Pricing</div>
+        <h5>Per-AI-employee monthly ($6–10K/mo) as a new tier.</h5>
+        <p class="now"><strong>NOW:</strong> Fixed-fee pilot (~$18K anchor S+A) → monthly retainer. No recurring AI-specific SKU.</p>
+        <p class="shift">Introduce a recurring per-employee tier between pilot and retainer. $6–10K/mo per deployed AI employee, bundled with monthly tune-and-tweak + compliance review. Solves the "we built it, now what?" moment every pilot hits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 7 — PRIORITIZED RECOMMENDATIONS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-priorities" data-label="Priorities" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">The Action Register</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 14px;">What to do, in what order, and why.</h2>
+    <p class="body-lg anim fade-up" style="animation-delay:0.18s; max-width: 820px;">
+      Prioritized per JIRAH discipline. P1 = Critical (do in next 30 days, blocks downstream work). P2 = High (next quarter). P3 = Medium (queue for opportunistic fit).
+    </p>
+
+    <div class="priority-band anim fade-up" style="animation-delay:0.25s">
+      <div class="band-header p1">
+        <span>P1 · Critical · Next 30 Days</span>
+        <span class="count">3 items</span>
+      </div>
+      <div class="band-body">
+        <div class="band-row">
+          <div class="idx">1</div>
+          <div class="content">
+            <h6>Ship the "Client Business Brain" as a new pilot-plan deliverable line.</h6>
+            <p><strong>Rationale.</strong> Highest-leverage move. Converts pilots from one-off builds into compounding per-client assets. Reshapes the pricing story immediately. Requires a new section in <code>/jirah-pilot-plan</code> + a standard folder scaffold (policies, SOPs, financials, compliance, exemplars). S+A gets the brain retrofitted as the first reference.</p>
+          </div>
+          <div class="meta">Surface<br>Client Pilot<br><span class="owner">Jason</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">2</div>
+          <div class="content">
+            <h6>Add self-scoring quality gate to /jirah-report-review.</h6>
+            <p><strong>Rationale.</strong> Cheap, fast, reinforces methodology. Every Mode A deliverable self-scores 0–100 on partner-voice, methodology-compliance, mode-consistency, triangulation-proof. Regenerates below 90. Directly reduces the polish burden on partners before ship.</p>
+          </div>
+          <div class="meta">Surface<br>Skill Library<br><span class="owner">Joshua</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">3</div>
+          <div class="content">
+            <h6>Decide on the "AI Employee" language shift for pitch + proposals.</h6>
+            <p><strong>Rationale.</strong> Not a build decision — a voice decision — but gates everything downstream (slide 6 shifts 2–4 all depend on it). Partner sync, 30-minute decision meeting. Update <code>context/jirah-voice.md</code> once resolved so the whole skill library picks it up.</p>
+          </div>
+          <div class="meta">Surface<br>Voice<br><span class="owner">Both</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="priority-band anim fade-up" style="animation-delay:0.35s">
+      <div class="band-header p2">
+        <span>P2 · High · Next Quarter</span>
+        <span class="count">4 items</span>
+      </div>
+      <div class="band-body">
+        <div class="band-row">
+          <div class="idx">4</div>
+          <div class="content">
+            <h6>Build the compliance-context file per vertical (engineering, accounting, pro services).</h6>
+            <p><strong>Rationale.</strong> Required before we can ship vertical-specific AI pilots at scale. Load-bearing for defensibility — "we know your compliance context" is a competitive moat that generalist AI consultancies can't replicate. Ship as reference files in <code>context/</code>.</p>
+          </div>
+          <div class="meta">Surface<br>Methodology<br><span class="owner">Jason</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">5</div>
+          <div class="content">
+            <h6>Productize the "AI Architect in residence" retainer tier.</h6>
+            <p><strong>Rationale.</strong> Fills the per-employee pricing gap, gives us a SKU to offer post-pilot. Requires scope definition, pricing calibration (vs. $18K pilot anchor), and a sample deliverable cadence. Start with S+A as Test 1 before external pitch.</p>
+          </div>
+          <div class="meta">Surface<br>Service Line<br><span class="owner">Jason</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">6</div>
+          <div class="content">
+            <h6>Document cloud-scheduler pattern (Azure / AWS / BYOK) for pilot plans.</h6>
+            <p><strong>Rationale.</strong> Without this, "always-on AI" recommendations in our pilot plans hand-wave the infrastructure question — which is exactly where IT governance at engineering/accounting firms will kill a deal. Ship as a pilot-plan boilerplate appendix.</p>
+          </div>
+          <div class="meta">Surface<br>Pilot Plan<br><span class="owner">Joshua</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">7</div>
+          <div class="content">
+            <h6>Upgrade /jirah-industry-pulse to scheduled + auto-append to prospects/.</h6>
+            <p><strong>Rationale.</strong> Small effort, material effect on pipeline. Matches her Event Scout pattern. Turns a weekly manual skill into a continuous feed into the pipeline — same skill signature, added trigger.</p>
+          </div>
+          <div class="meta">Surface<br>Internal Ops<br><span class="owner">Joshua</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="priority-band anim fade-up" style="animation-delay:0.45s">
+      <div class="band-header p3">
+        <span>P3 · Medium · Queue for Opportunistic Fit</span>
+        <span class="count">4 items</span>
+      </div>
+      <div class="band-body">
+        <div class="band-row">
+          <div class="idx">8</div>
+          <div class="content">
+            <h6>Ship "Market Expansion Evaluator" as a second AI-pilot exemplar.</h6>
+            <p><strong>Rationale.</strong> Her pattern reverse-engineers McKinsey-grade market scans from public source material. Directly fits engineering firms opening a second office or accounting firms picking a new vertical. Activate when a prospect conversation surfaces the need — don't build speculatively.</p>
+          </div>
+          <div class="meta">Surface<br>Client Pilot<br><span class="owner">Jason</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">9</div>
+          <div class="content">
+            <h6>Ship "Partnership Proposal Generator" as a third AI-pilot exemplar.</h6>
+            <p><strong>Rationale.</strong> B2B services firms live on partner-channel deals. Transcript-to-proposal pattern is high-margin and sits adjacent to Shop-Drawing as a clean demo. Build when an ICP firm expresses the pain, not before.</p>
+          </div>
+          <div class="meta">Surface<br>Client Pilot<br><span class="owner">Jason</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">10</div>
+          <div class="content">
+            <h6>Seed a JIRAH POV piece: "The Polarized Sunglasses Problem."</h6>
+            <p><strong>Rationale.</strong> Her "owners can't see AI opportunities without 40–60 hours of training the eye" riff pairs perfectly with our wedge ("the real constraint is almost never what the owner thinks"). Thought-leadership post that frames the Friction Audit as the eye-training. Queue for Tuesday cadence via <code>/jirah-thought-leadership</code>.</p>
+          </div>
+          <div class="meta">Surface<br>Content<br><span class="owner">Jason</span></div>
+        </div>
+
+        <div class="band-row">
+          <div class="idx">11</div>
+          <div class="content">
+            <h6>Extend /jirah-meeting-notes with the capture-tool-by-context matrix.</h6>
+            <p><strong>Rationale.</strong> Low-stakes improvement. Her stack (Granola/Fireflies for Zoom, Apple Call Recording for follow-up calls, Voice Memos for in-person, Whisper Flow for dictation) is better than our current single-tool default. Ship as a docs update.</p>
+          </div>
+          <div class="meta">Surface<br>Internal Ops<br><span class="owner">Joshua</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 8 — RED FLAGS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-flags" data-label="Red Flags" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">Do Not Copy</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 12px;">Where her playbook breaks on our ICP.</h2>
+    <p class="flag-intro anim fade-up" style="animation-delay:0.18s">
+      This is not her failure — it is a voice and audience mismatch. Her ICP (female founders, coaches, creators, $500K–$100M) is not ours. Lifting her tactics wholesale would cheapen JIRAH's authority positioning with a 30-year-veteran engineering-firm owner.
+    </p>
+
+    <div class="flag-list">
+      <div class="flag-card anim fade-up" style="animation-delay:0.25s">
+        <h6>The voice and vibe.</h6>
+        <p>"Buckle up buttercups," "boss babes," emoji-heavy, all-caps YES, cortisol language. Direct opposite of Mode A partner voice. Do not copy verbatim quotes into client artifacts — reframe through JIRAH voice rules first.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.3s">
+        <h6>Unverified outcome claims.</h6>
+        <p>"$16M revenue," "~50% margins," "150 AI employees." Treat as marketing copy. When citing in JIRAH content, use "reported" hedging and tie arguments to the architecture patterns, not the numbers.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.35s">
+        <h6>"AI Revenue Coach" as lead magnet.</h6>
+        <p>Works for a $97-ticket consumer funnel. Would signal wrong altitude to a $6–20M owner evaluating whether to trust us with a partner seat. Do not clone.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.4s">
+        <h6>Always-on spare laptop in the office.</h6>
+        <p>Fine for a $16M creator shop. Wrong advice for an engineering firm with IT governance. When our pilot plans ship scheduled-task logic, route it through cloud-scheduler infrastructure — never through a lone workstation.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.45s">
+        <h6>"Keep all your existing tools" as a philosophy.</h6>
+        <p>Oversimplifies. JIRAH clients often do need tool rationalization; blanket "just add Claude" contradicts our scope-discipline principle. Keep the nuance on a case-by-case basis.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.5s">
+        <h6>"End of human mediocrity" middle-manager rhetoric.</h6>
+        <p>Punches down at mid-level employees. Conflicts with JIRAH's respect-for-the-existing-team tone. We sell to owners, but we triangulate with their teams — those teams hear our posture. Avoid.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.55s">
+        <h6>Upload-everything-to-Claude posture.</h6>
+        <p>Her own HIPAA carve-out shows the line is real. Accounting SIN/SSN, engineering PE-stamped drawings, privileged legal doc — all need per-client data-handling protocols. Do not import the "comfortable putting financial data in" posture without the carve-out discipline.</p>
+      </div>
+
+      <div class="flag-card anim fade-up" style="animation-delay:0.6s">
+        <h6>"Nvidia engineers spend their salary on tokens."</h6>
+        <p>Useful anchor, but it's a chip-design context. Don't present as a normative benchmark in owner-run B2B services proposals — the number won't translate and will discredit the rest of the argument.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 9 — NEXT STEPS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-next" data-label="Next" data-theme="dark">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">What This Memo Asks Of You</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; color:#fff; margin-bottom: 16px;">Four decisions, two owners, one meeting.</h2>
+    <p class="next-lead anim fade-up" style="animation-delay:0.2s">
+      The P1 items are action-able today. The architecture shifts (slide 6) need a partner call. Suggest a 45-minute sync this week before anyone builds.
+    </p>
+
+    <div class="decisions">
+      <div class="decision-card anim fade-up" style="animation-delay:0.3s">
+        <div class="label">Decision 1</div>
+        <h6>Green-light the "Client Business Brain" as a pilot-plan line item?</h6>
+        <p>If yes — Joshua retrofits S+A's brain this week as reference; Jason updates the voice doc and pilot-plan skill. If no — discuss why; the question bears on everything below.</p>
+        <div class="owner">Owner · Jason</div>
+      </div>
+
+      <div class="decision-card anim fade-up" style="animation-delay:0.4s">
+        <div class="label">Decision 2</div>
+        <h6>Adopt the "AI Employee" language shift?</h6>
+        <p>If yes — Jason updates <code>context/jirah-voice.md</code>; the whole skill library inherits. If no — the four architecture shifts on slide 6 revert to current framing.</p>
+        <div class="owner">Owner · Both</div>
+      </div>
+
+      <div class="decision-card anim fade-up" style="animation-delay:0.5s">
+        <div class="label">Decision 3</div>
+        <h6>Commit to shipping a compliance-context file for each of our three verticals this quarter?</h6>
+        <p>Blocks vertical pilot scaling. Estimated ~12–16 hours per vertical. Jason to scope; Joshua to draft once scoped.</p>
+        <div class="owner">Owner · Jason</div>
+      </div>
+
+      <div class="decision-card anim fade-up" style="animation-delay:0.6s">
+        <div class="label">Decision 4</div>
+        <h6>Test the per-employee $6–10K/mo pricing tier on S+A before external pitch?</h6>
+        <p>Lowest-risk calibration. Confirm with Bob whether the Shop-Drawing tool warrants the ongoing SKU, at what number. If yes, add to proposal boilerplate. If no, kill it cleanly.</p>
+        <div class="owner">Owner · Jason</div>
+      </div>
+    </div>
+
+    <div class="close-strip">
+      <span class="brand">JIRAH Growth Partners</span>
+      <span class="meta">Internal · 22 April 2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── INTERSECTION OBSERVER FOR ANIMATIONS ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+// ─── SLIDE TRACKING ───
+const slides = document.querySelectorAll('.slide');
+const navDotsContainer = document.getElementById('navDots');
+const progressBar = document.getElementById('progressBar');
+const slideCounter = document.getElementById('slideCounter');
+const totalSlides = slides.length;
+
+slides.forEach((slide, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot' + (slide.dataset.theme === 'light' ? ' light' : '');
+  dot.innerHTML = `<span class="tooltip">${slide.dataset.label}</span>`;
+  dot.addEventListener('click', () => {
+    slide.scrollIntoView({ behavior: 'smooth' });
+  });
+  navDotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.nav-dot');
+
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = Array.from(slides).indexOf(e.target);
+      const theme = e.target.dataset.theme;
+
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+        if (theme === 'dark') { d.classList.remove('light'); } else { d.classList.add('light'); }
+      });
+
+      const pct = ((idx + 1) / totalSlides) * 100;
+      progressBar.style.width = pct + '%';
+
+      const num = String(idx + 1).padStart(2, '0');
+      const tot = String(totalSlides).padStart(2, '0');
+      slideCounter.textContent = `${num} / ${tot}`;
+      slideCounter.className = 'slide-counter' + (theme === 'light' ? ' dark-text' : '');
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(s => slideObserver.observe(s));
+
+// ─── KEYBOARD NAV ───
+let currentSlide = 0;
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+    e.preventDefault();
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+    }
+  } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault();
+    if (currentSlide > 0) {
+      currentSlide--;
+      slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+});
+
+const keyTracker = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      currentSlide = Array.from(slides).indexOf(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => keyTracker.observe(s));
+</script>
+
+</body>
+</html>

@@ -41,7 +41,7 @@ cp .env.local.example .env.local
 Then open `dashboard/.env.local` in a text editor and uncomment/set:
 
 ```
-ONEDRIVE_ROOT="C:\\Users\\joshu\\OneDrive - jirahgrowth.consulting\\JIRAH Growth Partners - Shared\\NEW - JIRAH MASTER"
+ONEDRIVE_ROOT="C:\\Users\\joshu\\OneDrive - jirahgrowth.consulting\\JIRAH Growth Partners - Shared"
 ```
 
 **Note on the path:**

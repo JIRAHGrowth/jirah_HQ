@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JIRAH Growth Partners — AI Build Self-Assessment — Internal Partner Memo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C5A55A;
+  --gold-light: #D4BC7E;
+  --gold-pale: #F5F0E3;
+  --gold-glow: rgba(197,165,90,0.15);
+  --navy: #111827;
+  --navy-mid: #1A2035;
+  --navy-light: #1F2A44;
+  --charcoal: #1E2330;
+  --slate: #374151;
+  --off-white: #FAF7F0;
+  --warm-gray: #E8E4DD;
+  --text-dark: #111827;
+  --text-mid: #4B5563;
+  --text-light: #9CA3AF;
+  --red: #B91C1C;
+  --red-bg: rgba(185,28,28,0.06);
+  --green: #15803D;
+  --green-bg: rgba(21,128,61,0.06);
+  --amber: #B45309;
+  --amber-bg: rgba(180,83,9,0.08);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-x: hidden; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--navy); }
+
+.slide {
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.slide-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-dots {
+  position: fixed; right: 30px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 12px;
+  z-index: 100;
+}
+.nav-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.nav-dot.active { background: var(--gold); border-color: var(--gold); transform: scale(1.3); box-shadow: 0 0 12px rgba(197,165,90,0.4); }
+.nav-dot.light { border-color: rgba(0,0,0,0.15); background: rgba(0,0,0,0.08); }
+.nav-dot.light.active { background: var(--gold); border-color: var(--gold); }
+.nav-dot .tooltip {
+  position: absolute; right: 22px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--navy); color: #fff;
+  padding: 6px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 500;
+  white-space: nowrap; opacity: 0;
+  pointer-events: none; transition: opacity 0.2s;
+  letter-spacing: 0.3px;
+}
+.nav-dot:hover .tooltip { opacity: 1; }
+
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  z-index: 200;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(197,165,90,0.3);
+}
+
+.slide-counter {
+  position: fixed; bottom: 30px; right: 30px;
+  z-index: 100;
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+}
+.slide-counter.dark-text { color: rgba(0,0,0,0.3); }
+
+.section-tag {
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.heading-xl {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.heading-lg {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.heading-md {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.body-lg { font-size: 18px; line-height: 1.7; font-weight: 300; color: var(--text-mid); }
+.body-md { font-size: 15px; line-height: 1.65; font-weight: 400; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-25px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pulse-glow { 0%,100% { box-shadow: 0 0 20px rgba(197,165,90,0.1); } 50% { box-shadow: 0 0 40px rgba(197,165,90,0.25); } }
+@keyframes count-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+.anim { opacity: 0; }
+.anim.visible { animation-fill-mode: both; }
+.anim.visible.fade-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim.visible.fade-left { animation: fadeInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim.visible.count-up { animation: count-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* ═══════════════════════════════════════
+   SLIDE 1 — TITLE
+   ═══════════════════════════════════════ */
+#slide-title { background: var(--navy); position: relative; }
+#slide-title::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 60%; height: 140%;
+  background: radial-gradient(ellipse at center, rgba(197,165,90,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.title-geo { position: absolute; border: 1px solid rgba(197,165,90,0.12); pointer-events: none; }
+.title-geo-1 { width: 400px; height: 400px; top: -100px; right: -50px; transform: rotate(25deg); border-radius: 4px; }
+.title-geo-2 { width: 260px; height: 260px; top: 80px; right: 140px; transform: rotate(40deg); border-radius: 4px; border-color: rgba(197,165,90,0.06); }
+
+.title-accent-bar { width: 4px; height: 110px; background: linear-gradient(180deg, var(--gold), transparent); margin-bottom: 28px; }
+.title-main { color: #fff; margin-bottom: 22px; }
+.title-main em { font-style: italic; color: var(--gold-light); }
+.title-sub { color: var(--gold-light); font-size: 18px; font-weight: 300; margin-bottom: 12px; letter-spacing: 0.5px; max-width: 780px; }
+.title-meta { color: var(--text-light); font-size: 13px; font-weight: 400; letter-spacing: 0.3px; }
+.title-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 40px;
+  padding: 10px 20px;
+  border: 1px solid rgba(197,165,90,0.25);
+  border-radius: 100px;
+  font-size: 11px; font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.title-badge .pulse { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; animation: pulse-glow 2s ease-in-out infinite; }
+.internal-banner {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 6px 14px;
+  background: rgba(185,28,28,0.15);
+  border: 1px solid rgba(185,28,28,0.35);
+  border-radius: 4px;
+  color: #FCA5A5;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 2 — THE FRAME
+   ═══════════════════════════════════════ */
+#slide-frame { background: var(--off-white); }
+.frame-lead {
+  font-size: 17px;
+  color: var(--text-dark);
+  line-height: 1.75;
+  max-width: 820px;
+  margin-bottom: 14px;
+}
+.frame-lead strong { color: var(--navy); font-weight: 600; }
+.tri-state {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 36px;
+}
+.tri-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 26px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border-top: 3px solid var(--gold);
+}
+.tri-card .num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 34px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.tri-card h5 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.tri-card p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.tri-card.amber { border-top-color: var(--amber); }
+.tri-card.amber .num { color: var(--amber); }
+.tri-card.green { border-top-color: var(--green); }
+.tri-card.green .num { color: var(--green); }
+
+/* ═══════════════════════════════════════
+   SLIDE 3 — THE SCORECARD
+   ═══════════════════════════════════════ */
+#slide-score { background: var(--navy); color: #fff; }
+.score-intro {
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+  max-width: 800px;
+  margin-bottom: 34px;
+  line-height: 1.7;
+}
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 14px;
+}
+.score-tile {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(197,165,90,0.22);
+  border-radius: 10px;
+  padding: 22px 20px;
+  position: relative;
+}
+.score-tile .pct {
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: var(--gold);
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.score-tile .denom {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: rgba(197,165,90,0.55);
+  font-size: 20px;
+  margin-left: 4px;
+}
+.score-tile h6 {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.score-tile p {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+.score-tile.wide {
+  grid-column: span 2;
+}
+.score-tile.red { border-color: rgba(185,28,28,0.45); }
+.score-tile.red .pct { color: #FCA5A5; }
+.score-tile.red .denom { color: rgba(252,165,165,0.5); }
+.score-tile.amber { border-color: rgba(180,83,9,0.5); }
+.score-tile.amber .pct { color: #FBBF24; }
+.score-tile.amber .denom { color: rgba(251,191,36,0.5); }
+.score-tile.green { border-color: rgba(21,128,61,0.5); }
+.score-tile.green .pct { color: #86EFAC; }
+.score-tile.green .denom { color: rgba(134,239,172,0.5); }
+.score-note {
+  grid-column: span 4;
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: rgba(197,165,90,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.65;
+}
+.score-note strong { color: var(--gold-light); font-weight: 600; }
+
+/* ═══════════════════════════════════════
+   SLIDE 4 — AHEAD OF THE CURVE
+   ═══════════════════════════════════════ */
+#slide-ahead { background: var(--off-white); }
+.ahead-lead {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 820px;
+  margin-bottom: 30px;
+}
+.ahead-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.ahead-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  border-left: 3px solid var(--green);
+}
+.ahead-card h5 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.ahead-card h5 .tiny {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--green-bg);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.ahead-card p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.ahead-card p strong { color: var(--navy); font-weight: 600; }
+
+/* ═══════════════════════════════════════
+   SLIDE 5 — AT PARITY
+   ═══════════════════════════════════════ */
+#slide-parity { background: var(--off-white); }
+.parity-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 26px;
+}
+.parity-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 240px;
+  gap: 18px;
+  align-items: center;
+  padding: 14px 18px;
+  background: #fff;
+  border-radius: 8px;
+  border-left: 3px solid var(--slate);
+}
+.parity-row .mark {
+  width: 24px; height: 24px;
+  background: var(--slate); color: #fff;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+}
+.parity-row .body h6 {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.parity-row .body p {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.parity-row .proof {
+  font-size: 11px;
+  color: var(--slate);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 6 — THE HONEST GAPS
+   ═══════════════════════════════════════ */
+#slide-gaps { background: var(--navy); color: #fff; }
+.gaps-intro {
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+  max-width: 820px;
+  margin-bottom: 30px;
+  line-height: 1.7;
+}
+.gaps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.gap-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(180,83,9,0.35);
+  border-radius: 10px;
+  padding: 22px 24px;
+  position: relative;
+}
+.gap-card.blocker { border-color: rgba(185,28,28,0.55); }
+.gap-card .tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(180,83,9,0.15);
+  padding: 3px 9px;
+  border-radius: 3px;
+}
+.gap-card.blocker .tag { color: #FCA5A5; background: rgba(185,28,28,0.2); }
+.gap-card h5 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-top: 8px;
+  line-height: 1.3;
+  padding-right: 90px;
+}
+.gap-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+}
+.gap-card p strong { color: var(--gold-light); font-weight: 600; }
+
+/* ═══════════════════════════════════════
+   SLIDE 7 — THE 3-HORIZON PATHWAY
+   ═══════════════════════════════════════ */
+#slide-pathway { background: var(--off-white); }
+.pathway-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+  position: relative;
+}
+.horizon {
+  background: #fff;
+  border-radius: 12px;
+  padding: 26px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.horizon.h1 { border-top: 4px solid var(--red); }
+.horizon.h2 { border-top: 4px solid var(--amber); }
+.horizon.h3 { border-top: 4px solid var(--gold); }
+
+.horizon .range {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.horizon.h1 .range { color: var(--red); }
+.horizon.h2 .range { color: var(--amber); }
+.horizon.h3 .range { color: var(--gold); }
+
+.horizon h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.horizon .goal {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.horizon ul { list-style: none; }
+.horizon ul li {
+  padding: 8px 0 8px 22px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.horizon ul li:last-child { border-bottom: none; }
+.horizon ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+}
+.horizon ul li strong { color: var(--navy); font-weight: 600; }
+
+/* ═══════════════════════════════════════
+   SLIDE 8 — THE BUILD QUEUE
+   ═══════════════════════════════════════ */
+#slide-queue { background: var(--off-white); }
+.queue-intro {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 820px;
+  margin-bottom: 28px;
+}
+.queue-intro strong { color: var(--navy); font-weight: 600; }
+.queue-list {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.queue-head {
+  display: grid;
+  grid-template-columns: 50px 1fr 140px 110px 90px;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.queue-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 140px 110px 90px;
+  gap: 16px;
+  padding: 14px 20px;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.queue-row:last-child { border-bottom: none; }
+.queue-row .idx {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 17px;
+}
+.queue-row .what h6 {
+  font-size: 13.5px;
+  color: var(--navy);
+  font-weight: 600;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.queue-row .what p {
+  font-size: 11.5px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.queue-row .surface, .queue-row .owner, .queue-row .effort {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.queue-row .owner { color: var(--gold); }
+.queue-row .effort { color: var(--text-mid); }
+.queue-row.p1 { background: rgba(185,28,28,0.04); }
+.queue-row.p2 { background: rgba(180,83,9,0.04); }
+.queue-row.p3 { background: rgba(55,65,81,0.02); }
+.queue-row .idx .p {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--red);
+  padding: 1px 5px;
+  border-radius: 2px;
+  margin-left: 2px;
+  letter-spacing: 1px;
+  vertical-align: top;
+}
+.queue-row.p2 .idx .p { background: var(--amber); }
+.queue-row.p3 .idx .p { background: var(--slate); }
+
+/* ═══════════════════════════════════════
+   SLIDE 9 — CLOSE
+   ═══════════════════════════════════════ */
+#slide-close { background: var(--navy); color: #fff; }
+.close-accent {
+  width: 4px;
+  height: 90px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  margin-bottom: 28px;
+}
+.close-headline {
+  color: #fff;
+  margin-bottom: 22px;
+}
+.close-headline em { font-style: italic; color: var(--gold-light); }
+.close-copy {
+  font-size: 17px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.75;
+  max-width: 820px;
+  margin-bottom: 30px;
+}
+.close-copy strong { color: var(--gold-light); font-weight: 600; }
+.close-commit {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.commit-tile {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(197,165,90,0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
+.commit-tile .when {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.commit-tile h6 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.commit-tile p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.55;
+}
+.close-strip {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(197,165,90,0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-strip .brand { font-family: var(--font-display); font-size: 18px; color: var(--gold); letter-spacing: 0.5px; }
+.close-strip .meta { color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 980px) {
+  .slide-inner { padding: 60px 30px; }
+  .tri-state, .score-grid, .ahead-grid, .gaps-grid, .pathway-grid, .close-commit { grid-template-columns: 1fr; }
+  .score-tile.wide { grid-column: auto; }
+  .score-note { grid-column: auto; }
+  .parity-row { grid-template-columns: 32px 1fr; }
+  .parity-row .proof { grid-column: 1 / -1; margin-left: 50px; text-align: left; margin-top: 4px; }
+  .queue-head, .queue-row { grid-template-columns: 36px 1fr; }
+  .queue-head span:nth-child(3), .queue-head span:nth-child(4), .queue-head span:nth-child(5) { display: none; }
+  .queue-row .surface, .queue-row .owner, .queue-row .effort { display: block; margin-top: 6px; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar" style="width:0%"></div>
+<div class="nav-dots" id="navDots"></div>
+<div class="slide-counter" id="slideCounter">01 / 09</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 1 — TITLE
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-title" data-label="Title" data-theme="dark">
+  <div class="title-geo title-geo-1"></div>
+  <div class="title-geo title-geo-2"></div>
+  <div class="slide-inner">
+    <div class="title-accent-bar anim fade-up"></div>
+    <p class="section-tag anim fade-up" style="animation-delay:0.1s">Internal Partner Memo &nbsp;·&nbsp; AI Capability Self-Assessment</p>
+    <h1 class="heading-xl title-main anim fade-up" style="animation-delay:0.2s">
+      The State of the<br><em>JIRAH AI Build.</em>
+    </h1>
+    <p class="title-sub anim fade-up" style="animation-delay:0.35s">
+      A clear-eyed look at what we've shipped, where we're ahead of the curve, and the pathway from here. Companion to the bootcamp-learnings memo — same partner audience, different lens.
+    </p>
+    <p class="title-meta anim fade-up" style="animation-delay:0.45s">
+      Prepared 22 April 2026 &nbsp;·&nbsp; Jason Lotoski &amp; Joshua Marshall &nbsp;·&nbsp; JIRAH Growth Partners
+    </p>
+    <div class="title-badge anim fade-up" style="animation-delay:0.55s">
+      <span class="pulse"></span>
+      Partner Review
+    </div>
+    <div style="margin-top:24px">
+      <span class="internal-banner anim fade-up" style="animation-delay:0.65s">Internal Only &nbsp;·&nbsp; Not for Client Circulation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 2 — THE FRAME
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-frame" data-label="Frame" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">How We're Grading</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 22px;">Three states, not two.</h2>
+    <p class="frame-lead anim fade-up" style="animation-delay:0.2s">
+      Most self-assessments binary-grade capability as "built vs. not built." That hides the real question: an idea can be <strong>codified</strong> without being <strong>wired</strong>, and wired without being <strong>activated</strong>. JIRAH's gap is not knowledge. It is the distance between pages 2 and 3.
+    </p>
+    <p class="frame-lead anim fade-up" style="animation-delay:0.28s">
+      Every capability on the following slides is scored against these three states, which matters because <strong>38 skills on disk</strong> is a very different sentence from <strong>38 skills with production mileage</strong>.
+    </p>
+
+    <div class="tri-state">
+      <div class="tri-card anim fade-up" style="animation-delay:0.35s">
+        <div class="num">01</div>
+        <h5>Codified</h5>
+        <p>The IP exists on disk — skill file, context doc, subagent. A competent operator could pick it up and run it cold.</p>
+      </div>
+      <div class="tri-card amber anim fade-up" style="animation-delay:0.42s">
+        <div class="num">02</div>
+        <h5>Wired</h5>
+        <p>Integrated into the stack — dashboard reads it, skill composes it, subagent fans out on it. Present at the right moment.</p>
+      </div>
+      <div class="tri-card green anim fade-up" style="animation-delay:0.5s">
+        <div class="num">03</div>
+        <h5>Activated</h5>
+        <p>Has battle mileage. Ran in a real engagement or on a real cadence. The feedback loop has closed at least once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 3 — THE SCORECARD
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-score" data-label="Scorecard" data-theme="dark">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">The Numbers</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; color:#fff; margin-bottom: 14px;">What's on disk, what's wired, what's running.</h2>
+    <p class="score-intro anim fade-up" style="animation-delay:0.2s">
+      Verified 22 April 2026 from the workspace itself. Ratios read as <em>state / target</em>. Gold = strong; amber = partial; red = gap.
+    </p>
+
+    <div class="score-grid">
+      <div class="score-tile green anim count-up" style="animation-delay:0.25s">
+        <div class="pct">38<span class="denom">/38</span></div>
+        <h6>Skills · Codified</h6>
+        <p>All full-bodied SKILL.md files — inputs, process, outputs, edge cases. No ghost stubs remain.</p>
+      </div>
+
+      <div class="score-tile green anim count-up" style="animation-delay:0.3s">
+        <div class="pct">6<span class="denom">/6</span></div>
+        <h6>Subagents · Codified</h6>
+        <p>All structured with output schemas + source-mapping. Parallel fan-out proven via jirah-win-loss (5 instances).</p>
+      </div>
+
+      <div class="score-tile green anim count-up" style="animation-delay:0.35s">
+        <div class="pct">10<span class="denom">/10</span></div>
+        <h6>Context Files</h6>
+        <p>Voice, visuals, ICP, wedge, friction points, process, methodology, pattern library, team, pipeline.</p>
+      </div>
+
+      <div class="score-tile amber anim count-up" style="animation-delay:0.4s">
+        <div class="pct">~4<span class="denom">/38</span></div>
+        <h6>Skills · Activated</h6>
+        <p>Production mileage: new-client, file-sort, daily-briefing, friction-audit. Rest are codified but unused in real engagements.</p>
+      </div>
+
+      <div class="score-tile green anim count-up" style="animation-delay:0.45s">
+        <div class="pct">5<span class="denom">/5</span></div>
+        <h6>Dashboard Views</h6>
+        <p>FocusBar · Pipeline Kanban · Audit Queue · Active Engagements · Briefing Panel. Reads live OneDrive data.</p>
+      </div>
+
+      <div class="score-tile red anim count-up" style="animation-delay:0.5s">
+        <div class="pct">0<span class="denom">/8</span></div>
+        <h6>Scheduled Triggers</h6>
+        <p>Daily briefing · Monday sync · Friday harvest · monthly KPI: logic ready, cron not wired. Biggest single gap.</p>
+      </div>
+
+      <div class="score-tile amber anim count-up" style="animation-delay:0.55s">
+        <div class="pct">2<span class="denom">/6</span></div>
+        <h6>Integrations Active</h6>
+        <p>OneDrive + WebSearch live. Outlook Mail, Outlook Calendar, Fireflies API, Canva MCP — planned, unwired.</p>
+      </div>
+
+      <div class="score-tile red anim count-up" style="animation-delay:0.6s">
+        <div class="pct">0<span class="denom">/3</span></div>
+        <h6>Partner-Shared Surfaces</h6>
+        <p>Dashboard runs localhost only. Git syncs context. No deployed app, no shared-state telemetry, no cross-machine dashboard.</p>
+      </div>
+
+      <div class="score-note anim fade-up" style="animation-delay:0.7s">
+        <strong>The pattern.</strong> Codified IP is mature (38/38 · 6/6 · 10/10). Wiring is partial. Activation is the real gap — the machine is built but has not yet run at speed. Pipeline is at 4 prospects; the system has not been stress-tested at 40.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 4 — AHEAD OF THE CURVE
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-ahead" data-label="Ahead" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">Where We're Ahead</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 14px;">Six things a peer 2-partner consultancy does not have.</h2>
+    <p class="ahead-lead anim fade-up" style="animation-delay:0.18s">
+      Honest — not puffed. Each of these is rare enough in a shop our size that a peer consultant walking into this workspace would stop and ask about it.
+    </p>
+
+    <div class="ahead-grid">
+      <div class="ahead-card anim fade-up" style="animation-delay:0.25s">
+        <h5>The 6-ring growth machine encoded in code.<span class="tiny">Rare</span></h5>
+        <p>Most consulting firms have delivery. A handful have demand-gen. Almost none have harvest-and-referral encoded as first-class skills. JIRAH has <strong>cold-lead → audit → delivery → harvest → cadence → referral</strong> as 38 named skills with explicit inputs and outputs. This is the moat.</p>
+      </div>
+
+      <div class="ahead-card anim fade-up" style="animation-delay:0.32s">
+        <h5>The Friction Audit as a codified product.<span class="tiny">Distinct</span></h5>
+        <p>Fixed price. 10-point diagnostic. Triangulation required. Confidence tags (Very High / High / Medium). Three expansion paths — ops, project, AI — as the default output shape. Most boutique firms bill hourly on "strategy"; we ship a product with a SKU.</p>
+      </div>
+
+      <div class="ahead-card anim fade-up" style="animation-delay:0.39s">
+        <h5>Mode A / Mode B dual-brand visual system.<span class="tiny">Design-mature</span></h5>
+        <p>Editorial authority voice vs. client-as-home-team. Full color/typography/structure specs per mode. Template exemplars on disk. JIRAH can ship co-branded collateral at brand velocity without a designer round-trip.</p>
+      </div>
+
+      <div class="ahead-card anim fade-up" style="animation-delay:0.46s">
+        <h5>Pattern library as evidence, not assertion.<span class="tiny">Methodological</span></h5>
+        <p>Four past engagements — Vulcan, Hatch, Falcon, Genesis — with 4/4 confirming FP #10 (Ownership Impact) as the terminal finding. The wedge is <strong>evidence-backed, not hypothesis-driven</strong>. Most shops say "we've seen patterns" and wave hands.</p>
+      </div>
+
+      <div class="ahead-card anim fade-up" style="animation-delay:0.53s">
+        <h5>AI service line as a co-equal revenue stream.<span class="tiny">Forward-built</span></h5>
+        <p>Not an upsell. Own skills (ai-opportunity-scan, ai-scoping, pilot-plan, ai-pilot-status), own exemplar (Smith + Andersen Shop-Drawing), own pricing anchor. Every audit is required to surface AI opportunities. Most consulting firms are bolting AI on; we planned it as a lane.</p>
+      </div>
+
+      <div class="ahead-card anim fade-up" style="animation-delay:0.6s">
+        <h5>The dashboard — Jason's build.<span class="tiny">Rare at this size</span></h5>
+        <p>Next.js 15 + React 19, reading live OneDrive markdown-plus-frontmatter, rendering kanban / audit queue / engagement cards / briefing panel. Very few 2-partner shops have a live ops dashboard. The frontmatter schema is the underrated asset — it turned every client folder into a <strong>queryable record</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 5 — AT PARITY
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-parity" data-label="Parity" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">Table Stakes We've Met</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 12px;">No extra credit — just the baseline.</h2>
+    <p class="ahead-lead anim fade-up" style="animation-delay:0.18s">
+      These don't differentiate JIRAH. They simply keep us in the game. Worth naming so we don't confuse table stakes for competitive edge.
+    </p>
+
+    <div class="parity-grid">
+      <div class="parity-row anim fade-up" style="animation-delay:0.22s">
+        <div class="mark">=</div>
+        <div class="body">
+          <h6>Transcript-first capture stack.</h6>
+          <p>Fireflies for every client meeting. Every consulting firm that's serious now runs this or equivalent.</p>
+        </div>
+        <div class="proof">Fireflies · jirah-session-analyzer</div>
+      </div>
+      <div class="parity-row anim fade-up" style="animation-delay:0.27s">
+        <div class="mark">=</div>
+        <div class="body">
+          <h6>Claude as primary LLM with paid-tier commitment.</h6>
+          <p>Cost of 1 FTE for the productivity of 3–5. The stat is shared across every serious 2026 operator we track.</p>
+        </div>
+        <div class="proof">Anthropic · Max tier</div>
+      </div>
+      <div class="parity-row anim fade-up" style="animation-delay:0.32s">
+        <div class="mark">=</div>
+        <div class="body">
+          <h6>Skill-and-project architecture with forward-slash invocation.</h6>
+          <p>Specialized capabilities composed inside named projects. We do it. The bootcamp speaker does it. Common floor now.</p>
+        </div>
+        <div class="proof">.claude/skills · CLAUDE.md</div>
+      </div>
+      <div class="parity-row anim fade-up" style="animation-delay:0.37s">
+        <div class="mark">=</div>
+        <div class="body">
+          <h6>Markdown + frontmatter as working database.</h6>
+          <p>Clean enough for two partners at current volume. Will break at 40 prospects; fine today.</p>
+        </div>
+        <div class="proof">OneDrive · gray-matter parser</div>
+      </div>
+      <div class="parity-row anim fade-up" style="animation-delay:0.42s">
+        <div class="mark">=</div>
+        <div class="body">
+          <h6>Git for context portability between partners.</h6>
+          <p>Both partners pull the same skill library and context spine. No drift. Clean practice.</p>
+        </div>
+        <div class="proof">GitHub · Desktop\Jirah Ops</div>
+      </div>
+      <div class="parity-row anim fade-up" style="animation-delay:0.47s">
+        <div class="mark">=</div>
+        <div class="body">
+          <h6>Confidence-tag discipline on every finding.</h6>
+          <p>Very High / High / Medium. Methodology-native now. Expected of any firm selling diagnostic work.</p>
+        </div>
+        <div class="proof">context/jirah-methodology.md</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 6 — THE HONEST GAPS
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-gaps" data-label="Gaps" data-theme="dark">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">What's Not Built Yet</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; color:#fff; margin-bottom: 14px;">Six gaps, one of them load-bearing.</h2>
+    <p class="gaps-intro anim fade-up" style="animation-delay:0.2s">
+      No euphemisms. Each of these is a real absence that shows up when we ask "could we onboard a third partner tomorrow" or "could we run at 40 prospects instead of 4."
+    </p>
+
+    <div class="gaps-grid">
+      <div class="gap-card blocker anim fade-up" style="animation-delay:0.26s">
+        <span class="tag">Load-bearing</span>
+        <h5>Zero scheduled triggers are wired.</h5>
+        <p>The daily briefing, Monday weekly review, Friday harvest scan, monthly KPI — the <strong>cadence skills exist</strong>, but no cron runs them. Right now both partners run skills manually. This is the gap between a machine and a playbook-in-a-drawer.</p>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.32s">
+        <span class="tag">Integration</span>
+        <h5>MCPs not wired: Outlook Mail, Calendar, Fireflies API, Canva.</h5>
+        <p>Skills <strong>draft</strong> emails, scan transcripts, and describe Canva work — but they don't <strong>send</strong>, <strong>fetch</strong>, or <strong>render</strong>. Human sits in the middle of every handoff. High-volume scenarios will overload the partner before the machine.</p>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.38s">
+        <span class="tag">Deployment</span>
+        <h5>Dashboard is localhost-only.</h5>
+        <p>Each partner runs <code>npm run dev</code> on their own machine. State is synced via OneDrive + Git. No browser-accessible URL, no mobile access, no Vercel deployment. Works for two partners; breaks with any third viewer (advisor, client-side stakeholder, auditor).</p>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.44s">
+        <span class="tag">Mileage</span>
+        <h5>~34 of 38 skills have never run in anger.</h5>
+        <p>They're codified. They're wired. They have not met a real engagement. The next real Discovery call will be the first time most of them hit friction with a live client and a real transcript. Expect breakage; build feedback loops for rapid iteration.</p>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.5s">
+        <span class="tag">Observability</span>
+        <h5>No telemetry · no invocation history · no logging.</h5>
+        <p>We cannot answer "which skills have been called, when, with what inputs, producing what outputs?" That means <strong>no learning loop yet</strong>. Every improvement relies on partner memory instead of recorded signal.</p>
+      </div>
+
+      <div class="gap-card anim fade-up" style="animation-delay:0.56s">
+        <span class="tag">Scale</span>
+        <h5>No client-facing AI employee pattern to re-sell.</h5>
+        <p>Shop-Drawing is the only exemplar. We can cite it, not clone it. A second and third named AI-employee pattern (e.g., Partnership Proposal Generator, Market Expansion Evaluator) would turn the AI service line from <strong>bespoke</strong> into <strong>productized</strong>. Directly echoes the bootcamp memo's P3 recommendations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 7 — THE 3-HORIZON PATHWAY
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-pathway" data-label="Pathway" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">The Growth Pathway</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 12px;">Three horizons. Each unlocks the next.</h2>
+    <p class="ahead-lead anim fade-up" style="animation-delay:0.18s">
+      The order matters. Activating the machine (H1) is the prerequisite for scaling the service line (H2), which is the prerequisite for broadcasting the platform (H3). Skip H1 and the rest are forecasts, not plans.
+    </p>
+
+    <div class="pathway-grid">
+      <div class="horizon h1 anim fade-up" style="animation-delay:0.24s">
+        <div class="range">Horizon 1 · Next 30 Days</div>
+        <h4>Activate the Machine.</h4>
+        <p class="goal">Move skills from <em>codified</em> to <em>activated</em> by wiring cadence and closing one engagement end-to-end.</p>
+        <ul>
+          <li><strong>Wire the daily briefing trigger</strong> — single cron on Jason's dev machine, proves the pattern, unlocks the rest of the 8-trigger stack</li>
+          <li><strong>Run one prospect end-to-end</strong> through Discovery → Discussion Doc → Kickoff. Break things on purpose; update skills from feedback</li>
+          <li><strong>Add self-scoring gate</strong> to /jirah-report-review (bootcamp memo P1)</li>
+          <li><strong>Activate /jirah-industry-pulse on a weekly trigger</strong> — appends straight to prospects/</li>
+          <li><strong>Record one invocation log file</strong> — simple append-only trace of which skill ran with which inputs. Seed of telemetry</li>
+        </ul>
+      </div>
+
+      <div class="horizon h2 anim fade-up" style="animation-delay:0.34s">
+        <div class="range">Horizon 2 · 30–90 Days</div>
+        <h4>Ship the Client Business Brain.</h4>
+        <p class="goal">Upgrade every AI pilot from <em>one-off build</em> to <em>compounding per-client asset</em>. Productize a second exemplar.</p>
+        <ul>
+          <li><strong>Wire Outlook Mail + Calendar MCP</strong> — skills send, book, and follow up. Eliminates the human-in-the-loop tax</li>
+          <li><strong>Ship the Client Business Brain</strong> as a standard pilot-plan line item (bootcamp P1 #1) — retrofit S+A as Test 1</li>
+          <li><strong>Decide + adopt "AI Employee" language</strong> (bootcamp P1 #3) — update jirah-voice.md once</li>
+          <li><strong>Test the per-employee $6–10K/mo tier</strong> on S+A before external pitch</li>
+          <li><strong>Productize exemplar #2</strong> — Partnership Proposal Generator or Market Expansion Evaluator, only when a real ICP prospect pulls it forward</li>
+          <li><strong>Compliance-context file per vertical</strong> (engineering, accounting, pro services) — unlocks vertical pilot scaling</li>
+        </ul>
+      </div>
+
+      <div class="horizon h3 anim fade-up" style="animation-delay:0.44s">
+        <div class="range">Horizon 3 · 6+ Months</div>
+        <h4>Broadcast the Platform.</h4>
+        <p class="goal">Move from <em>internal tool</em> to <em>partner-visible platform</em>. Open the machine to a third party without inviting chaos.</p>
+        <ul>
+          <li><strong>Deploy dashboard to Vercel</strong> — browser-accessible, auth-gated, shared-state via MS Graph or Supabase bridge</li>
+          <li><strong>Real telemetry layer</strong> — invocation history, error tracking, learning-loop reports fed back to skill refinement</li>
+          <li><strong>Cloud-scheduler infrastructure</strong> — Azure Functions or AWS EventBridge for cadence, ready to drop into client pilots too</li>
+          <li><strong>First public case study</strong> — S+A or Genesis, editorial long-form, published via /jirah-case-study</li>
+          <li><strong>AI Architect retainer lane</strong> as a named Step 6 tier, distinct from ops advisory</li>
+          <li><strong>Pattern library with ≥ 8 engagements</strong> — quantifies the wedge; feeds /jirah-win-loss</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 8 — THE BUILD QUEUE
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-queue" data-label="Queue" data-theme="light">
+  <div class="slide-inner">
+    <p class="section-tag anim fade-up">The Build Queue</p>
+    <h2 class="heading-lg anim fade-up" style="animation-delay:0.1s; margin-bottom: 14px;">Ordered, owner-assigned, effort-scaled.</h2>
+    <p class="queue-intro anim fade-up" style="animation-delay:0.18s">
+      Priority is <strong>P1 (critical, next 30 days)</strong>, <strong>P2 (high, next quarter)</strong>, <strong>P3 (medium, opportunistic)</strong>. Effort bands: <strong>S</strong> = under half a day · <strong>M</strong> = 1–3 days · <strong>L</strong> = a partner-week or more. Cross-references to the bootcamp-learnings memo are flagged.
+    </p>
+
+    <div class="queue-list anim fade-up" style="animation-delay:0.25s">
+      <div class="queue-head">
+        <span>#</span>
+        <span>What + Why</span>
+        <span>Surface</span>
+        <span>Owner</span>
+        <span>Effort</span>
+      </div>
+
+      <div class="queue-row p1">
+        <div class="idx">1<span class="p">P1</span></div>
+        <div class="what">
+          <h6>Wire the daily briefing on a real scheduled trigger.</h6>
+          <p>Single cron on a dev machine. Proves the pattern. Unlocks the 7 other triggers. Single highest-leverage move in the whole queue.</p>
+        </div>
+        <div class="surface">Internal Ops</div>
+        <div class="owner">Jason</div>
+        <div class="effort">S</div>
+      </div>
+
+      <div class="queue-row p1">
+        <div class="idx">2<span class="p">P1</span></div>
+        <div class="what">
+          <h6>Run one prospect end-to-end through Steps 1–3.</h6>
+          <p>Discovery → Discussion Doc → Kickoff. First time 10+ skills meet a real client. Capture what breaks; update from signal, not guess.</p>
+        </div>
+        <div class="surface">Engagement</div>
+        <div class="owner">Joshua</div>
+        <div class="effort">M</div>
+      </div>
+
+      <div class="queue-row p1">
+        <div class="idx">3<span class="p">P1</span></div>
+        <div class="what">
+          <h6>Add self-scoring gate to /jirah-report-review.</h6>
+          <p>Bootcamp memo P1 #2. Deliverables self-score 0–100 on partner-voice, methodology, mode; regenerate below 90. Reinforces methodology discipline; reduces partner polish burden.</p>
+        </div>
+        <div class="surface">Skill Library</div>
+        <div class="owner">Joshua</div>
+        <div class="effort">S</div>
+      </div>
+
+      <div class="queue-row p1">
+        <div class="idx">4<span class="p">P1</span></div>
+        <div class="what">
+          <h6>Partner sync: "AI Employee" language shift.</h6>
+          <p>Bootcamp memo P1 #3. 30-minute decision meeting. If yes, update jirah-voice.md once; whole skill library inherits. Gates the architecture shifts below.</p>
+        </div>
+        <div class="surface">Voice</div>
+        <div class="owner">Both</div>
+        <div class="effort">S</div>
+      </div>
+
+      <div class="queue-row p1">
+        <div class="idx">5<span class="p">P1</span></div>
+        <div class="what">
+          <h6>Invocation log file — minimum-viable telemetry.</h6>
+          <p>Append-only trace of skill name + timestamp + inputs-digest. Writes to workspace-local file. First step toward a learning loop. No frameworks, no database.</p>
+        </div>
+        <div class="surface">Observability</div>
+        <div class="owner">Jason</div>
+        <div class="effort">S</div>
+      </div>
+
+      <div class="queue-row p2">
+        <div class="idx">6<span class="p">P2</span></div>
+        <div class="what">
+          <h6>Wire Outlook Mail + Calendar MCP.</h6>
+          <p>Skills currently draft but don't send. Wiring send + book capability removes the partner-in-the-loop tax on every cold-outreach cycle. Biggest compounding return of any P2 item.</p>
+        </div>
+        <div class="surface">Integration</div>
+        <div class="owner">Jason</div>
+        <div class="effort">M</div>
+      </div>
+
+      <div class="queue-row p2">
+        <div class="idx">7<span class="p">P2</span></div>
+        <div class="what">
+          <h6>Ship the Client Business Brain as a pilot-plan line item.</h6>
+          <p>Bootcamp memo P1 #1. Synced Drive/SharePoint + Claude Project per client, populated with policies, SOPs, financials, compliance, exemplars. Turns one-off pilots into compounding assets. Retrofit S+A as Test 1.</p>
+        </div>
+        <div class="surface">Service Line</div>
+        <div class="owner">Jason</div>
+        <div class="effort">M</div>
+      </div>
+
+      <div class="queue-row p2">
+        <div class="idx">8<span class="p">P2</span></div>
+        <div class="what">
+          <h6>Compliance-context file per vertical.</h6>
+          <p>Bootcamp memo P2 #4. Engineering (PE stamps, liability), accounting (CPA ethics), professional services (privilege). Load-bearing for vertical-specific AI pilots. ~12–16 hrs per vertical.</p>
+        </div>
+        <div class="surface">Methodology</div>
+        <div class="owner">Jason</div>
+        <div class="effort">L</div>
+      </div>
+
+      <div class="queue-row p2">
+        <div class="idx">9<span class="p">P2</span></div>
+        <div class="what">
+          <h6>Activate /jirah-industry-pulse on a weekly trigger.</h6>
+          <p>Bootcamp memo P2 #7. Scheduled + auto-append to prospects/. Small effort, material pipeline effect. Second trigger activated — proves the pattern repeats.</p>
+        </div>
+        <div class="surface">Internal Ops</div>
+        <div class="owner">Joshua</div>
+        <div class="effort">S</div>
+      </div>
+
+      <div class="queue-row p2">
+        <div class="idx">10<span class="p">P2</span></div>
+        <div class="what">
+          <h6>Cloud-scheduler pattern documented for pilot plans.</h6>
+          <p>Bootcamp memo P2 #6. Azure Functions, AWS EventBridge, or Anthropic BYOK jobs. Unblocks "always-on AI" recommendations in client pilot plans without hand-waving IT governance.</p>
+        </div>
+        <div class="surface">Pilot Plan</div>
+        <div class="owner">Joshua</div>
+        <div class="effort">M</div>
+      </div>
+
+      <div class="queue-row p2">
+        <div class="idx">11<span class="p">P2</span></div>
+        <div class="what">
+          <h6>Test the per-employee $6–10K/mo pricing tier.</h6>
+          <p>Bootcamp memo. Confirm with S+A whether the Shop-Drawing tool warrants an ongoing SKU at what number. If yes, add to proposal boilerplate; if no, kill cleanly.</p>
+        </div>
+        <div class="surface">Pricing</div>
+        <div class="owner">Jason</div>
+        <div class="effort">S</div>
+      </div>
+
+      <div class="queue-row p3">
+        <div class="idx">12<span class="p">P3</span></div>
+        <div class="what">
+          <h6>Deploy dashboard to Vercel with auth.</h6>
+          <p>Browser access, mobile-readable, third-party-shareable. Requires MS Graph or Supabase bridge for shared state. Activates when partner count > 2 or client-facing view becomes valuable.</p>
+        </div>
+        <div class="surface">Dashboard</div>
+        <div class="owner">Jason</div>
+        <div class="effort">L</div>
+      </div>
+
+      <div class="queue-row p3">
+        <div class="idx">13<span class="p">P3</span></div>
+        <div class="what">
+          <h6>Productize AI-pilot exemplar #2 or #3.</h6>
+          <p>Partnership Proposal Generator or Market Expansion Evaluator. Only when an ICP prospect pulls it forward — do not build speculatively. Seeds a multi-exemplar service line.</p>
+        </div>
+        <div class="surface">Service Line</div>
+        <div class="owner">Jason</div>
+        <div class="effort">L</div>
+      </div>
+
+      <div class="queue-row p3">
+        <div class="idx">14<span class="p">P3</span></div>
+        <div class="what">
+          <h6>"AI Architect in residence" as named Step 6 retainer lane.</h6>
+          <p>Bootcamp memo architecture shift #3. Separate SKU from ops advisory. Activates once P1/P2 prove out and we have a story to sell.</p>
+        </div>
+        <div class="surface">Service Line</div>
+        <div class="owner">Jason</div>
+        <div class="effort">M</div>
+      </div>
+
+      <div class="queue-row p3">
+        <div class="idx">15<span class="p">P3</span></div>
+        <div class="what">
+          <h6>First published case study.</h6>
+          <p>S+A or Genesis via /jirah-case-study. Establishes the pattern-library + thought-leadership flywheel. Gates on client sign-off.</p>
+        </div>
+        <div class="surface">Content</div>
+        <div class="owner">Jason</div>
+        <div class="effort">M</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 9 — CLOSE
+     ═══════════════════════════════════════ -->
+<section class="slide" id="slide-close" data-label="Close" data-theme="dark">
+  <div class="slide-inner">
+    <div class="close-accent anim fade-up"></div>
+    <p class="section-tag anim fade-up" style="animation-delay:0.05s">The Honest Read</p>
+    <h2 class="heading-lg close-headline anim fade-up" style="animation-delay:0.15s">
+      Jason built a machine.<br><em>Now it needs mileage.</em>
+    </h2>
+    <p class="close-copy anim fade-up" style="animation-delay:0.3s">
+      The IP is codified at a level most 2-partner consultancies never reach. <strong>38/38 skills · 6/6 subagents · 10/10 context files</strong> — that is not normal, and it is worth naming. The dashboard reads real data. The pattern library is evidence-backed. The Mode A / Mode B system ships.
+    </p>
+    <p class="close-copy anim fade-up" style="animation-delay:0.4s">
+      What is missing is not more <strong>building</strong> — it is <strong>running</strong>. The scheduled triggers are the single biggest gap. The first end-to-end engagement is the second. Everything else compounds from there. The pathway is not ambiguous; the order is not optional.
+    </p>
+
+    <div class="close-commit">
+      <div class="commit-tile anim fade-up" style="animation-delay:0.5s">
+        <div class="when">This Week</div>
+        <h6>Wire the daily briefing. Run one prospect through Steps 1–3.</h6>
+        <p>Two commits. First proves the machine ticks. Second proves the skills survive a real engagement.</p>
+      </div>
+      <div class="commit-tile anim fade-up" style="animation-delay:0.58s">
+        <div class="when">Next 30 Days</div>
+        <h6>Close the P1 queue. Decide on the language shift.</h6>
+        <p>Five P1 items, all small-to-medium effort. Finishes Horizon 1. Unblocks H2.</p>
+      </div>
+      <div class="commit-tile anim fade-up" style="animation-delay:0.66s">
+        <div class="when">Quarter</div>
+        <h6>Ship the Client Business Brain. Wire Outlook.</h6>
+        <p>Moves JIRAH from "has AI skills" to "ships AI capacity as a product." The two highest-compounding P2s.</p>
+      </div>
+    </div>
+
+    <div class="close-strip">
+      <span class="brand">JIRAH Growth Partners</span>
+      <span class="meta">Internal · 22 April 2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+const slides = document.querySelectorAll('.slide');
+const navDotsContainer = document.getElementById('navDots');
+const progressBar = document.getElementById('progressBar');
+const slideCounter = document.getElementById('slideCounter');
+const totalSlides = slides.length;
+
+slides.forEach((slide, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot' + (slide.dataset.theme === 'light' ? ' light' : '');
+  dot.innerHTML = `<span class="tooltip">${slide.dataset.label}</span>`;
+  dot.addEventListener('click', () => {
+    slide.scrollIntoView({ behavior: 'smooth' });
+  });
+  navDotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.nav-dot');
+
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = Array.from(slides).indexOf(e.target);
+      const theme = e.target.dataset.theme;
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+        if (theme === 'dark') { d.classList.remove('light'); } else { d.classList.add('light'); }
+      });
+      const pct = ((idx + 1) / totalSlides) * 100;
+      progressBar.style.width = pct + '%';
+      const num = String(idx + 1).padStart(2, '0');
+      const tot = String(totalSlides).padStart(2, '0');
+      slideCounter.textContent = `${num} / ${tot}`;
+      slideCounter.className = 'slide-counter' + (theme === 'light' ? ' dark-text' : '');
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(s => slideObserver.observe(s));
+
+let currentSlide = 0;
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+    e.preventDefault();
+    if (currentSlide < totalSlides - 1) { currentSlide++; slides[currentSlide].scrollIntoView({ behavior: 'smooth' }); }
+  } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault();
+    if (currentSlide > 0) { currentSlide--; slides[currentSlide].scrollIntoView({ behavior: 'smooth' }); }
+  }
+});
+
+const keyTracker = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { currentSlide = Array.from(slides).indexOf(e.target); } });
+}, { threshold: 0.5 });
+slides.forEach(s => keyTracker.observe(s));
+</script>
+
+</body>
+</html>

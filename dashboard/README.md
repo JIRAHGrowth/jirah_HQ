@@ -19,7 +19,7 @@ Open http://localhost:3000.
 
 ## Data source
 
-The dashboard reads from `ONEDRIVE_ROOT` — the OneDrive `NEW - JIRAH MASTER` folder synced on your machine. Must be set in `.env.local` or the dashboard will throw a clear error on startup. Each partner's path differs (OneDrive prefixes shared folders with the owner's name); see `.env.local.example` for both variants.
+The dashboard reads from `ONEDRIVE_ROOT` — the OneDrive `JIRAH Growth Partners - Shared` folder synced on your machine. Must be set in `.env.local` or the dashboard will throw a clear error on startup. Each partner's path differs (OneDrive prefixes shared folders with the owner's name); see `.env.local.example` for both variants.
 
 Briefings are read from `../briefings/YYYY-MM-DD.md` (committed to the repo, shared across both partners).
 

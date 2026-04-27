@@ -144,7 +144,7 @@ Why: volume at top, prestige in middle, commitment test at the threshold, constr
 ### OneDrive additions (shared with Joshua)
 
 ```
-...\NEW - JIRAH MASTER\
+...\JIRAH Growth Partners - Shared\
 ├── 01 - Clients\
 │   ├── Active Clients\
 │   │   ├── _template\                        ← NEW: new-client skill copies from here

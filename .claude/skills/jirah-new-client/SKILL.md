@@ -26,7 +26,7 @@ Read before acting:
 
 ## Process
 
-1. **Resolve OneDrive root.** Read `ONEDRIVE_ROOT` from `dashboard/.env.local` at the workspace root — that value is the per-machine path to the `NEW - JIRAH MASTER` folder (Jason's and Joshua's differ; OneDrive prefixes shared folders with the owner's name on the receiving side). **Locate template** at `[ONEDRIVE_ROOT]\01 - Clients\_template\`. If `ONEDRIVE_ROOT` is unset or the path doesn't resolve, stop and ask the user to configure `dashboard/.env.local`.
+1. **Resolve OneDrive root.** Read `ONEDRIVE_ROOT` from `dashboard/.env.local` at the workspace root — that value is the per-machine path to the `JIRAH Growth Partners - Shared` folder (Jason's and Joshua's differ; OneDrive prefixes shared folders with the owner's name on the receiving side). **Locate template** at `[ONEDRIVE_ROOT]\01 - Clients\_template\`. If `ONEDRIVE_ROOT` is unset or the path doesn't resolve, stop and ask the user to configure `dashboard/.env.local`.
 2. **Copy to new folder** at `01 - Clients\Active\[Client Name]\` using the client name verbatim. The template carries the full numbered scaffold (03 - Admin → 10 - Harvest).
 3. **Fill `00 - Profile.md` frontmatter**:
    - `id` — slug of client name (lowercase, dashes)
