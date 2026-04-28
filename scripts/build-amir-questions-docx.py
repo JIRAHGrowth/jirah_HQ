@@ -29,13 +29,15 @@ AMBER = RGBColor(0xB6, 0x7E, 0x2B)
 DISPLAY_FONT = "Cambria"
 BODY_FONT = "Calibri"
 
-OUT_PATH = Path(
-    r"C:\Users\joshu\OneDrive - jirahgrowth.consulting"
-    r"\JIRAH Growth Partners - Shared"
-    r"\01 - Clients\Active\Hatch Interior Design"
-    r"\08 - Monthly Retainer"
-    r"\2026-04-30 Amir Discovery Call — Questions for Rachel and Shanna.docx"
+from _paths import ACTIVE_CLIENTS, assert_no_legacy_segment
+
+OUT_PATH = (
+    ACTIVE_CLIENTS
+    / "Hatch Interior Design"
+    / "08 - Monthly Retainer"
+    / "2026-04-30 Amir Discovery Call — Questions for Rachel and Shanna.docx"
 )
+assert_no_legacy_segment(OUT_PATH)
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────

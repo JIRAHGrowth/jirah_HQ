@@ -21,15 +21,22 @@ Reflects the decisions captured in the April 23, 2026 pre-counsel discussion:
 from __future__ import annotations
 
 import os
+import sys
+from pathlib import Path
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.table import WD_TABLE_ALIGNMENT
 
-BASE_DIR = (
-    r"C:\Users\joshu\OneDrive - jirahgrowth.consulting\JIRAH Growth Partners - Shared"
-    r"\01 - Clients\Active\Genesis Systems"
-    r"\03 - Admin\Contract & DocuSign"
+sys.path.insert(0, str(Path(__file__).parent))
+from _paths import ACTIVE_CLIENTS, assert_no_legacy_segment
+
+BASE_DIR = str(
+    ACTIVE_CLIENTS
+    / "Genesis Systems"
+    / "03 - Admin"
+    / "Contract & DocuSign"
 )
+assert_no_legacy_segment(BASE_DIR)
 AGREEMENT_PATH = os.path.join(BASE_DIR, "Genesis_JIRAH AI Pilot Agreement - DRAFT FOR COUNSEL.docx")
 MEMO_PATH = os.path.join(BASE_DIR, "Genesis_JIRAH AI Pilot - Cover Memo to Counsel.docx")
 

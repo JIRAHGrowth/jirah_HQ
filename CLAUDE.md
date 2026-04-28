@@ -53,6 +53,17 @@ For any client, prospect, or deliverable work, read these first:
 
 **Per-client folder convention** (inside `Active\[ClientName]\`): `00 - Profile.md`, `01 - Engagement Plan.md`, `02 - Comms Log.md`, `03 - Admin/`, `04 - Client Source Files/`, `05 - Discovery & Discussion Doc/`, `06 - Sprint & Facilitation/`, `07 - Deliverables/` (Drafts/Final/Appendices), `08 - Monthly Retainer/`, `09 - AI Pilot/`, `10 - Harvest/`. Numeric prefixes mirror the 6-step engagement process; unused phases stay as empty folders.
 
+### ⚠ FORBIDDEN PATH — `NEW - JIRAH MASTER\`
+
+The `NEW - JIRAH MASTER\` subfolder under JGP-Shared was **promoted to top-level in the April 2026 migration and no longer exists**. Any path that includes `\NEW - JIRAH MASTER\` is a regression — the folder will get auto-recreated by `os.makedirs` / `mkdir(parents=True)`, and files will land in the wrong place.
+
+When writing files (in builder scripts, skill outputs, manual saves), the schema starts directly under `JIRAH Growth Partners - Shared\`:
+
+✅ Correct: `JIRAH Growth Partners - Shared\01 - Clients\Active\[Client]\...`
+❌ Forbidden: `JIRAH Growth Partners - Shared\NEW - JIRAH MASTER\01 - Clients\...`
+
+Python builder scripts must import path constants from [scripts/_paths.py](scripts/_paths.py) and call `assert_no_legacy_segment(out_path)` before writing — that helper raises a clear error if any path still references the deprecated segment.
+
 ---
 
 ## Skills (invoke with `/skill-name`)

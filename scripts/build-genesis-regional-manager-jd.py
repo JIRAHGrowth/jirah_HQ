@@ -28,13 +28,15 @@ from docx.shared import Pt, RGBColor, Inches
 # Genesis navy from the existing Rascal JDs (approximate match)
 NAVY = RGBColor(0x1F, 0x3A, 0x6D)
 
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from _paths import ACTIVE_CLIENTS, assert_no_legacy_segment
+
 LOGO_PATH = Path(__file__).parent / "assets" / "genesis-logo.png"
 
-OUTPUT_DIR = Path(
-    r"C:\Users\joshu\OneDrive - jirahgrowth.consulting\JIRAH Growth Partners - Shared"
-    r"\01 - Clients\Active\Genesis Systems\07 - Deliverables"
-)
+OUTPUT_DIR = ACTIVE_CLIENTS / "Genesis Systems" / "07 - Deliverables"
 OUTPUT_PATH = OUTPUT_DIR / "Regional-Manager-Metro-Vancouver.docx"
+assert_no_legacy_segment(OUTPUT_PATH)
 
 
 def add_page_number_footer(section):

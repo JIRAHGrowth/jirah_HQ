@@ -10,16 +10,22 @@ Mirrors the Hatch Monthly Coaching Agreement skeleton, adapted for:
 from __future__ import annotations
 
 import os
+import sys
+from pathlib import Path
 from docx import Document
 from docx.shared import Inches, Pt
 
+sys.path.insert(0, str(Path(__file__).parent))
+from _paths import ACTIVE_CLIENTS, assert_no_legacy_segment
 
-OUT_PATH = (
-    r"C:\Users\joshu\OneDrive - jirahgrowth.consulting\JIRAH Growth Partners - Shared"
-    r"\01 - Clients\Active\Genesis Systems"
-    r"\03 - Admin\Contract & DocuSign"
-    r"\Genesis_JIRAH Strategic Execution Advisory Agreement.docx"
+OUT_PATH = str(
+    ACTIVE_CLIENTS
+    / "Genesis Systems"
+    / "03 - Admin"
+    / "Contract & DocuSign"
+    / "Genesis_JIRAH Strategic Execution Advisory Agreement.docx"
 )
+assert_no_legacy_segment(OUT_PATH)
 
 
 def build() -> str:
