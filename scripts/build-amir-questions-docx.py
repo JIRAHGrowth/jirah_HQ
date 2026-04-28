@@ -31,7 +31,7 @@ BODY_FONT = "Calibri"
 
 OUT_PATH = Path(
     r"C:\Users\joshu\OneDrive - jirahgrowth.consulting"
-    r"\JIRAH Growth Partners - Shared\NEW - JIRAH MASTER"
+    r"\JIRAH Growth Partners - Shared"
     r"\01 - Clients\Active\Hatch Interior Design"
     r"\08 - Monthly Retainer"
     r"\2026-04-30 Amir Discovery Call — Questions for Rachel and Shanna.docx"
