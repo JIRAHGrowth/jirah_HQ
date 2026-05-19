@@ -15,7 +15,10 @@
       "Bash(node *)",
       "Bash(pnpm *)",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "Bash(python scripts/build_genesis_june9_announcement.py)",
+      "Bash(start \"\" \"C:\\\\Users\\\\joshu\\\\OneDrive - jirahgrowth.consulting\\\\JIRAH Growth Partners - Shared\\\\01 - Clients\\\\Active\\\\Genesis Systems\\\\07 - Deliverables\\\\Drafts\\\\Derrick-Announcement-Letter-v1.docx\")",
+      "Bash(start \"\" \"C:\\\\Users\\\\joshu\\\\OneDrive - jirahgrowth.consulting\\\\JIRAH Growth Partners - Shared\\\\01 - Clients\\\\Active\\\\Genesis Systems\\\\07 - Deliverables\\\\Drafts\\\\June-9-Announcement-Speaker-Notes-v1.docx\")"
     ]
   }
 }
