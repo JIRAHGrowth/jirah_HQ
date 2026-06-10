@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ========================================================================
+     Genesis Letter Template — canonical
+     Mirrors the visual format of Derrick-Offer-Letter.docx (Final/).
+     Used for: offer letters, announcement letters, internal role-transition
+     letters, any partner-voice letter to a Genesis stakeholder.
+     ====================================================================== */
+  :root {
+    --ink: #1F2937;
+    --ink-soft: #777777;
+    --rule: #E5E5E5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink); background: #ffffff;
+    line-height: 1.5; font-size: 10pt;
+  }
+  .page {
+    max-width: 750px; margin: 0 auto;
+    padding: 56px 72px 72px;
+  }
+
+  /* --- Letterhead --- */
+  .letterhead { text-align: center; margin-bottom: 22px; }
+  .letterhead .company {
+    font-weight: 700; font-size: 14pt; letter-spacing: 0.04em;
+    color: var(--ink); margin: 0;
+  }
+  .letterhead .doctype {
+    font-style: italic; font-size: 10pt;
+    color: var(--ink-soft); margin: 4px 0 0;
+  }
+
+  /* --- Meta block (DATE / FROM / TO) --- */
+  .meta {
+    margin: 26px 0 24px;
+  }
+  .meta .row {
+    display: grid; grid-template-columns: 70px 1fr;
+    gap: 8px; padding: 2px 0;
+  }
+  .meta .row .lbl {
+    font-weight: 700; font-size: 8.5pt;
+    letter-spacing: 0.05em; color: var(--ink-soft);
+    padding-top: 2px; text-transform: uppercase;
+  }
+  .meta .row .val { font-size: 10pt; }
+
+  /* --- Greeting --- */
+  .greeting {
+    font-weight: 700; font-size: 11.5pt;
+    margin: 0 0 14px;
+  }
+
+  /* --- Body --- */
+  p { margin: 0 0 12px; font-size: 10pt; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+
+  /* --- Section headings --- */
+  h2 {
+    font-weight: 700; font-size: 13pt;
+    color: var(--ink); margin: 22px 0 10px;
+  }
+  /* Inline sub-headings written in markup as <p class="subhead"> or
+     <p><strong>Sub-head text</strong></p>. Either way the look is the
+     same — bold, inline, no size change. Provided as a class for clarity. */
+  p.subhead { font-weight: 700; margin: 14px 0 6px; }
+
+  /* --- Lists --- */
+  ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+  li { margin-bottom: 5px; font-size: 10pt; }
+  li strong { font-weight: 700; }
+
+  /* --- Sign-off --- */
+  .signoff { margin-top: 18px; }
+  .signoff p.closer { margin-bottom: 28px; }
+  .signoff .name { font-weight: 700; margin: 0; }
+  .signoff .role { font-size: 9.5pt; color: var(--ink-soft); margin: 0; }
+
+  @media print {
+    body { font-size: 10pt; }
+    .page { max-width: none; padding: 36px 48px; margin: 0; }
+    h2 { page-break-after: avoid; }
+    .signoff { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- LETTERHEAD ----------------------------------------------------------- -->
+  <div class="letterhead">
+    <p class="company">GENESIS BUILDING CONTROLS LTD.</p>
+    <p class="doctype">{{DOCTYPE}}</p>
+  </div>
+
+  <!-- META ---------------------------------------------------------------- -->
+  <div class="meta">
+    <div class="row"><div class="lbl">Date</div><div class="val">{{DATE}}</div></div>
+    <div class="row"><div class="lbl">From</div><div class="val">{{FROM}}</div></div>
+    <div class="row"><div class="lbl">To</div><div class="val">{{TO}}</div></div>
+  </div>
+
+  <!-- GREETING ------------------------------------------------------------ -->
+  <p class="greeting">Dear {{RECIPIENT_FIRST_NAME}},</p>
+
+  <!-- BODY ---------------------------------------------------------------- -->
+  <!--
+    Body paragraphs go here. Use:
+      <p>Plain paragraph.</p>
+      <h2>Section Heading</h2>
+      <p class="subhead">Inline bold subhead</p>  OR  <p><strong>Inline bold subhead</strong></p>
+      <ul><li>Bullet</li></ul>
+      <ol><li>Numbered item</li></ol>
+      <strong>bold</strong>, <em>italic</em>
+    No callout boxes, no shaded backgrounds, no Trent notes in the body
+    (those go in the cover email, not the deliverable).
+  -->
+  {{BODY}}
+
+  <!-- SIGN-OFF ------------------------------------------------------------ -->
+  <div class="signoff">
+    <p class="closer">Sincerely,</p>
+    <p class="name">{{SIGNATORY_NAME}}</p>
+    <p class="role">{{SIGNATORY_ROLE}}</p>
+  </div>
+
+</div>
+</body>
+</html>

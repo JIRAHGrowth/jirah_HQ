@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Calibri&display=swap" rel="stylesheet">
+<style>
+  /* ========================================================================
+     Genesis JD / Position Agreement Template — canonical
+     Mirrors the visual format of Regional-Manager-Metro-Vancouver.docx
+     (Final/). Used for: Job Descriptions, Position Agreements, role
+     charters — any role-definition deliverable.
+     ====================================================================== */
+  :root {
+    --ink: #1F2937;
+    --ink-soft: #595959;
+    --rule: #D9D2C4;
+    --table-header-bg: #1F2937;
+    --table-header-ink: #FFFFFF;
+    --table-alt-bg: #F4F1EA;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Calibri, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink); background: #ffffff;
+    line-height: 1.45; font-size: 10.5pt;
+  }
+  .page {
+    max-width: 780px; margin: 0 auto;
+    padding: 56px 72px 72px;
+  }
+
+  /* --- Title block --- */
+  h1 {
+    font-weight: 700; font-size: 18pt;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 4px;
+  }
+  .subtitle {
+    font-style: italic; font-size: 11pt; color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+
+  /* --- Section headings (h2) — 12pt bold ALL CAPS --- */
+  h2 {
+    font-weight: 700; font-size: 12pt;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink); margin: 22px 0 8px;
+  }
+
+  /* --- Sub-headings (h3) — 11pt bold, normal case --- */
+  h3 {
+    font-weight: 700; font-size: 11pt;
+    color: var(--ink); margin: 14px 0 6px;
+  }
+
+  /* --- Body --- */
+  p { margin: 0 0 10px; font-size: 10.5pt; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+
+  /* --- Lists --- */
+  ul, ol { margin: 6px 0 12px; padding-left: 22px; }
+  li { margin-bottom: 4px; font-size: 10.5pt; }
+
+  /* --- Tables (Authority Matrix, Behavioural Competencies, etc.) --- */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 10px 0 18px; font-size: 10pt;
+  }
+  thead th {
+    background: var(--table-header-bg); color: var(--table-header-ink);
+    font-weight: 700; text-align: left;
+    padding: 10px 12px; font-size: 10pt;
+    border-bottom: 1px solid var(--table-header-bg);
+  }
+  tbody td {
+    padding: 9px 12px; vertical-align: top;
+    border-bottom: 1px solid var(--rule); font-size: 10pt;
+  }
+  tbody tr:nth-child(even) td {
+    background: var(--table-alt-bg);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  @media print {
+    body { font-size: 10.5pt; }
+    .page { max-width: none; padding: 36px 48px; margin: 0; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+    thead { display: table-header-group; }
+    tr { page-break-inside: avoid; }
+    thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    tbody tr:nth-child(even) td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TITLE BLOCK --------------------------------------------------------- -->
+  <h1>{{TITLE_UPPER}}</h1>
+  <p class="subtitle">{{SUBTITLE}}</p>
+
+  <!-- BODY ---------------------------------------------------------------- -->
+  <!--
+    Body sections go here. Use:
+      <h2>SECTION HEADING</h2>   (rendered ALL CAPS by CSS — write either case)
+      <h3>Sub-section heading</h3>
+      <p>Paragraph text.</p>
+      <ul><li>Bullet</li></ul>
+      <ol><li>Numbered item</li></ol>
+      <table><thead>...<tbody>... — for Authority Matrix, Competencies, etc.
+      <strong>bold</strong>, <em>italic</em>
+    No callout boxes, no shaded backgrounds, no phase boxes, no JIRAH brand
+    bar inside the deliverable.
+  -->
+  {{BODY}}
+
+</div>
+</body>
+</html>
